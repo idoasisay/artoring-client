@@ -1,0 +1,25 @@
+.MentorFindContainer{
+ 
+  justify-content: center;
+  display: flex;
+
+}
+.CareerFindContainer{
+ 
+  justify-content: center;
+  display: flex;
+
+}
+
+.Slogan {
+  background-color: rgb(200,200,200);
+  width: 100vw;
+  height:10vh;
+  display: flex;
+  justify-items: center;
+}
+
+.WhoisartContainer{
+  display: flex;
+  justify-content: center;
+}

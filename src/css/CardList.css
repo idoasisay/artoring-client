@@ -1,0 +1,13 @@
+
+.CardsContainer{
+  display: flex;
+  max-width: 50vw;
+  flex-wrap: wrap;
+}
+.CardList{
+  width: 50vw;
+}
+.CardListTitle{
+  font-weight: bolder;
+  font-size:xx-large;
+}
