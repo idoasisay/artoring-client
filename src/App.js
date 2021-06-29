@@ -16,7 +16,7 @@ function App () {
           rel='noopener noreferrer'
         >
           Learn React
-          And this is CD test.
+          And this is CD test!
         </a>
       </header>
     </div>
