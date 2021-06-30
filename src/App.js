@@ -19,6 +19,7 @@ function App () {
           And this is CD test!
         </a>
       </header>
+      <img src='https://artoring-container.s3.ap-northeast-2.amazonaws.com/img/kakao_login_medium_narrow.png' alt='block test' />
     </div>
   );
 }
