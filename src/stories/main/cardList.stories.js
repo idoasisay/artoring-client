@@ -14,49 +14,49 @@ Template.args = {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${Date.now()} - ${Date.now()}`,
+      date: `${new Date()} - ${new Date()}`,
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${Date.now()} - ${Date.now()}`,
+      date: `${new Date()} - ${new Date()}`,
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${Date.now()} - ${Date.now()}`,
+      date: `${new Date()} - ${new Date()}`,
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${Date.now()} - ${Date.now()}`,
+      date: `${new Date()} - ${new Date()}`,
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${Date.now()} - ${Date.now()}`,
+      date: `${new Date()} - ${new Date()}`,
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${Date.now()} - ${Date.now()}`,
+      date: `${new Date()} - ${new Date()}`,
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${Date.now()} - ${Date.now()}`,
+      date: `${new Date()} - ${new Date()}`,
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${Date.now()} - ${Date.now()}`,
+      date: `${new Date()} - ${new Date()}`,
       price: 'test 원'
     }]
   }

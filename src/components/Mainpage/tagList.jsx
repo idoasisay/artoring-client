@@ -3,7 +3,7 @@ import React from 'react';
 const TagList = (props) => {
   return (
     props.tags.map((ele, i) =>
-      <div className='Tag' key={i}>{ele}</div>
+      <div className='Tag' style={{ 'background-color': ele === '오프라인' ? 'rgb(220, 220, 250)' : '' }} key={i}>{ele}</div>
     )
 
   );

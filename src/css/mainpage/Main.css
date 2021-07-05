@@ -1,0 +1,64 @@
+.MentorFindContainer{
+ 
+  justify-content: center;
+  display: flex;
+  
+
+}
+.CareerFindContainer{
+ 
+  justify-content: center;
+  display: flex;
+
+
+}
+
+
+
+.WhoisartContainer{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(241,241,254);
+  padding-top: 2vw;
+  padding-bottom: 2vw;
+  width: 100%;
+}
+
+.WhoisartTopDesc,  .WhoisartMidDesc{
+  display: block;
+  margin-bottom: 2vh;
+  font-size: small;
+}
+.WhoisartTopDesc{
+  display: grid;
+  align-items: center;
+  height: 15vh;
+  font-size: large;
+}
+.WhoisartMidDesc{
+  display: grid;
+  height: 8vh;
+}
+
+.WhoisartDesc{
+
+
+  overflow-x:auto;
+  width: 50%
+}
+.ToWhoisartBtn{
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 10vw;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.WhoisartImg{
+  margin-right: 1vw;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 50%
+}

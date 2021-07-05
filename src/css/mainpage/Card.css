@@ -1,0 +1,36 @@
+.Card{
+  margin: 1vw;
+  align-items: center;
+}
+
+.CardThumb{
+  max-width: 10vw;
+}
+.Card{
+  max-width: 12vw;
+}
+
+.CardCategory{
+  display: flex;
+}
+.Tag{
+  border: 1px solid black;
+  margin-right: 2px;
+  margin-left:  2px;;
+  border-radius: 4px;
+}
+.CardDate{
+  font-size:x-small;
+  color: rgb(118,118,119)
+}
+
+.CardTitle{
+  font-size: large;
+  font-weight: bold;
+  min-height: 50px;
+}
+
+.CardPrice{
+  padding-top: 1rem;
+  color: red;
+}

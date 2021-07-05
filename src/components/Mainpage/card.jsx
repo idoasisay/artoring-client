@@ -1,6 +1,6 @@
 import React from 'react';
-import TagList from './tagList';
-import '../../css/Card.css';
+import TagList from './tagList.jsx';
+import '../../css/mainpage/Card.css';
 
 const Card = ({ data }) => {
   console.log(data);

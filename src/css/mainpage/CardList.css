@@ -1,13 +1,16 @@
 
 .CardsContainer{
   display: flex;
-  max-width: 50vw;
+  max-width: 100%;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .CardList{
-  width: 50vw;
+  width: 70%;
 }
 .CardListTitle{
   font-weight: bolder;
   font-size:xx-large;
+  left: 9%;
+  position: relative;
 }

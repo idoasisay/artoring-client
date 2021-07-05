@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Card from './card';
-import '../../css/CardList.css';
+import Card from './card.jsx';
+import '../../css/mainpage/CardList.css';
 
 const CardList = ({ data }) => {
   console.log(data);
