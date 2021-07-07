@@ -14,49 +14,49 @@ Template.args = {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['오프라인', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }]
   },
@@ -66,49 +66,49 @@ Template.args = {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }, {
       thumb: 'https://aefadsf1i9alk1230.s3.ap-northeast-2.amazonaws.com/logo.png',
       tag: ['test1', 'test2'],
       title: '테스트!!',
-      date: `${new Date()} - ${new Date()}`,
+      date: '2020.06.22(수) ~ 2020.07.12(일)',
       price: 'test 원'
     }]
   }

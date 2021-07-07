@@ -1,17 +1,18 @@
 .Card{
-  margin: 1vw;
+  margin: 12px;
   align-items: center;
+  max-width:  246px;
 }
 
 .CardThumb{
-  max-width: 10vw;
+  max-width: 100%;
 }
-.Card{
-  max-width: 12vw;
-}
+
 
 .CardCategory{
   display: flex;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 .Tag{
   border: 1px solid black;
@@ -20,17 +21,41 @@
   border-radius: 4px;
 }
 .CardDate{
-  font-size:x-small;
-  color: rgb(118,118,119)
+  width: 181px;
+  height: 27px;
+  font-family: 'nanumSquare';
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: normal;
+  color: #767677;
 }
 
 .CardTitle{
-  font-size: large;
-  font-weight: bold;
-  min-height: 50px;
+  width: 246px;
+  min-height: 52px;
+  font-family: 'nanumSquare';
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.63;
+  letter-spacing: normal;
+  color: #000000;
+  margin-bottom: 6px;
 }
 
 .CardPrice{
-  padding-top: 1rem;
-  color: red;
+  width: 60px;
+  height: 27px;
+  font-family: 'nanumSquare';
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.93;
+  letter-spacing: normal;
+  color: #ff4a70;
 }

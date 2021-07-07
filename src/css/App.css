@@ -1,4 +1,23 @@
+@font-face {
+  font-family: "nanumSquare";        
+  src: url("../assets/fonts/NanumSquareRoundOTFR.otf");
+}
+@font-face {
+  font-family: "nanumSquare Light";        
+  src: url("../assets/fonts/NanumSquareRoundOTFL.otf");
+}
+@font-face {
+  font-family: "nanumSquare Bold";        
+  src: url("../assets/fonts/NanumSquareRoundOTFB.otf");
+}
+@font-face {
+  font-family: "nanumSquare EBold";        
+  src: url("../assets/fonts/NanumSquareRoundOTFEB.otf");
+}
+
+
 .App {
+  max-width: 3248px;
   text-align: center;
 }
 
@@ -12,6 +31,8 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+
 
 .App-header {
   background-color: #282c34;

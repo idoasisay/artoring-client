@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../../css/mainpage/Tag.css';
 const TagList = (props) => {
   return (
     props.tags.map((ele, i) =>

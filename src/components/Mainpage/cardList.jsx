@@ -11,7 +11,9 @@ const CardList = ({ data }) => {
       <div className='CardsContainer'>
         {data.cards.map((ele, i) => <Card data={ele} key={i} />)}
       </div>
-      <div className='MoreInfo' />
+      <div className='MoreInfo'>
+        <div className='MoreBtnText Size16px OTFEB'>View more</div>
+      </div>
     </div>
   );
 };

@@ -4,13 +4,47 @@
   max-width: 100%;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 50px;
 }
 .CardList{
-  width: 70%;
+  width: 1080px;
+  margin-bottom: 80px;
 }
 .CardListTitle{
-  font-weight: bolder;
-  font-size:xx-large;
-  left: 9%;
-  position: relative;
+  width: 116px;
+  height: 52px;
+  padding-left:12px;
+  font-family: 'nanumSquare EBold';
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.17;
+  letter-spacing: normal;
+  color: #000000;
+  justify-self: flex-start;
+}
+.MoreInfo{
+  float: right;
+  width: 150px;
+  height: 50px;
+  margin-right: 12px;
+  border-radius: 10px;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MoreInfo:hover{
+  background-color: #868eee;
+}
+
+.MoreBtnText{
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
 }
