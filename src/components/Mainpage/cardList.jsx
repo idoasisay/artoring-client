@@ -4,7 +4,6 @@ import Card from './card.jsx';
 import '../../css/mainpage/CardList.css';
 
 const CardList = ({ data }) => {
-  console.log(data);
   return (
     <div className='CardList'>
       <div className='CardListTitle'>{data.title}</div>
