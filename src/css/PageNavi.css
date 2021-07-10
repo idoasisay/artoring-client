@@ -1,0 +1,19 @@
+nav {
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  background-color: azure;
+}
+
+.nav,
+.navLeft,
+.navRight {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav {
+  justify-content: space-between;
+  padding-left: 432px;
+  padding-right: 432px;
+}
