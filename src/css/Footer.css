@@ -1,0 +1,28 @@
+.FooterUpper{
+    height: 50%;
+    display: flex;
+    margin-bottom: 2vh;
+    justify-content: center;
+}
+
+.CustomerService, .Contact, .Social {
+  margin-left: 1vw;
+  margin-right: 1vw;
+
+  max-width: 20vw;
+}
+.WorkingHour, .ContactMethods, .SocialMethods {
+  margin-top: 2vh;
+}
+
+.FooterLower {
+
+  padding-top: 4vh;
+  position: absolute;
+}
+.FooterContainer{
+      display: flex;
+    align-content: stretch;
+    justify-content: center;
+    flex-direction: column;
+}
