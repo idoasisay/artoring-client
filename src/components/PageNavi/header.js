@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Header(props) {
+function Header (props) {
   return (
     <div className='nav'>
       <div className='navLeft'>
@@ -14,13 +14,13 @@ function Header(props) {
           <Link to='/mentor'>멘토 찾기</Link>
         </div>
         <div className='navBox'>
-          <Link to='/careerTeach'>커리어 교육</Link>
+          <Link to='/career/teach'>커리어 교육</Link>
           <div className='navCareerSubTab'>
             <div className='navCareerSubTabBox'>
-              <Link to='/careerTeach'>커리어 성장</Link>
+              <Link to='/career/growing'>커리어 성장</Link>
             </div>
             <div className='navCareerSubTabBox'>
-              <Link to='#'>시그니처 프로그램</Link>
+              <Link to='/career/signature'>시그니처 프로그램</Link>
             </div>
           </div>
         </div>
