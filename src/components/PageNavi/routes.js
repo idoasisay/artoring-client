@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import Header from './header';
 import {
   Mentor,
   CareerTeach,
@@ -8,10 +7,11 @@ import {
   About,
   Search,
   Login,
-  Home
+  Home,
 } from '../../pages';
+import Header from './header';
 
-export default function Nav (props) {
+export default function Nav(props) {
   return (
     <Router>
       <Header />
