@@ -23,12 +23,14 @@ const Profile = (props) => {
   const onSubmit = data => {
     console.log(data);
     console.log(list);
+    props.profileHandler({ ...props.profile, ...data, InterestedList: list });
     // axios로 서버에 저장 요청을 보내고 리디렉션
   };
 
   return (
     <div className='ProfileContainer'>
-      <div className='ProfileTitle'>멘토링 신청 시 멘토가 참고할 수 있도록 프로필을 작성해 주세요!</div>
+      📌
+      <div className='ProfileTitle'>멘토링 신청 시 멘토가 참고할 수 있도록<br /> 프로필을 작성해 주세요!</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           <div className='FormTitle'>전공*</div>
