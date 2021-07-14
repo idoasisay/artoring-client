@@ -1,0 +1,76 @@
+@font-face {
+  font-family: "nanumSquare";        
+  src: url("../../assets/fonts/NanumSquareRoundOTFR.otf");
+}
+@font-face {
+  font-family: "nanumSquare Light";        
+  src: url("../../assets/fonts/NanumSquareRoundOTFL.otf");
+}
+@font-face {
+  font-family: "nanumSquare Bold";        
+  src: url("../../assets/fonts/NanumSquareRoundOTFB.otf");
+}
+@font-face {
+  font-family: "nanumSquare EBold";        
+  src: url("../../assets/fonts/NanumSquareRoundOTFEB.otf");
+}
+
+.SloganContainer {
+  background-color: rgb(253, 243, 207);
+  display: flex;
+  justify-content: center;
+  width: 98vw;
+  height: 450px;
+
+  margin: 80px 0 0;
+
+  display: flex;
+  justify-items: center;
+  align-items: center;
+
+  margin-bottom: 50px;
+}
+
+
+.SloganTopDesc,  .SloganMidDesc{
+  display: block;
+  margin-bottom: 2vh;
+  font-size: 36px;
+  font-family: 'nanumSquare';
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.56;
+  letter-spacing: normal;
+  color: #000000;
+}
+.SloganTopDesc{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  height: 186px;
+
+  font-size: 36px;
+}
+.SloganMidDesc{
+  display: grid;
+  height: 8vh;
+}
+
+.SloganDesc{
+  display: flex;
+  justify-content: center;
+  width: 432px;
+
+  padding-bottom: 46px;
+  
+}
+
+.SloganImgContainer{
+  margin-left: 1vw;
+  display: flex;
+  width: 432px;;
+}
+.SloganImg{
+  height: 321px;
+}
