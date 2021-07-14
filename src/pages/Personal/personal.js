@@ -38,7 +38,7 @@ const Personal = (props) => {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
         ? `http://localhost:3000/user/profile?type=${props.type}`
         : `https://temp.artoring.com/user/profile?type=${props.type}`;
-      axios.put(url, { profile, type: 'email' }, {
+      axios.put(url, { profile, type: props.type }, {
         headers: {
           authorization: `Bearer ${props.token}`
         }
