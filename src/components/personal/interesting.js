@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InterestedInEntry from './interestringEntry';
 
 const InterestedList = ({ list, listHandler }) => {
+  console.log(list);
   function handler (data) {
     console.log('test');
     listHandler(list.map(ele => {

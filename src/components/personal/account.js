@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+
 import '../../css/Personal/Account.css';
 
 const Account = (props) => {
@@ -10,7 +12,23 @@ const Account = (props) => {
   const onSubmit = data => {
     console.log(data);
     // axios로 서버에 저장 요청을 보내고 리디렉션
-    props.profileHandler({ ...props.profile, ...data });
+    props.profileHandler({ ...props.profile, thumb: image, ...data });
+    console.log(props.profile);
+    props.onClickHandler();
+  };
+  const imageUploader = async (e) => {
+    console.log('test');
+    const formData = new FormData();
+    formData.append('img', e.target.files[0]);
+
+    const url = process.env.REACT_APP_NODE_ENV === 'development'
+      ? 'http://localhost:3000/upload/img'
+      : 'https://temp.artoring.com/upload/img';
+
+    const { data } = await axios.post(url, formData);
+    console.log(data);
+    const imgUrl = 'https://artoring.com/'.concat(data[0].key);
+    imageHandler(imgUrl);
   };
 
   return (
@@ -21,24 +39,25 @@ const Account = (props) => {
           <div className='PlaceHolder '>
             <div className='FormTitle SpaceAround'>프로필 사진</div>
             <div className='Flex'>
-              {image ? <img src='' alt='thumbnail' /> : <div className='BlankThumb' />}
+              {image ? <img src={image} alt='thumbnail' className='Thumb' /> : <div className='BlankThumb' />}
               <div className='FormTitle ThumbDesc'>해당영역을 클릭하여 이미지 업로드를 할수 있습니다. <br /> png, jpeg, jpg 파일만 업로드 가능합니다.
               </div>
               <label htmlFor='UploadPhoto' />
               <input
                 type='file' accept='image/jpg,image/png,image/jpeg'
-                name='picture' id='UploadPhoto' {...register('thumb')}
+                name='picture' id='UploadPhoto'
+                onChange={imageUploader}
               />
             </div>
           </div>
         </label>
         <label>
           <div className='FormTitle'>이름*</div>
-          <div className='PlaceHolder'>test</div>
+          <div className='PlaceHolder'>{props.profile.name}</div>
         </label>
         <label>
           <div className='FormTitle'>이메일*</div>
-          <div className='PlaceHolder'>foo@bar.com</div>
+          <div className='PlaceHolder'>{props.profile.email}</div>
         </label>
         <label>
           <div className='FormTitle'>성별*</div>
@@ -60,15 +79,15 @@ const Account = (props) => {
         </label>
         <label>
           <div className='FormTitle'>생년원일*</div>
-          <div className='PlaceHolder'>test</div>
+          <div className='PlaceHolder'>{props.profile.birth}</div>
         </label>
         <label>
           <div className='FormTitle'>휴대전화번호*</div>
-          <div className='PlaceHolder'>test</div>
+          <div className='PlaceHolder'>{props.profile.phone}</div>
         </label>
         <label>
           <div className='FormTitle'>주소*</div>
-          <div className='PlaceHolder'>test</div>
+          <div className='PlaceHolder'>{props.profile.address}</div>
         </label>
         {isChangePwd
           ? <label>
