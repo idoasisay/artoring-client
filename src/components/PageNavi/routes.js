@@ -7,16 +7,18 @@ import {
   About,
   Search,
   Login,
-  Home,
+  Home
 } from '../../pages';
 import Header from './header';
+import Personal from '../../pages/Personal/personal';
 
-export default function Nav(props) {
+export default function Nav (props) {
   return (
     <Router>
       <Header />
       <Route exact path='/' component={Home} />
       <Route path='/mentor' component={Mentor} />
+      <Route path='/user/edit' component={Personal} />
       <Route path='/career/teach' component={CareerTeach} />
       <Route path='/career/growing' component={CareerTeach} />
       <Route path='/career/signature' component={CareerTeach} />
