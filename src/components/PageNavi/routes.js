@@ -9,7 +9,7 @@ import {
   Login
 } from '../../pages';
 
-import MainPage from '../../pages/main/main';
+import MainPage from '../../pages/Main/main';
 import Header from './header';
 import Personal from '../../pages/Personal/personal';
 
