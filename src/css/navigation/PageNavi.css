@@ -1,16 +1,17 @@
 nav {
+  width: 100vw;
   font-weight: 600;
   font-size: 16px;
   color: #000000;
   height: 80px;
   width: 100%;
-  position: fixed;
   background-color: white;
   border-bottom: 1px solid #d6d6d6;
   box-sizing: border-box;
   padding: 29px 432px 27px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .nav {

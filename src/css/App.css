@@ -1,3 +1,30 @@
+@font-face {
+  font-family: 'NanumSquareRound';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "nanumSquare";        
+  src: url("../assets/fonts/NanumSquareRoundOTFR.otf");
+}
+@font-face {
+  font-family: "nanumSquare Light";        
+  src: url("../assets/fonts/NanumSquareRoundOTFL.otf");
+}
+@font-face {
+  font-family: "nanumSquare Bold";        
+  src: url("../assets/fonts/NanumSquareRoundOTFB.otf");
+}
+@font-face {
+  font-family: "nanumSquare EBold";        
+  src: url("../assets/fonts/NanumSquareRoundOTFEB.otf");
+}
+
+
+.App {
+  max-width: 3248px;
 html,
 body,
 div,
@@ -125,6 +152,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+}
 
 /* .App {
   text-align: center;
@@ -164,14 +192,6 @@ table {
     transform: rotate(360deg);
   }
 } */
-
-@font-face {
-  font-family: 'NanumSquareRound';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
 
 #root{
   justify-self: center;

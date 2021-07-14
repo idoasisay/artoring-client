@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from './footer';
-import '../../css/PageNavi.css';
+import '../../css/navigation/PageNavi.css';
 import Routes from './routes';
 
 const Nav = (props) => {

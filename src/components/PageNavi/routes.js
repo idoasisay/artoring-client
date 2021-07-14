@@ -6,9 +6,10 @@ import {
   CareerInfo,
   About,
   Search,
-  Login,
-  Home
+  Login
 } from '../../pages';
+
+import MainPage from '../../pages/main/main';
 import Header from './header';
 import Personal from '../../pages/Personal/personal';
 
@@ -16,7 +17,7 @@ export default function Nav (props) {
   return (
     <Router>
       <Header />
-      <Route exact path='/' component={Home} />
+      <Route exact path='/' component={MainPage} />
       <Route path='/mentor' component={Mentor} />
       <Route path='/user/edit' component={Personal} />
       <Route path='/career/teach' component={CareerTeach} />
