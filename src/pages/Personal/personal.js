@@ -5,18 +5,17 @@ import Account from '../../components/Personal/account';
 import '../../css/Personal/Personal.css';
 import axios from 'axios';
 
-const Personal = (props) => {
+const Personal = ({ profile, profileHandler, type, token }) => {
   const [counter, countHandler] = useState(0);
   const [isProfile, flagToggler] = useState(false);
-  const [profile, profileHandler] = useState({});
   useEffect(() => {
     async function awaitFetch () {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
-        ? `http://localhost:3000/user/profile?type=${props.type}`
-        : `https://temp.artoring.com/user/profile?type=${props.type}`;
+        ? `http://localhost:4000/user/profile?type=${type}`
+        : `https://temp.artoring.com/user/profile?type=${type}`;
       const { data } = await axios.get(url, {
         headers: {
-          authorization: `Bearer ${props.token}`
+          authorization: `Bearer ${token}`
         }
       });
       profileHandler(data);
@@ -36,11 +35,11 @@ const Personal = (props) => {
   const uploader = () => {
     if (counter !== 0) {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
-        ? `http://localhost:3000/user/profile?type=${props.type}`
-        : `https://temp.artoring.com/user/profile?type=${props.type}`;
-      axios.put(url, { profile, type: props.type }, {
+        ? `http://localhost:4000/user/profile?type=${type}`
+        : `https://temp.artoring.com/user/profile?type=${type}`;
+      axios.put(url, { profile, type: type }, {
         headers: {
-          authorization: `Bearer ${props.token}`
+          authorization: `Bearer ${token}`
         }
       });
     }

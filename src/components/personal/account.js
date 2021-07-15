@@ -22,7 +22,7 @@ const Account = (props) => {
     formData.append('img', e.target.files[0]);
 
     const url = process.env.REACT_APP_NODE_ENV === 'development'
-      ? 'http://localhost:3000/upload/img'
+      ? 'http://localhost:4000/upload/img'
       : 'https://temp.artoring.com/upload/img';
 
     const { data } = await axios.post(url, formData);
@@ -93,7 +93,7 @@ const Account = (props) => {
           ? <label>
             <div className='FormTitle'>비밀번호*</div>
             <div className='PlaceHolder' onClick={() => isChangePwdHandler()}>비밀번호 변경하기</div>
-          </label>
+            </label>
           : (
             <div>
               <label>
