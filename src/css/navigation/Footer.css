@@ -1,0 +1,64 @@
+.FooterUpper{
+    height: 50%;
+    display: flex;
+    margin-bottom: 2vh;
+    justify-content: center;
+}
+
+.CustomerService, .Contact, .Social, .FooterInner {
+  margin-right: 25px;
+
+  width: 246px;
+}
+.WorkingHour, .ContactMethods, .SocialMethods {
+  margin-top: 17px;
+  font-family: NanumSquareRound;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.FooterLower {
+
+  font-family: NanumSquareRound;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  color: #000000;
+
+  display: flex;
+}
+.FooterInner{
+  padding-top: 46px;
+  display: block;
+  
+}
+.FooterContainer{
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+
+  width: 98vw;
+    padding-top:  120px;
+}
+.FooterLogo{
+  padding-right: 83px;
+  height: 26px;
+}
+.SubTitle{
+  font-family: NanumSquareRound;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #000000;
+}

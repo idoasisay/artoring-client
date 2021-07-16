@@ -3,7 +3,7 @@ import '../../css/App.css';
 import Nav from '../../components/PageNavi/pageNaviComponent';
 import { BrowserRouter } from 'react-router-dom';
 
-function App() {
+function App () {
   return (
     <BrowserRouter>
       <div className='App'>
