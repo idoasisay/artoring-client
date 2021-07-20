@@ -1,0 +1,169 @@
+
+.CareerTeachContainer{
+  max-width: 766px;
+  overflow: visible;
+}
+.CareerTeachHeaderImg{
+  padding-right: 55px;
+  height: 336px;
+  width: 336px;
+}
+
+.CareerTeachHeaderTitle{
+  padding-top:10px;
+  padding-bottom: 45px;
+}
+
+.CareerTeachHeaderDate{
+  color: #767677;
+}
+.CareerTeachHeaderPrice{
+  color: #ff4a70
+}
+.CareerTeachHeader{
+  padding-bottom: 70px;
+}
+.CareerTeachMiddelUI{
+
+  position: sticky;
+  top:0px;
+  background-color: #ffffff;
+  height:80px;
+  z-index: 10;
+  justify-content: center;
+
+  border-top: 1px solid black;
+  border-bottom:  1px solid black;
+  margin-left: calc(-100vw / 2 + 600px / 2);
+  margin-right: calc(-100vw / 2 + 600px / 2);
+}
+.MiddleUiInner{
+   width: 650px;
+}
+.MiddleUiBtn{
+ margin-right: 36px; 
+}
+
+.AccordionBtn{
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-135deg);
+  height: 1px;
+  width: 1px;
+  transition: 0.2s;
+  margin-right: 10px;
+}
+.AccordionContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 1s;
+    width: 100%;
+  padding-top: 21px;
+  padding-bottom: 21px;
+
+  border-top: 1px solid black;
+}
+
+.AccordionText{
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.2s;
+  width: 600px;
+}
+.AccordionOpen{
+  padding-top:20px;
+  padding-bottom: 50px;
+}
+
+.BtnOpen{
+
+  display: inline-block;
+  transform: rotate(45deg);
+}
+.test{
+  transition: 1s;
+}
+
+.ReviewContainer{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 34px;
+}
+.ReviewDescContainer{
+  justify-content: space-between;
+}
+.ReviewThumb{
+  width: 74px;
+  height: 74px;
+  margin-right:23px;
+  clip-path: circle(40%)
+}
+.ReviewDetail{
+  width: 553px;
+
+}
+.Reviewer{
+  font-family: "nanumSquare Bold";
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.69;
+  letter-spacing: normal;
+  color: #000000;
+}
+.ReviewDate{
+  font-family: "nanumSquare Bold";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #aeaeae;
+  align-self: center;
+  padding-left: 12px;
+}
+
+.PaginationContainer{
+  display: flex;
+  justify-content: center;
+}
+
+.PaginationItem{
+  font-family: "nanumSquare Bold";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  padding-left: 3px;
+  padding-right: 3px;
+  transition: 0.2s;
+  padding-bottom: 7px;
+}
+.PageIndicator{
+
+  border-bottom: 1px solid black;
+  transition: 0.2s;
+}
+.PaginationUI{
+  font-family: "nanumSquare Bold";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  padding-left: 7px;
+  padding-right:7px;
+}
+
+.FaqTitle{
+  padding-bottom: 31px;
+}

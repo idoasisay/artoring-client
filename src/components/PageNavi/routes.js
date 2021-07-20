@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import {
   Mentor,
   CareerTeach,
@@ -11,6 +11,7 @@ import {
 import Header from './header';
 import MainPage from '../../pages/Main/main';
 import Personal from '../../pages/Personal/personal';
+import ViewPost from '../../pages/Post/viewPost';
 
 export default function Nav ({ profile, profileHandler }) {
   return (
@@ -18,6 +19,9 @@ export default function Nav ({ profile, profileHandler }) {
       <Header />
       <Route exact path='/' render={() => <MainPage profile={profile} profileHandler={profileHandler} type='email' />} />
       <Route path='/mentor' component={Mentor} />
+      <Switch>
+        <Route path='/career/teach/:id' render={() => <ViewPost profile={profile} profileHandler={profileHandler} type='email' />} />
+      </Switch>
       <Route path='/career/teach' component={CareerTeach} />
       <Route path='/career/growing' component={CareerTeach} />
       <Route path='/career/signature' component={CareerTeach} />

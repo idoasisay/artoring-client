@@ -21,8 +21,99 @@
   font-family: "nanumSquare EBold";        
   src: url("../assets/fonts/NanumSquareRoundOTFEB.otf");
 }
+a {
+  text-decoration: none;
+  color: #000000;
+}
 
+.Title1{
+  font-family: "nanumSquare EBold";
+  font-size: 36px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.56;
+  letter-spacing: normal;
+  color: #000000;
+}
 
+.Title2{
+  font-family: "nanumSquare EBold";
+  font-size: 32px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #000000;
+
+}
+
+.Title3{
+  font-family: "nanumSquare EBold";
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.58;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.Title4{
+  font-family: "nanumSquare EBold";
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #000000;
+
+}
+
+.Title5{
+  font-family: "nanumSquare EBold";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.63;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.body1{
+  font-family: "nanumSquare EBold";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.88;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.body2{
+  font-family: "nanumSquare EBold";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.PaddingBottom12px{
+  padding-bottom: 12px;
+}
+.Flex{
+  display: flex;
+}
+.JustifyCenter{
+  justify-content: center;
+}
 .App {
   max-width: 3248px;
 html,
@@ -195,4 +286,7 @@ table {
 
 #root{
   justify-self: center;
+}
+.flex{
+  display: flex;
 }
