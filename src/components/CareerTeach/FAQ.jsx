@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 
 const Faq = (props) => {
+  // 각 컨테이너마다 번호를 할당하고 넘겨받은 번호에 해당되는 컨테이너 속성을 변경
   const handler = (num) => {
     active === num ? activeHandler(0) : activeHandler(num)
     ;
 
     const panel = document.querySelectorAll('.AccordionText');
 
-    // if (panel.style.maxHeight) {
-    //   panel.style.maxHeight = null;
-    // } else {
-    //   panel.style.maxHeight = panel.scrollHeight + 'px';
-    // }
     const keys = Object.keys(panel);
     for (const index in keys) {
       if (index != num - 1) panel[index].style.maxHeight = null;
@@ -26,6 +22,8 @@ const Faq = (props) => {
       }
     }
   };
+
+  // 타이틀 선택여부를 추적하기 위한 상태
   const [active, activeHandler] = useState(0);
   return (
     <div>
@@ -87,7 +85,7 @@ const Faq = (props) => {
           </div>
           <div
             className='AccordionContainer'
-           />
+          />
         </div>
       </div>
     </div>

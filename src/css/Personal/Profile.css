@@ -18,6 +18,7 @@ textarea::placeholder{
   margin-bottom:30px
 }
 .InterestedListContainer{
+  width: 600px;
   margin-top: 3px;
   min-width: 528px;
   display: flex;

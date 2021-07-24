@@ -2,6 +2,7 @@
   margin: 12px;
   align-items: center;
   max-width:  246px;
+  position:relative
 }
 
 .CardThumb{
@@ -58,4 +59,15 @@
   line-height: 1.93;
   letter-spacing: normal;
   color: #ff4a70;
+}
+.CardLikes{
+  width: fit-content;
+  position: absolute;
+  z-index: 10;
+  right:10%;
+  top:10%;
+  
+}
+.LikeActive{
+  filter: invert(44%) sepia(70%) saturate(2582%) hue-rotate(319deg) brightness(99%) contrast(105%);
 }

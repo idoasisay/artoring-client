@@ -1,5 +1,5 @@
 import Embed from '@editorjs/embed';
-import Table from '@editorjs/table';
+import Table from 'editorjs-table';
 import Paragraph from '@editorjs/paragraph';
 import List from '@editorjs/list';
 import Warning from '@editorjs/warning';

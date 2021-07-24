@@ -5,7 +5,7 @@ import { EDITOR_JS_TOOLS } from './editorTools';
 import Undo from 'editorjs-undo';
 import DragDrop from 'editorjs-drag-drop';
 
-const Editor = ({ data, holder = 'editorjs-container' }) => {
+const Editor = ({ data, holder = 'editorjs-container', readOnly }) => {
   const [editor, editorUpdater] = useState(null);
   const handleReady = () => {
     if (editor && editor.configuration) {

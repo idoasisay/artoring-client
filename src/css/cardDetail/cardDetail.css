@@ -36,6 +36,8 @@
   border-bottom:  1px solid black;
   margin-left: calc(-100vw / 2 + 600px / 2);
   margin-right: calc(-100vw / 2 + 600px / 2);
+
+  margin-bottom: 50px;
 }
 .MiddleUiInner{
    width: 650px;
@@ -43,7 +45,25 @@
 .MiddleUiBtn{
  margin-right: 36px; 
 }
+.ParticipateUpper{
+  width: 261px;
+  height: 50px;
+}
+.ParticipateLower{
+  width: 202px;
+  height: 50px;
+}
+.likeImg{
+  padding-right: 3px;
+}
 
+.Moderator{
+}
+
+.EditorHolder{
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
 .AccordionBtn{
   border: solid black;
   border-width: 0 3px 3px 0;

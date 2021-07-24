@@ -28,45 +28,12 @@
 .Toggler{
   width: 250px;
   height: 44px;
-  border-radius: 10px;
-   border: solid 2px #000000;
-  background-color: #000000;
-
-  font-family: 'NanumSquare EBold';
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
+  
 
   margin-right: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
 }
 
-.TogglerActivate{
-  width: 250px;
-  height: 44px;
-  border-radius: 10px;
-  border: solid 2px #000000;
-
-  margin-right: 8px;
-  font-family: 'NanumSquare EBold';
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .PersonalTitle{
   font-family: 'NanumSquare Bold';
@@ -122,15 +89,6 @@
 .PlaceHolderBtn{
   width: 336px;
   height: 50px;
-  padding: 11px 120px 12px;
-  border-radius: 10px;
-  background-color: #ff4a70;
-  font-family: 'nanumSquare EBold';
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.69;
-  letter-spacing: normal;
-  color: #ffffff;
+
+
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Header(props) {
+function Header (props) {
   return (
     <div className='nav'>
       <div className='navLeft'>

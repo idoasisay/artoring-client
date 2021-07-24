@@ -4,29 +4,33 @@ import axios from 'axios';
 
 import '../../css/Personal/Account.css';
 
-const Account = (props) => {
-  const [image, imageHandler] = useState(null);
+const Account = ({ profileHandler, onClickHandler, profile }) => {
+  const [image, imageHandler] = useState(profile.thumb);
   const [isChangePwd, isChangePwdHandler] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
   const onSubmit = data => {
-    console.log(data);
     // axios로 서버에 저장 요청을 보내고 리디렉션
-    props.profileHandler({ ...props.profile, thumb: image, ...data });
-    console.log(props.profile);
-    props.onClickHandler();
+    profileHandler({ ...profile, thumb: image, ...data });
+    onClickHandler();
   };
+
+  // 이미지 업로드용
   const imageUploader = async (e) => {
-    console.log('test');
     const formData = new FormData();
-    formData.append('img', e.target.files[0]);
+    formData.append('file', e.target.files[0]);
 
     const url = process.env.REACT_APP_NODE_ENV === 'development'
       ? 'http://localhost:4000/upload/img'
-      : 'https://temp.artoring.com/upload/img';
+      : 'https://back.artoring.com/upload/img';
 
     const { data } = await axios.post(url, formData);
-    console.log(data);
+
+    // 전달받은 데이터는 URL 주소 및 도메인과 프로토콜의 정보가없는 path만 존재하는 key 데이터가 존재.
+    // 해당 key를 이용하여 클라우트 프론트 주소(artoring.com)으로 접근한다. S3 주소는 직접 접근이 제한되어 있다.
+    // ! 버그!!!!
+    // ! 서버에 해당 유저데이터가 존재하면 화면에 해당 유저의 데이터들이 렌더링 된다.
+    // ! 하지만 react-hook-form은 아무런 입력이 없으면 validation이 실패한다.
     const imgUrl = 'https://artoring.com/'.concat(data[0].key);
     imageHandler(imgUrl);
   };
@@ -53,11 +57,11 @@ const Account = (props) => {
         </label>
         <label>
           <div className='FormTitle'>이름*</div>
-          <div className='PlaceHolder'>{props.profile.name}</div>
+          <div className='PlaceHolder'>{profile.name}</div>
         </label>
         <label>
           <div className='FormTitle'>이메일*</div>
-          <div className='PlaceHolder'>{props.profile.email}</div>
+          <div className='PlaceHolder'>{profile.email}</div>
         </label>
         <label>
           <div className='FormTitle'>성별*</div>
@@ -79,26 +83,26 @@ const Account = (props) => {
         </label>
         <label>
           <div className='FormTitle'>생년원일*</div>
-          <div className='PlaceHolder'>{props.profile.birth}</div>
+          <div className='PlaceHolder'>{profile.birth}</div>
         </label>
         <label>
           <div className='FormTitle'>휴대전화번호*</div>
-          <div className='PlaceHolder'>{props.profile.phone}</div>
+          <div className='PlaceHolder'>{profile.phone}</div>
         </label>
         <label>
           <div className='FormTitle'>주소*</div>
-          <div className='PlaceHolder'>{props.profile.address}</div>
+          <div className='PlaceHolder'>{profile.address}</div>
         </label>
         {isChangePwd
           ? <label>
             <div className='FormTitle'>비밀번호*</div>
             <div className='PlaceHolder' onClick={() => isChangePwdHandler()}>비밀번호 변경하기</div>
-            </label>
+          </label>
           : (
             <div>
               <label>
                 <div className='FormTitle'>비밀번호*</div>
-                <span className='FormTitle'>새로운 비밀번호</span><span>(8자 이상 입력해 주세요)</span>
+                <span className='FormTitle TextType4'>새로운 비밀번호</span><span className='Title5 TextType4'>(8자 이상 입력해 주세요)</span>
                 <input type='password' className='PlaceHolder' {...register('password', { pattern: /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[!@%*#^&])(?!.*[^a-zA-z0-9!@%*#^&]).{8,16}$/ })} />
 
               </label>
@@ -128,7 +132,7 @@ const Account = (props) => {
             )}
         <label>
           <div className='PlaceHolderBtnContainer'>
-            <button className='PlaceHolderBtn'>변경사항 저장</button>
+            <div className='PlaceHolderBtn BtnType5'>변경사항 저장</div>
           </div>
         </label>
       </form>

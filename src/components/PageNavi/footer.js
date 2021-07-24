@@ -2,6 +2,7 @@ import React from 'react';
 import '../../css/navigation/Footer.css';
 import logo from '../../assets/img/logo.png';
 
+// 푸터의 외형은 완성되었으나 특정 버튼을 누를 경우에대한 핸들러가 아무것도 없음
 const Footer = () => {
   return (
     <div className='FooterContainer'>

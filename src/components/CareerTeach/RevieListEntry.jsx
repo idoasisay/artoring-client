@@ -13,7 +13,6 @@ const ReviewListEntry = ({ thumb = 'https://artoring.com/img/1626247507674.jpeg'
   if (minute < 10) minute = '0'.concat(minute);
 
   modifiedDate = modifiedDate.concat(year, '.', month, '.', day, ' ', hour, ':', minute);
-  console.log(modifiedDate);
   return (
     <div className='ReviewContainer'>
       <img src={thumb} alt='userThumb' className='ReviewThumb' />

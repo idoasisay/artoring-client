@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InterestedInEntry from './interestringEntry';
 
 const InterestedList = ({ list, listHandler }) => {
-  console.log(list);
   function handler (data) {
-    console.log('test');
     listHandler(list.map(ele => {
+      // 관심사리스트는 ['취업', ...]과 같은 스트링 배열
       if (ele.name === data.name) return { ...data, val: !data.val };
       else return ele;
     }));
