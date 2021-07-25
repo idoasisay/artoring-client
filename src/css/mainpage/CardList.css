@@ -29,22 +29,7 @@
   width: 150px;
   height: 50px;
   margin-right: 12px;
-  border-radius: 10px;
-  background-color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.MoreInfo:hover{
-  background-color: #868eee;
-}
-
-.MoreBtnText{
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
 }

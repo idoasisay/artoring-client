@@ -50,16 +50,11 @@
 .ToWhoisartBtn{
   width: 150px;
   height: 52px;
-  border-radius: 10px;
-  border: 2px solid #000000;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.ToWhoisartBtn:hover{
-  background-color: #868eee;
-}
 
 .WhoisartImgContainer{
   margin-right: 1vw;

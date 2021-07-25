@@ -7,7 +7,7 @@
 
 .Thumb{
   height: 50px;
-    clip-path: circle(40%)
+  clip-path: circle(40%)
 }
 .BlankThumb{
   border-radius: 50%;
