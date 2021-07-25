@@ -97,7 +97,7 @@ const Account = ({ profileHandler, onClickHandler, profile }) => {
           ? <label>
             <div className='FormTitle'>비밀번호*</div>
             <div className='PlaceHolder' onClick={() => isChangePwdHandler()}>비밀번호 변경하기</div>
-          </label>
+            </label>
           : (
             <div>
               <label>

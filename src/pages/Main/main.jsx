@@ -12,7 +12,7 @@ const MainPage = (props) => {
     async function inner () {
       const uri = process.env.REACT_APP_NODE_ENV === 'development'
         ? 'http://localhost:4000'
-        : 'http://back.artoring.com';
+        : 'https://back.artoring.com';
       const { data } = await axios.get(uri.concat('/career/teach'));
       console.log(props.profile, data);
       cardsHandler(data);

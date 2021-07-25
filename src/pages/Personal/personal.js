@@ -12,7 +12,7 @@ const Personal = ({ profile, profileHandler, type, token }) => {
     async function awaitFetch () {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
         ? `http://localhost:4000/profile?type=${type}`
-        : `https://temp.artoring.com/profile?type=${type}`;
+        : `https://back.artoring.com/profile?type=${type}`;
       const { data } = await axios.get(url, {
         headers: {
           authorization: `Bearer ${token}`
@@ -36,7 +36,7 @@ const Personal = ({ profile, profileHandler, type, token }) => {
     if (counter !== 0) {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
         ? `http://localhost:4000/profile?type=${type}`
-        : `https://temp.artoring.com/user/profile?type=${type}`;
+        : `https://back.artoring.com/user/profile?type=${type}`;
       axios.put(url, { profile, type: type }, {
         headers: {
           authorization: `Bearer ${token}`

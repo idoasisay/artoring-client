@@ -36,7 +36,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
       // 환경변수에 따라 요청을 보내야 하는 주소가 달라짐
       const uri = process.env.REACT_APP_NODE_ENV === 'development'
         ? 'http://localhost:4000'
-        : 'http://back.artoring.com';
+        : 'https://back.artoring.com';
 
       // 좋아요 여부에 따라 좋아요 등록/삭제가 이뤄지게 된다
       likes
@@ -166,7 +166,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         </div>
         <div id='FAQ'><Faq /></div>
 
-      </div>
+        </div>
 
   );
 };
