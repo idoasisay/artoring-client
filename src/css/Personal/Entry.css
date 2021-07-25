@@ -1,0 +1,10 @@
+.EntryContainer{
+  
+  width: 162px;
+  height: 40px;
+  margin-right :12px;
+  margin-bottom: 10px;
+}
+.Active{
+    background-color: #868eee;
+}

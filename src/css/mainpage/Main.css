@@ -1,0 +1,96 @@
+.MentorFindContainer{
+ 
+  justify-content: center;
+  display: flex;
+  
+
+}
+.CareerFindContainer{
+ 
+  justify-content: center;
+  display: flex;
+
+}
+
+
+.WhoisartContainer{
+
+  display: flex;
+  justify-content: center;
+  background-color: rgb(241,241,254);
+  padding-top: 2vw;
+  padding-bottom: 2vw;
+  width: 100%;
+}
+
+.WhoisartTopDesc,  .WhoisartMidDesc{
+  display: block;
+}
+
+.WhoisartTopDesc{
+  display: grid;
+  align-items: center;
+  height: 144px;
+  margin-bottom: 18px;
+}
+.WhoisartMidDesc{
+  display: grid;
+  min-height: 60px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.WhoisartDesc{
+
+
+  overflow-x:auto;
+  width: 50%
+}
+.ToWhoisartBtn{
+  width: 150px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.WhoisartImgContainer{
+  margin-right: 1vw;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 50%
+}
+.WhoisartImg{
+  width: 267px;
+  height: 302px;
+  margin: 0 159px 2px 0;
+}
+.OTFEB{
+  font-family: 'nanumSquare EBold' !important;
+}
+.OTFR{
+  font-family: 'nanumSquare' !important;
+}
+.OTFRL{
+  font-family: 'nanumSquare Light' !important;
+}
+.OTRRB{
+  font-family: 'nanumSquare Bold' !important;
+}
+.Size36px{
+  font-size: 36px !important;
+}
+.Size32px{
+  font-size: 32px !important;
+}
+.Size16px{
+  font-size: 16px !important;
+}
+.Height48px{
+  line-height: 1.5 !important;
+}
+.Height56px{
+  line-height: 1.56 !important;
+}

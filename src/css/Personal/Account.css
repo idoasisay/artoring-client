@@ -1,0 +1,41 @@
+
+#UploadPhoto{
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.Thumb{
+  height: 50px;
+  clip-path: circle(40%)
+}
+.BlankThumb{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #d8d8d8;
+
+}
+.Flex{
+  display: flex;
+  align-items: center;
+}
+
+.ThumbDesc{
+  margin-left: 17px;
+}
+.Gender{
+  width: 100%;
+  height: 27px;
+}
+.GenderSelect{
+  align-items: center;
+  font-family: 'NanumSquare Bold';
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: normal;
+  color: #242221;
+}
