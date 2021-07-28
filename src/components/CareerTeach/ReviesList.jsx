@@ -4,7 +4,7 @@ import ReviewListEntry from './RevieListEntry';
 import PaginationList from './PaginationList';
 
 const uri = process.env.REACT_APP_NODE_ENV === 'development'
-  ? 'http://localhost:4000/reviews/'
+  ? 'https://localhost:4000/reviews/'
   : 'https://back.artoring.com/reviews/';
 
 const ReviewList = ({ list }) => {

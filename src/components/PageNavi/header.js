@@ -39,7 +39,7 @@ function Header (props) {
         </div>
         <div className='navBox'>
           {props.isLogin ? (
-            <Link to='/login'>로그아웃</Link>
+            <Link to='/logout'>로그아웃</Link>
           ) : (
             <Link to='/login'>로그인/회원가입</Link>
           )}

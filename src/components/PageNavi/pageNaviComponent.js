@@ -9,7 +9,7 @@ const Nav = (props) => {
   const [profile, profileHandler] = useState({});
   const [isLogin, loginHandler] = useState(false);
   const [accessToken, tokenHandler] = useState('');
-  const { loginType, typeHandler } = useState('email');
+  const [loginType, typeHandler] = useState('email');
 
   // 하단 삼항연산자들은 스토리북을 사용할때와 그렇지 않을때 모두 대응이 가능함.
   return (
@@ -20,7 +20,9 @@ const Nav = (props) => {
         isLogin={props.isLogin ? props.isLogin : isLogin}
         loginHandler={props.loginHandler ? props.loginHandler : loginHandler}
         accessToken={props.accessToken ? props.accessToken : accessToken}
+        tokenHandler={tokenHandler}
         loginType={props.loginType ? props.loginType : loginType}
+        typeHandler={props.typeHandler ? props.typeHandler : typeHandler}
       />
       <Footer />
     </nav>

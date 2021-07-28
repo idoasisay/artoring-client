@@ -11,8 +11,8 @@ const Personal = ({ profile, profileHandler, type, token }) => {
   useEffect(() => {
     async function awaitFetch () {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
-        ? `http://localhost:4000/profile?type=${type}`
-        : `https://back.artoring.com/profile?type=${type}`;
+        ? `https://localhost:4000/profile?type=${type}`
+        : `https://temp.artoring.com/profile?type=${type}`;
       const { data } = await axios.get(url, {
         headers: {
           authorization: `Bearer ${token}`
@@ -35,8 +35,8 @@ const Personal = ({ profile, profileHandler, type, token }) => {
   const uploader = () => {
     if (counter !== 0) {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
-        ? `http://localhost:4000/profile?type=${type}`
-        : `https://back.artoring.com/user/profile?type=${type}`;
+        ? `http://localhost:4000/user/profile?type=${type}`
+        : `https://temp.artoring.com/user/profile?type=${type}`;
       axios.put(url, { profile, type: type }, {
         headers: {
           authorization: `Bearer ${token}`
@@ -52,10 +52,10 @@ const Personal = ({ profile, profileHandler, type, token }) => {
       <div className='PersonalTitle'>일반회원</div>
       <div>
         <div className='TogglerContainer Flex'>
-          <div className={isProfile === true ? 'Toggler BtnType3 Btn3Active' : 'Toggler BtnType3'} onClick={enableProfile}>
+          <div className={isProfile === false ? 'TogglerActivate' : 'Toggler'} onClick={enableProfile}>
             <div>계정</div>
           </div>
-          <div className={isProfile === false ? 'Toggler BtnType3 Btn3Active' : 'Toggler BtnType3'} onClick={disableProfile}>프로파일</div>
+          <div className={isProfile === true ? 'TogglerActivate' : 'Toggler'} onClick={disableProfile}>프로파일</div>
         </div>
         {isProfile
           ? <Account profile={profile} profileHandler={profileHandler} onClickHandler={trigger} />

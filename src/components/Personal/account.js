@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
+import utils from '../Common';
 import '../../css/Personal/Account.css';
 
-const Account = ({ profileHandler, onClickHandler, profile }) => {
+const { classReplacer } = utils;
+
+const Account = ({ profileHandler, onClickHandler, profile, isSignup }) => {
   const [image, imageHandler] = useState(profile.thumb);
   const [isChangePwd, isChangePwdHandler] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
   const onSubmit = data => {
+    console.log(errors);
     // axios로 서버에 저장 요청을 보내고 리디렉션
     profileHandler({ ...profile, thumb: image, ...data });
     onClickHandler();
@@ -21,7 +25,7 @@ const Account = ({ profileHandler, onClickHandler, profile }) => {
     formData.append('file', e.target.files[0]);
 
     const url = process.env.REACT_APP_NODE_ENV === 'development'
-      ? 'http://localhost:4000/upload/img'
+      ? 'https://localhost:4000/upload/img'
       : 'https://back.artoring.com/upload/img';
 
     const { data } = await axios.post(url, formData);
@@ -57,11 +61,15 @@ const Account = ({ profileHandler, onClickHandler, profile }) => {
         </label>
         <label>
           <div className='FormTitle'>이름*</div>
-          <div className='PlaceHolder'>{profile.name}</div>
+          {isSignup && !profile.name
+            ? <input type='text' id='name' className='PlaceHolder' {...register('name', { required: true })} />
+            : <div className='PlaceHolder'>{profile.name}</div>}
         </label>
         <label>
           <div className='FormTitle'>이메일*</div>
-          <div className='PlaceHolder'>{profile.email}</div>
+          {isSignup && !profile.email
+            ? <input type='text' id='email' className='PlaceHolder' {...register('email', { required: true })} />
+            : <div className='PlaceHolder'>{profile.email}</div>}
         </label>
         <label>
           <div className='FormTitle'>성별*</div>
@@ -83,17 +91,17 @@ const Account = ({ profileHandler, onClickHandler, profile }) => {
         </label>
         <label>
           <div className='FormTitle'>생년원일*</div>
-          <div className='PlaceHolder'>{profile.birth}</div>
+          {isSignup && !profile.birth
+            ? <input type='text' id='birth' className='PlaceHolder' {...register('birth', { required: true })} />
+            : <div className='PlaceHolder'>{profile.birth}</div>}
         </label>
         <label>
           <div className='FormTitle'>휴대전화번호*</div>
-          <div className='PlaceHolder'>{profile.phone}</div>
+          {isSignup && !profile.phone
+            ? <input type='text' id='phone' className='PlaceHolder' {...register('phone', { required: true })} />
+            : <div className='PlaceHolder'>{profile.phone}</div>}
         </label>
-        <label>
-          <div className='FormTitle'>주소*</div>
-          <div className='PlaceHolder'>{profile.address}</div>
-        </label>
-        {isChangePwd
+        {isSignup ? '' : isChangePwd
           ? <label>
             <div className='FormTitle'>비밀번호*</div>
             <div className='PlaceHolder' onClick={() => isChangePwdHandler()}>비밀번호 변경하기</div>
@@ -102,7 +110,7 @@ const Account = ({ profileHandler, onClickHandler, profile }) => {
             <div>
               <label>
                 <div className='FormTitle'>비밀번호*</div>
-                <span className='FormTitle TextType4'>새로운 비밀번호</span><span className='Title5 TextType4'>(8자 이상 입력해 주세요)</span>
+                <span className='FormTitle'>새로운 비밀번호</span><span>(8자 이상 입력해 주세요)</span>
                 <input type='password' className='PlaceHolder' {...register('password', { pattern: /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[!@%*#^&])(?!.*[^a-zA-z0-9!@%*#^&]).{8,16}$/ })} />
 
               </label>
@@ -132,7 +140,12 @@ const Account = ({ profileHandler, onClickHandler, profile }) => {
             )}
         <label>
           <div className='PlaceHolderBtnContainer'>
-            <div className='PlaceHolderBtn BtnType5'>변경사항 저장</div>
+            <button
+              className='PlaceHolderBtn BtnType5'
+              onMouseOver={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType5 Btn5Active')}
+              onMouseLeave={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType5')}
+            >변경사항 저장
+            </button>
           </div>
         </label>
       </form>
