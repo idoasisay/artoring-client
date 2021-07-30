@@ -2,6 +2,7 @@
 .CareerTeachContainer{
   max-width: 766px;
   overflow: visible;
+  position: relative;
 }
 .CareerTeachHeaderImg{
   padding-right: 55px;
@@ -22,6 +23,7 @@
 }
 .CareerTeachHeader{
   padding-bottom: 70px;
+  position: relative;
 }
 .CareerTeachMiddelUI{
 
@@ -34,8 +36,8 @@
 
   border-top: 1px solid black;
   border-bottom:  1px solid black;
-  margin-left: calc(-100vw / 2 + 600px / 2);
-  margin-right: calc(-100vw / 2 + 600px / 2);
+  margin-left: calc(-100vw / 2 + 800px / 2);
+  margin-right: calc(-100vw / 2 + 800px / 2);
 
   margin-bottom: 50px;
 }
@@ -53,11 +55,66 @@
   width: 202px;
   height: 50px;
 }
-.likeImg{
+.LikeImg{
   padding-right: 3px;
 }
 
-.Moderator{
+.ShareBtn{
+  margin-left:16px;
+  width: 24px;
+  height:22px;
+}
+.ModalHidden{
+  display: none !important;
+}
+
+.ModalContainer{
+  background-color: rgba(0,0,0,0.3);
+  position: fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 11;
+
+  display: block;
+
+  font-family: "nanumSquare Bold";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.ShareModal{
+  width: 222px;
+  height: 126px;
+  border-radius: 10px;
+  border: solid 2px #000000;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 12;
+}
+
+.ModalTop{
+  justify-content: space-around;
+  margin-bottom: 25px;
+  margin-top: 24px;
+}
+.ModalExit{
+  position: absolute;
+  right:21px;
+  top:25px;
+}
+
+.ModalShareBtns{
+  height:36px;
+  margin-left: 4.5px;
+  margin-right:4.5px;
 }
 
 .EditorHolder{

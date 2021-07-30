@@ -12,25 +12,29 @@ const FbLogin = ({ typeHandler, loginHandler, tokenHandler, profileHandler }) =>
 
   function onLoginHandler () {
     const time = setInterval(async () => {
-      const sessionKey = sessionStorage.key(0);
-      const { authResponse } = sessionKey? JSON.parse(sessionStorage.getItem(sessionKey)) : null;
+      const sessionKey = 'fbssls_290939452791975'
+      console.log(sessionKey,sessionStorage.getItem(sessionKey))
+      const { authResponse } = sessionKey && sessionStorage.getItem(sessionKey)? JSON.parse(sessionStorage.getItem(sessionKey)) : null;
 
       if (authResponse) {
-        sessionStorage.removeItem(sessionKey);
+        //sessionStorage.removeItem(sessionKey);
         typeHandler('facebook');
         loginHandler(true);
         tokenHandler(authResponse.accessToken);
-        const { userData } = await axios.get(url.concat('/facebook'));
+        const response = await axios.post(url.concat('/facebook'),{
+          token: authResponse.accessToken,
+          id: authResponse.userID
+        });
 
-        profileHandler(userData);
+        profileHandler(response.data.trimedData);
 
-        history.push('/');
+        response.data.signup ? history.push('/signup/detail/account') :  history.push('/');
         clearInterval(time);
       } else {
          history.push('/');
          clearInterval(time);
       }
-    }, 100);
+    }, 1000);
   }
   global.onLoginHandler = onLoginHandler;
 
@@ -62,6 +66,7 @@ const FbLogin = ({ typeHandler, loginHandler, tokenHandler, profileHandler }) =>
       data-button-type='login_with'
       data-layout='default'
       data-auto-logout-link='false'
+      data-scope="public_profile,user_birthday,email,user_gender"
       data-use-continue-as='false'
     />
   );

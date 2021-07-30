@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
@@ -12,17 +12,51 @@ import ReviewList from '../../components/CareerTeach/ReviesList';
 
 import '../../css/cardDetail/cardDetail.css';
 import likeImg from '../../assets/img/like.svg';
+import shareImg from '../../assets/img/share.svg';
+
+import naverShareBtn from '../../assets/img/naver_square.png';
+import facebookShareBtn from '../../assets/img/facebook_logo.png';
 
 const { classReplacer } = utils;
 
 const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) => {
+  const ref = useRef();
   const { id } = useParams();
   const [card, cardHandler] = useState({});
+
+  const [enableModal, modalToggler] = useState(false);
+
+  const naverShare = async () => {
+    const { href } = window.location;
+    // https://share.naver.com/web/shareView?url=인코딩한URL값&title=인코딩한title값
+    const url = encodeURI(encodeURIComponent(href.concat(`/career/teach${id}`)));
+    const title = encodeURI(card.title);
+    window.open(`https://share.naver.com/web/shareView?url=${url}&title=${title}`, 'popoup',
+              `toolbar=no, location=no, status=no,
+              menubar=no, scrollbars=no, resizable=no,
+              width=400, height=500`);
+  };
+
+  const facebookShare = () => {
+    const { href } = window.location;
+    // https://share.naver.com/web/shareView?url=인코딩한URL값&title=인코딩한title값
+    const url = href.concat(`/career/teach${id}`);
+
+    console.log(url);
+    window.FB.ui({
+      method: 'share',
+      href: url
+    }, function (response) {
+      console.log(response);
+    });
+  };
 
   // 로그인이 안되어 있으면 profile에 likedCareerEdu가 없다
   // 로그인이 되어있다면 상세 정보 렌더링 대상의 카드의 id를 바탕으로 유저가 좋아요를 누른 리스트에
   // 포함되어 있는지를 확인한다.
   // String은 inludes 넘버타입으로 형변환이 이뤄지지 않는다.
+
+  console.log(profile);
   const [likes, likesHandler] = useState(profile.likedCareerEdu
     ? profile.likedCareerEdu.includes(Number(id))
     : false);
@@ -65,7 +99,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         cardHandler({ ...card, likesCount: card.likesCount - 1 });
       } else {
         // 좋아요가 안되어 있다면 유저의 좋아요 목록에 등록
-        likedCareerEdu = likedCareerEdu.push(Number(id));
+        likedCareerEdu.push(Number(id));
         cardHandler({ ...card, likesCount: card.likesCount + 1 });
       }
 
@@ -73,6 +107,23 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
       likesHandler(!likes);
     }
   };
+
+  // 모달창 밖과을 눌렀을때 모당창을 닥기위함
+  // 동시에 모달창 내부에서는 반드시 X 버튼을 눌러야 한다.
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      if (enableModal && ref.current && !ref.current.contains(e.target)) {
+        modalToggler(false);
+      }
+    };
+    document.addEventListener('mousedown', checkIfClickedOutside);
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener('mousedown', checkIfClickedOutside);
+    };
+  }, [enableModal]);
+
+  // 보여줘야할 카드의 상세정보를 요청. 페이지 렌더링시 단 한번만 실행된다.
   useEffect(() => {
     async function getCardInfo () {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
@@ -85,10 +136,73 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
 
     getCardInfo();
   }, []);
+
+  useEffect(() => {
+    const cont = document.getElementById('create-kakao-link-btn');
+    if (cont) {
+      window.Kakao.Link.createDefaultButton({
+        container: cont,
+        objectType: 'feed',
+        content: {
+          title: card.title,
+          description: card.detailInfo,
+          imageUrl: '',
+          link: {
+            mobileWebUrl: `https://localhost:3000/card/teach/${id}`
+          }
+        },
+        buttons: [
+          {
+            title: '웹으로 이동',
+            link: {
+              mobileWebUrl: `https://localhost:3000/card/teach/${id}`
+            }
+          }
+
+        ]
+      }
+      );
+    }
+  });
   return (
     !card.title
       ? <div> waiting...</div>
       : <div className='CareerTeachContainer'>
+        <div
+          className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
+        >
+          <div className='ShareModal' ref={ref}>
+            <div className='ModalTop Flex'>
+              <div className='ModalTitle'>공유하기</div>
+              <div className='ModalExit' onClick={() => modalToggler(false)}>&#88;</div>
+            </div>
+            <div className='Flex JustifyCenter'>
+              <a id='create-kakao-link-btn'>
+                <img
+                  src='https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png'
+                  alt='kakaoShare'
+                  className='ModalShareBtns'
+                />
+              </a>
+              <div className='create-naver-link-btn'>
+                <img
+                  src={naverShareBtn}
+                  alt='naverShare'
+                  onClick={naverShare}
+                  className='ModalShareBtns'
+                />
+              </div>
+              <div className='create-facebook-link-btn'>
+                <img
+                  src={facebookShareBtn}
+                  alt='facebookShare'
+                  onClick={facebookShare}
+                  className='ModalShareBtns'
+                />
+              </div>
+            </div>
+          </div>
+        </div>
         <div className='CareerTeachHeader Flex'>
           <img src={card.thumb} alt='Card Thumbnail' className='CareerTeachHeaderImg' />
           <div className='CareerTeachHeaderDesc'>
@@ -115,11 +229,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                 className={!likes ? 'LikesUpper BtnType6 Flex' : 'LikesUpper BtnType6 Btn6Active Flex'}
                 onClick={likeHandler}
               >
-                <img src={likeImg} alt='likeImg' className='likeImg' />
+                <img src={likeImg} alt='likeImg' className='LikeImg' />
                 <div id='test'>{card.likesCount}</div>
 
               </div>
-
+              <img src={shareImg} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
             </div>
           </div>
         </div>
@@ -166,7 +280,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         </div>
         <div id='FAQ'><Faq /></div>
 
-      </div>
+        </div>
 
   );
 };

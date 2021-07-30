@@ -27,13 +27,13 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
 
         if (code) {
           sessionStorage.removeItem(sessionKey);
-
+          console.log(code, type, state);
           const { data } = await axios.post(url.concat(`/${type}`), { code, state });
-          const { accessToken, userData, signup } = data;
+          const { accessToken, trimedData, signup } = data;
           typeHandler(type);
           loginHandler(true);
           tokenHandler(accessToken);
-          profileHandler(userData);
+          profileHandler(trimedData);
 
           if (signup === true) { history.push('/signup/detail/account'); } else { history.push('/'); }
           clearInterval(time);

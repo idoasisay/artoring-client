@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Router, Switch, useHistory } from 'react-router-dom';
 import {
   Mentor,
@@ -20,28 +20,45 @@ import axios from 'axios';
 
 export default function Nav ({ profile, profileHandler, isLogin, loginHandler, accessToken, tokenHandler, loginType, typeHandler }) {
   const history = useHistory();
+  const [counter, countHandler] = useState(0);
+
+  const trigger = () => {
+    countHandler(counter + 1);
+  };
+  useEffect(profileDetailHandler, [counter]);
+
   function accountDetailHandler () {
     history.push('/signup/detail/profile');
   }
   function profileDetailHandler () {
-    const url = process.env.REACT_APP_NODE_ENV === 'development'
-      ? 'https://localhost:4000/profile'
-      : 'https://back.artoring.com/profile';
-    axios.put(url, { profile, type: loginType }, {
-      headers: {
-        authorization: `Bearer ${accessToken}`
-      }
-    });
+    if (counter >= 1) {
+      history.push('/');
+      const url = process.env.REACT_APP_NODE_ENV === 'development'
+        ? 'https://localhost:4000/profile'
+        : 'https://back.artoring.com/profile';
+      const Time = setInterval(() => {
+        if (profile.major !== '') {
+          clearInterval(
+            Time
+          );
 
-    history.push('/');
-    const updatedObj = {};
-    updatedObj.interestedIn = profile.interestedIn;
-    updatedObj.interestedIn = profile.interestedIn;
-    updatedObj.interestedIn = profile.interestedIn;
-    updatedObj.likedCareerEdu = [];
-    updatedObj.likedMentor = [];
+          axios.put(url, { profile, type: loginType }, {
+            headers: {
+              authorization: `Bearer ${accessToken}`
+            }
+          });
 
-    profileHandler(updatedObj);
+          const updatedObj = {};
+          updatedObj.interestedIn = profile.interestedIn;
+          updatedObj.interestedIn = profile.interestedIn;
+          updatedObj.interestedIn = profile.interestedIn;
+          updatedObj.likedCareerEdu = [];
+          updatedObj.likedMentor = [];
+
+          profileHandler(updatedObj);
+        }
+      }, 10);
+    }
   }
   return (
     <Router history={history}>
@@ -81,9 +98,9 @@ export default function Nav ({ profile, profileHandler, isLogin, loginHandler, a
       {/*
        * 임시토큰을 전달하고 있으나 프로덕션 배포에서는 고정값이 아닌 Props의 값으로 대체
        */}
-      <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} accessToken="'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwibmFtZSI6InRlc3QgdXNlciIsImlhdCI6MTYyNjIzNTQ5OH0.UW45M6t1kbBKN-OUl8HiaLCae8eYxMue_6SxXsMscWQ" loginType='email' />} />
-      <Route path='/signup/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} />} />
-      <Route path='/signup/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={profileDetailHandler} />} />
+      <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} accessToken={accessToken} loginType='email' />} />
+      <Route path='/signup/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
+      <Route path='/signup/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
     </Router>
   );
 }

@@ -326,7 +326,7 @@ a {
   padding-bottom: 12px;
 }
 .Flex{
-  display: flex;
+  display: flex !important;
 }
 .JustifyCenter{
   justify-content: center;
