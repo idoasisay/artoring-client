@@ -1,0 +1,12 @@
+.LoginContainer{
+  flex-direction: column;
+  width: fit-content;
+}
+.Delimiter{
+  justify-content: space-between;
+}
+.DelimiterInner{
+  height: 0px;
+  border: 1px solid black;
+  width: 45%;
+}

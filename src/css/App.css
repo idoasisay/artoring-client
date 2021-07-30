@@ -321,18 +321,19 @@ a {
 .Btn6Active img{
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(233deg) brightness(104%) contrast(101%);
 }
-#test:focus > .BtnType6{
-  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(233deg) brightness(104%) contrast(101%);
 
-}
 .PaddingBottom12px{
   padding-bottom: 12px;
 }
 .Flex{
-  display: flex;
+  display: flex !important;
 }
 .JustifyCenter{
   justify-content: center;
+}
+
+.AlignLeft{
+  justify-self: flex-start;
 }
 .App {
   max-width: 3248px;

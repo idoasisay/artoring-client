@@ -11,7 +11,7 @@ const MainPage = (props) => {
   function getCards () {
     async function inner () {
       const uri = process.env.REACT_APP_NODE_ENV === 'development'
-        ? 'http://localhost:4000'
+        ? 'https://localhost:4000'
         : 'https://back.artoring.com';
       const { data } = await axios.get(uri.concat('/career/teach'));
       console.log(props.profile, data);
@@ -32,7 +32,7 @@ const MainPage = (props) => {
       <div className='CareerFindContainer'>
         <CardList
           data={{ title: '커리어 교육', cards: cards, likedCareerEdu: props.profile ? props.profile.likedCareerEdu : [] }}
-          loginType={props.profile.loginType}
+          loginType={props.loginType}
           accessToken={props.accessToken}
           isLogin={props.isLogin}
         />
