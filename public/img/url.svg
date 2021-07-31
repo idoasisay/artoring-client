@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>url아이콘</title>
+    <desc>Created with Sketch.</desc>
+    <g id="url아이콘" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="circleangle" fill="#FF4A70" cx="50" cy="50" r="50"></circle>
+        <text id="URL" font-family="NanumSquareRoundOTFEB, NanumSquareRoundOTF" font-size="25" font-weight="700" fill="#FFFFFF">
+            <tspan x="26" y="58">URL</tspan>
+        </text>
+    </g>
+</svg>

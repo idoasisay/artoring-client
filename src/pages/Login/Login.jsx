@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import utils from '../../components/Common';
 
 import FbLogin from '../../components/SocailLogin/facebookBtn';
-import naverLogin from '../../assets/img/naver.png';
 
 import '../../css/login/Login.css';
 
@@ -71,7 +70,7 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
           </div>
           <div className='NaverLogin'>
             <img
-              src={naverLogin} alt='naverBtn' onClick={() => {
+              src='img/naver.png' alt='naverBtn' onClick={() => {
                 const state = encodeURI('58randomstate/a');
                 const redirect_uri = process.env.REACT_APP_NODE_ENV === 'development' ? 'https://localhost:3000/callback/naver' : 'https://artoring.com/callback/naver';
                 window.open(`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_APP_ID}&redirect_uri=${redirect_uri}&state=${state}`,

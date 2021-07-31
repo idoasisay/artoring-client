@@ -5,7 +5,6 @@ import TagList from './tagList.jsx';
 import utils from '../Common/index.js';
 
 import '../../css/mainpage/Card.css';
-import likeIcon from '../../assets/img/like.svg';
 
 // 메인페이지에서 사용되는 카드를 렌더링하는 컴포넌트
 const Card = ({ data, liked }) => {
@@ -23,7 +22,7 @@ const Card = ({ data, liked }) => {
       }}
     >
       <img
-        src={likeIcon} alt='likeImg' className={likes ? 'CardLikes LikeActive' : 'CardLikes'}
+        src='img/like.svg' alt='likeImg' className={likes ? 'CardLikes LikeActive' : 'CardLikes'}
       />
       <div>
         <img className='CardThumb' alt='cardThumbnail' src={data.thumb} />

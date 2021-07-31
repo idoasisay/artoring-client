@@ -5,7 +5,6 @@ import App from './pages/App/App';
 import reportWebVitals from './reportWebVitals';
 
 window.Kakao.init(process.env.REACT_APP_KAKAO_JS_ID);
-console.log(window.Kakao.isInitialized());
 ReactDOM.render(
   <React.StrictMode>
     <App />

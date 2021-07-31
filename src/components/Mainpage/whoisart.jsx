@@ -1,10 +1,10 @@
 import React from 'react';
-import whoisartLogo from '../../assets/img/illust.png';
+
 const Whoisart = () => {
   return (
     <div className='WhoisartContainer'>
       <div className='WhoisartImgContainer'>
-        <img src={whoisartLogo} alt='WhoisartLogo' className='WhoisartImg' />
+        <img src='img/illust.png' alt='WhoisartLogo' className='WhoisartImg' />
       </div>
       <div className='WhoisartDesc'>
         <div className='WhoisartTopDesc'>
