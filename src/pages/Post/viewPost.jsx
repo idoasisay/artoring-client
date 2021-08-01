@@ -11,11 +11,6 @@ import Faq from '../../components/CareerTeach/FAQ';
 import ReviewList from '../../components/CareerTeach/ReviesList';
 
 import '../../css/cardDetail/cardDetail.css';
-import likeImg from '../../assets/img/like.svg';
-import shareImg from '../../assets/img/share.svg';
-
-import naverShareBtn from '../../assets/img/naver_square.png';
-import facebookShareBtn from '../../assets/img/facebook_logo.png';
 
 const { classReplacer } = utils;
 
@@ -51,6 +46,16 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
     });
   };
 
+  const copyUrl = () => {
+    const el = document.createElement('input');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    alert('클립보드로 복사되었습니다.');
+  };
   // 로그인이 안되어 있으면 profile에 likedCareerEdu가 없다
   // 로그인이 되어있다면 상세 정보 렌더링 대상의 카드의 id를 바탕으로 유저가 좋아요를 누른 리스트에
   // 포함되어 있는지를 확인한다.
@@ -186,7 +191,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
               </a>
               <div className='create-naver-link-btn'>
                 <img
-                  src={naverShareBtn}
+                  src='/img/naver_square.png'
                   alt='naverShare'
                   onClick={naverShare}
                   className='ModalShareBtns'
@@ -194,9 +199,17 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
               </div>
               <div className='create-facebook-link-btn'>
                 <img
-                  src={facebookShareBtn}
+                  src='/img/facebook_logo.png'
                   alt='facebookShare'
                   onClick={facebookShare}
+                  className='ModalShareBtns'
+                />
+              </div>
+              <div className='create-url-link-btn'>
+                <img
+                  src='/img/url.svg'
+                  alt='copyUrl'
+                  onClick={copyUrl}
                   className='ModalShareBtns'
                 />
               </div>
@@ -229,11 +242,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                 className={!likes ? 'LikesUpper BtnType6 Flex' : 'LikesUpper BtnType6 Btn6Active Flex'}
                 onClick={likeHandler}
               >
-                <img src={likeImg} alt='likeImg' className='LikeImg' />
+                <img src='/img/like.svg' alt='likeImg' className='LikeImg' />
                 <div id='test'>{card.likesCount}</div>
 
               </div>
-              <img src={shareImg} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
+              <img src='/img/share.svg' alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
             </div>
           </div>
         </div>
@@ -257,7 +270,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
               onMouseUp={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6')}
               onClick={likeHandler}
             >
-              <img src={likeImg} alt='likeImg' className='likeImg' />
+              <img src='/img/like.svg' alt='likeImg' className='likeImg' />
               <div>{card.likesCount}</div>
             </div>
           </div>
@@ -280,7 +293,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         </div>
         <div id='FAQ'><Faq /></div>
 
-        </div>
+      </div>
 
   );
 };

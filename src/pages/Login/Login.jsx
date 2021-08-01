@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import utils from '../../components/Common';
 
 import FbLogin from '../../components/SocailLogin/facebookBtn';
-import naverLogin from '../../assets/img/naver.png';
 
 import '../../css/login/Login.css';
 
@@ -62,18 +61,18 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
   };
   return (
     <div className='LoginContainer Flex JustifyCenter'>
-      <div>
-        <div className='Title3 AlignLeft'>로그인</div>
+      <div className='LimitWidth'>
+        <div className='Title3 AlignLeft LoginHead'>로그인</div>
         <div className='SocailBtnContainer'>
+
+          <FbLogin loginHandler={loginHandler} typeHandler={typeHandler} tokenHandler={tokenHandler} profileHandler={profileHandler} />
           <div className='FacebookLogin' />
-          <div>
-            <FbLogin loginHandler={loginHandler} typeHandler={typeHandler} tokenHandler={tokenHandler} profileHandler={profileHandler} />
-          </div>
-          <div className='NaverLogin'>
-            <img
-              src={naverLogin} alt='naverBtn' onClick={() => {
+          <div className=''>
+            <div
+              className='NaverLogin Flex'
+              onClick={() => {
                 const state = encodeURI('58randomstate/a');
-                const redirect_uri = process.env.REACT_APP_NODE_ENV === 'development' ? 'https://localhost:3000/callback/naver' : 'https://artoring.com/callback/naver';
+                const redirect_uri = process.env.REACT_APP_NODE_ENV === 'development' ? 'https://localhost:3000/callback/naver' : 'https://insideart-dev.artoring.com/callback/naver';
                 window.open(`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_APP_ID}&redirect_uri=${redirect_uri}&state=${state}`,
                   'popoup',
               `toolbar=no, location=no, status=no,
@@ -82,13 +81,16 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
                 );
                 KandNloginProcessor();
               }}
-            />
+            >
+              <div alt='NaverLogo' className='NaverLogo'>N</div>
+              <div className='NaverDesc'>네이버 아이디로 로그인</div>
+            </div>
           </div>
           <div
             className='KakaoLogin' onClick={() => {
               const state = encodeURI('58randomstate/a');
               console.log(state);
-              const redirect_uri = process.env.REACT_APP_NODE_ENV === 'development' ? 'https://localhost:3000/callback/kakao' : 'https://artoring.com/callback/kakao';
+              const redirect_uri = process.env.REACT_APP_NODE_ENV === 'development' ? 'https://localhost:3000/callback/kakao' : 'https://insideart-dev.artoring.com/callback/kakao';
               window.open(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_APP_ID}&redirect_uri=${redirect_uri}&response_type=code&state=${state}`,
                 'popoup',
               `toolbar=no, location=no, status=no,
@@ -98,26 +100,27 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
               KandNloginProcessor();
             }}
           >
-            <img src='https://artoring.com/img/kakao_login_medium_wide.png' alt='kakaotalkBtn' />
+            <img className='KakaoLogo' alt='kakoLogo' src='/img/kakao_ci.png' />
+            <div className='KakaoDesc'>카카오톡으로 로그인</div>
           </div>
         </div>
-        <div className='Delimiter Flex'>
+        <div className='Delimiter LimitWidth Flex'>
           <div className='DelimiterInner' />
           <div className='Or'>or</div>
           <div className='DelimiterInner' />
         </div>
         <div className='EmailContainer Flex '>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className='LimitWidth'>
             <label>
               <div className='Email'>
                 <div className='Ttile5, FormTitle'>이메일</div>
-                <textarea className='PlaceHolder' type='text' {...register('email')} />
+                <textarea className='PlaceHolder LimitWidth' type='text' {...register('email')} />
               </div>
             </label>
             <label>
               <div className='Password'>
                 <div className='Ttitle5 FormTitle'>비밀번호</div>
-                <textarea className='PlaceHolder' type='text' {...register('password')} />
+                <textarea className='PlaceHolder LimitWidth' type='text' {...register('password')} />
               </div>
             </label>
             <label>

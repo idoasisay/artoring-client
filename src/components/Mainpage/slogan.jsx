@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../css/mainpage/Slogan.css';
-import character from '../../assets/img/character.png';
 
 const Slogan = (props) => {
   return (
@@ -13,7 +12,7 @@ const Slogan = (props) => {
         </div>
       </div>
       <div className='SloganImgContainer'>
-        <img src={character} alt='SloganLogo' className='SloganImg' />
+        <img src='img/character.png' alt='SloganLogo' className='SloganImg' />
       </div>
     </div>
   );

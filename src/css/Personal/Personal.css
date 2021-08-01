@@ -1,19 +1,4 @@
-@font-face {
-  font-family: "nanumSquare";        
-  src: url("../../assets/fonts/NanumSquareRoundOTFR.otf");
-}
-@font-face {
-  font-family: "nanumSquare Light";        
-  src: url("../../assets/fonts/NanumSquareRoundOTFL.otf");
-}
-@font-face {
-  font-family: "nanumSquare Bold";        
-  src: url("../../assets/fonts/NanumSquareRoundOTFB.otf");
-}
-@font-face {
-  font-family: "nanumSquare EBold";        
-  src: url("../../assets/fonts/NanumSquareRoundOTFEB.otf");
-}
+
 .PersonalContainer{
   display: flex;
   flex-wrap: nowrap;
