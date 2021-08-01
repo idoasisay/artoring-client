@@ -16,7 +16,7 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
   useEffect(() => {
     async function asyncFetch () {
       if (!profile) {
-        const url = process.env.NODE_ENV === 'development' ? `https://localhost:4000/profile?type=${loginType}` : `https://artoring.com/profile?type=${loginType}`;
+        const url = process.env.NODE_ENV === 'development' ? `https://localhost:4000/profile?type=${loginType}` : `https://insideart-dev.artoring.com/profile?type=${loginType}`;
         const { data } = await axios.get(url, { headers: { authorization: `Bearer ${accessToken}` } });
         profileHandler(data);
       }
@@ -117,7 +117,7 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
             ? <label>
               <div className='FormTitle'>비밀번호*</div>
               <div className='PlaceHolder' onClick={() => isChangePwdHandler()}>비밀번호 변경하기</div>
-              </label>
+            </label>
             : (
               <div>
                 <label>
@@ -160,7 +160,7 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
               </button>
             </div>
           </label>
-          </form>
+        </form>
         : <div>불러오는중.....</div>}
     </div>
   );

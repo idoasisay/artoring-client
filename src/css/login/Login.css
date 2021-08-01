@@ -1,7 +1,17 @@
 .LoginContainer{
   flex-direction: column;
-  width: fit-content;
 }
+div{
+  max-width: inherit;
+}
+.LimitWidth{
+  max-width: 336px;
+}
+
+.LoginHead{
+  padding-bottom: 30px;
+}
+
 .Delimiter{
   justify-content: space-between;
 }
@@ -9,4 +19,65 @@
   height: 0px;
   border: 1px solid black;
   width: 45%;
+}
+
+.FacebookLogin{
+  margin-bottom: 8px;
+}
+
+
+.NaverLogin{
+  width:312px;
+  height: 16px;
+
+  background-color: rgb(3,199,90);
+
+  border-radius:  5px;
+  border:12px solid rgb(3,199,90);
+  display: flex;
+
+  align-items: center;
+  position: static;
+
+  margin-bottom: 8px;
+}
+.NaverLogo{
+  left: 3px;
+  position: relative;
+  color: white;
+  font-weight: bolder;
+  font-size: x-large;
+}
+
+.NaverDesc{
+  text-align: center;
+  font-weight: bold;
+  width: -webkit-fill-available;
+  color: #ffffff;
+}
+
+.KakaoLogin{
+  width:312px;
+  height: 16px;
+
+  background-color: #FEE500;
+
+  border-radius:  5px;
+  border:12px solid #FEE500;
+  display: flex;
+
+  align-items: center;
+  position: static
+}
+.KakaoLogo{
+  left: 3px;
+  position: relative;
+  height: 100%;
+
+}
+.KakaoDesc{
+  text-align: center;
+  font-weight: bold;
+  width: -webkit-fill-available;
+  color: #000000;
 }

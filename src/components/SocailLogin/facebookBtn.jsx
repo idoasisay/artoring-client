@@ -60,8 +60,8 @@ const FbLogin = ({ typeHandler, loginHandler, tokenHandler, profileHandler }) =>
 
   return (
    <div
-      className='fb-login-button'
-      data-width='300px'
+      className='fb-login-button testing'
+      data-width='336px'
       data-size='large'
       data-button-type='login_with'
       data-layout='default'
