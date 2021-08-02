@@ -191,7 +191,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
               </a>
               <div className='create-naver-link-btn'>
                 <img
-                  src='/img/naver_square.png'
+                  src={process.env.PUBLIC_URL + '/img/naver_square.png'}
                   alt='naverShare'
                   onClick={naverShare}
                   className='ModalShareBtns'
@@ -199,7 +199,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
               </div>
               <div className='create-facebook-link-btn'>
                 <img
-                  src='/img/facebook_logo.png'
+                  src={process.env.PUBLIC_URL + '/img/facebook_logo.png'}
                   alt='facebookShare'
                   onClick={facebookShare}
                   className='ModalShareBtns'
@@ -207,7 +207,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
               </div>
               <div className='create-url-link-btn'>
                 <img
-                  src='/img/url.svg'
+                  src={process.env.PUBLIC_URL + '/img/url.svg'}
                   alt='copyUrl'
                   onClick={copyUrl}
                   className='ModalShareBtns'
@@ -242,11 +242,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                 className={!likes ? 'LikesUpper BtnType6 Flex' : 'LikesUpper BtnType6 Btn6Active Flex'}
                 onClick={likeHandler}
               >
-                <img src='/img/like.svg' alt='likeImg' className='LikeImg' />
+                <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
                 <div id='test'>{card.likesCount}</div>
 
               </div>
-              <img src='/img/share.svg' alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
+              <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
             </div>
           </div>
         </div>
@@ -270,7 +270,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
               onMouseUp={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6')}
               onClick={likeHandler}
             >
-              <img src='/img/like.svg' alt='likeImg' className='likeImg' />
+              <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
               <div>{card.likesCount}</div>
             </div>
           </div>

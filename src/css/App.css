@@ -21,6 +21,17 @@
   font-family: "nanumSquare EBold";        
   src: url("../assets/fonts/NanumSquareRoundOTFEB.otf");
 }
+#kakao-add-channel-button{
+  position: fixed;
+
+  width: 85px;
+  height: 85px;
+
+  background-color: #ff4a70;
+  right: 190px;
+  bottom:357px;
+  clip-path: circle(40%);
+}
 
 /* 텍스트 에디터 설정 */
 .codex-editor__redactor{
@@ -332,9 +343,31 @@ a {
   justify-content: center;
 }
 
+.JustifyAround{
+  justify-content: space-around;
+}
+
 .AlignLeft{
   justify-self: flex-start;
 }
+
+.AlignCenter{
+  align-items: center;
+}
+.Flex-Col{
+  display: flex;
+  flex-direction: column;
+}
+.BorderBlack2px{
+  border: 2px solid black;
+}
+
+.BorderBlack2px-bottom{
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
 .App {
   max-width: 3248px;
 html,

@@ -65,3 +65,30 @@ nav {
   height: 45px;
   padding-bottom: 45px;
 }
+
+.OnLoginThumb{
+  clip-path: circle(40%);
+  height: 70px;
+  width: 70px;
+}
+.OnLoginContainer{
+  width: 187px;
+  
+}
+.IsMentor{
+  height: 61px;
+    width:  187px;
+}
+.MyMentoring{
+  height: 80px;
+  width:  187px;
+}
+.commonalityContainer{
+  width: 187px;
+}
+.Commonality{
+  height: 117px;
+
+  width:  187px;
+
+}
