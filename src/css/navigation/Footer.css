@@ -45,8 +45,9 @@
     align-content: stretch;
     justify-content: center;
 
-  width: 98vw;
+    width: 99vw;
     padding-top:  120px;
+    
 }
 .FooterLogo{
   padding-right: 83px;

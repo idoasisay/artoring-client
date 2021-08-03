@@ -15,7 +15,7 @@ const Kakao1by1Btn = () => {
   };
   return (
     <img
-      onClick={clickHandler} id='kakao-add-channel-button' alt='1대1 버튼' src={process.env.PUBLIC_URL + '/img/favicon.png'}
+      onClick={clickHandler} id='kakao-add-channel-button' alt='1대1 버튼' src={process.env.PUBLIC_URL + '/img/channelTalk.png'}
 
     />
   );
