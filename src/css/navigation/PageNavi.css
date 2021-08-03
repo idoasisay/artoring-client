@@ -160,7 +160,6 @@ nav {
   display: none;
   overflow: hidden;
   top:100%;
-  right:-127px;
   width: 0;
   height: 0;
   z-index: 3;

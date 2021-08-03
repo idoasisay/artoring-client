@@ -332,6 +332,49 @@ a {
 .Btn6Active img{
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(233deg) brightness(104%) contrast(101%);
 }
+.Caption1 {
+  font-family: "nanumSquare EBold";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #ff4a70
+}
+
+.Caption2-Black{
+  font-family:  "nanumSquare EBold";
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.Caption2-Grey{
+  
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  color: #767677;
+}
+
+.Caption3{
+  font-family:  "nanumSquare EBold";
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  color: #000000;
+}
 
 .PaddingBottom12px{
   padding-bottom: 12px;
@@ -345,6 +388,10 @@ a {
 
 .JustifyAround{
   justify-content: space-around;
+}
+
+.Flex-Start{
+  justify-content: flex-start;
 }
 
 .AlignLeft{
