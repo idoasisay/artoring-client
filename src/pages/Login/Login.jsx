@@ -23,7 +23,6 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
       const sessionKey = 'authResponse';
       if (sessionStorage.getItem(sessionKey)) {
         const { code, type, state } = JSON.parse(sessionStorage.getItem(sessionKey));
-
         if (code) {
           sessionStorage.removeItem(sessionKey);
           console.log(code, type, state);
@@ -100,7 +99,7 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
               KandNloginProcessor();
             }}
           >
-            <img className='KakaoLogo' alt='kakoLogo' src='/img/kakao_ci.png' />
+            <img className='KakaoLogo' alt='kakoLogo' src={process.env.PUBLIC_URL + '/img/kakao_ci.png'} />
             <div className='KakaoDesc'>카카오톡으로 로그인</div>
           </div>
         </div>

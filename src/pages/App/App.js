@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../css/App.css';
 import Nav from '../../components/PageNavi/pageNaviComponent';
 import { BrowserRouter } from 'react-router-dom';
+import Kakao1by1Btn from '../../components/Common/ToKakaoBtn';
 
 function App () {
   return (
@@ -11,6 +12,7 @@ function App () {
           <Nav />
         </header>
       </div>
+      <Kakao1by1Btn />
     </BrowserRouter>
   );
 }
