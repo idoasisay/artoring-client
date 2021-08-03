@@ -23,7 +23,6 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
       const sessionKey = 'authResponse';
       if (sessionStorage.getItem(sessionKey)) {
         const { code, type, state } = JSON.parse(sessionStorage.getItem(sessionKey));
-
         if (code) {
           sessionStorage.removeItem(sessionKey);
           console.log(code, type, state);

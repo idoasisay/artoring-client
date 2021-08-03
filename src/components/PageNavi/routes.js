@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Router, Switch, useHistory } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, useHistory } from 'react-router-dom';
 import {
   Mentor,
   CareerTeach,
@@ -19,7 +19,11 @@ import Logout from '../../pages/Logout/Logout';
 
 import axios from 'axios';
 
-export default function Nav ({ profile, profileHandler, isLogin, loginHandler, accessToken, tokenHandler, loginType, typeHandler }) {
+export default function Nav ({
+  profile, profileHandler, isLogin, loginHandler,
+  accessToken, tokenHandler, loginType, typeHandler,
+  searchData, searchDataHandler
+}) {
   const history = useHistory();
   const [counter, countHandler] = useState(0);
 
@@ -63,7 +67,7 @@ export default function Nav ({ profile, profileHandler, isLogin, loginHandler, a
   }
   return (
     <Router history={history}>
-      <Header isLogin={isLogin} loginHandler={loginHandler} />
+      <Header isLogin={isLogin} loginHandler={loginHandler} profile={profile} searchData={searchData} searchDataHandler={searchDataHandler} />
       {/**
        * 렌더를 사용하면 프롭을 내려줄수가 있다. 최상단에서 전달받은 프롭들을 입맛대로 전달한다.
        */}
@@ -99,7 +103,7 @@ export default function Nav ({ profile, profileHandler, isLogin, loginHandler, a
       {/*
        * 임시토큰을 전달하고 있으나 프로덕션 배포에서는 고정값이 아닌 Props의 값으로 대체
        */}
-      <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} accessToken={accessToken} loginType='email' />} />
+      <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} accessToken={accessToken} loginType={loginType} />} />
       <Route path='/signup/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
       <Route path='/signup/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
       <Route path='/logout' render={() => <Logout loginType={loginType} accessToken={accessToken} tokenHandler={tokenHandler} profileHandler={profileHandler} loginHandler={loginHandler} />} />
