@@ -128,7 +128,7 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
                   className='PlaceHolderBtn BtnType5'
                   onMouseOver={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType5 Btn5Active')}
                   onMouseLeave={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType5')}
-                >변경사항 저장
+                >로그인
                 </div>
               </div>
             </label>
