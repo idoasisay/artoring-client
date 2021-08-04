@@ -5,7 +5,11 @@ import Slgoan from '../../components/Mainpage/slogan.jsx';
 import Whoisart from '../../components/Mainpage/whoisart.jsx';
 import '../../css/mainpage/Main.css';
 
-const MainPage = (props) => {
+const url = process.env.REACT_APP_NODE_ENV === 'development'
+  ? 'https://localhost:4000/email/retry'
+  : 'https://back.artoring.com/email/retry';
+
+const MainPage = ({ isLogin, profile, accessToken, loginType }) => {
   const [cards, cardsHandler] = useState([]);
 
   function getCards () {
@@ -14,11 +18,32 @@ const MainPage = (props) => {
         ? 'https://localhost:4000'
         : 'https://back.artoring.com';
       const { data } = await axios.get(uri.concat('/career/teach'));
-      console.log(props.profile, data);
+
       cardsHandler(data);
     }
     inner();
   }
+
+  useEffect(() => {
+    const asyncAlert = async function () {
+      if (isLogin && profile && profile.verifiedEmail === false) {
+        const t = new Date().getTime() - profile.createdAt.getTime();
+
+        if (t >= 600000) {
+          window.alert('이메일 검증이 완료되어야 모든 기능을 사용할 수 있습니다.');
+          if (window.confirm('다시한번 인증 메일을 보낼까요?')) {
+            const response = await axios.post(url, {
+              accessToken,
+              type: loginType
+            });
+            window.alert(`메일을 전송했습니다.
+          회원가입때 사용했던 ${response.data.email}을 확인해주세요`);
+          }
+        }
+      }
+    };
+    asyncAlert();
+  });
 
   useEffect(() => {
     getCards();
@@ -31,10 +56,10 @@ const MainPage = (props) => {
       </div>
       <div className='CareerFindContainer'>
         <CardList
-          data={{ title: '커리어 교육', cards: cards, likedCareerEdu: props.profile ? props.profile.likedCareerEdu : [] }}
-          loginType={props.loginType}
-          accessToken={props.accessToken}
-          isLogin={props.isLogin}
+          data={{ title: '커리어 교육', cards: cards, likedCareerEdu: profile ? profile.likedCareerEdu : [] }}
+          loginType={loginType}
+          accessToken={accessToken}
+          isLogin={isLogin}
         />
       </div>
       <div className='WhoisartContainer'>
