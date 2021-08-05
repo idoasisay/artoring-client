@@ -17,6 +17,7 @@ import Account from '../Personal/account';
 import Profile from '../Personal/profile';
 import Logout from '../../pages/Logout/Logout';
 import VerifyRequest from '../../pages/Signup/verify';
+import EmailSignup from '../../pages/Signup/emailSignup';
 
 import axios from 'axios';
 
@@ -105,6 +106,7 @@ export default function Nav ({
        * 임시토큰을 전달하고 있으나 프로덕션 배포에서는 고정값이 아닌 Props의 값으로 대체
        */}
       <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} accessToken={accessToken} loginType={loginType} />} />
+      <Route path='/signup' render={() => <EmailSignup />} />
       <Route path='/signup/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
       <Route path='/signup/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
       <Route path='/verify' render={() => <VerifyRequest />} />

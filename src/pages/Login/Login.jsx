@@ -43,6 +43,10 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
     }, 1000);
   }
 
+  const kickToSignup = () => {
+    history.push('/signup');
+  };
+
   const onSubmit = async (data) => {
     const { email, password } = data;
 
@@ -108,7 +112,7 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
           <div className='Or'>or</div>
           <div className='DelimiterInner' />
         </div>
-        <div className='EmailContainer Flex '>
+        <div className='EmailContainer Flex-Col '>
           <form onSubmit={handleSubmit(onSubmit)} className='LimitWidth'>
             <label>
               <div className='Email'>
@@ -126,13 +130,17 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
               <div className='PlaceHolderBtnContainer'>
                 <div
                   className='PlaceHolderBtn BtnType5'
-                  onMouseOver={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType5 Btn5Active')}
-                  onMouseLeave={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType5')}
+                  onMouseOver={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType1 Btn1Active')}
+                  onMouseLeave={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType1')}
                 >로그인
                 </div>
               </div>
             </label>
           </form>
+          <div>
+            <div className='FindPwd body2'>비밀번호를 잊으셨나요?</div>
+            <span className='body2 '>아직 아토링 계정이 없으신가요?</span><a className=' Caption1' href='/signup'>가입하기</a>
+          </div>
         </div>
       </div>
     </div>

@@ -231,22 +231,38 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
             <div className='CareerTeachHeaderPrice Title5'>{card.price} 원</div>
             <div className='Flex'>
 
-              <div
-                className='ParticipateUpper BtnType5'
-                onMouseDown={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active')}
-                onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
-              >신청하기
-              </div>
+              {profile.verifiedEmail === true
+                ? <div
+                    className='ParticipateUpper BtnType5'
+                    onMouseDown={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active')}
+                    onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
+                  >신청하기
+                  </div>
+                : <div className='ParticipateUpperDisabled'>신청하기</div>}
 
-              <div
-                className={!likes ? 'LikesUpper BtnType6 Flex' : 'LikesUpper BtnType6 Btn6Active Flex'}
-                onClick={likeHandler}
-              >
-                <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
-                <div id='test'>{card.likesCount}</div>
+              {
+                profile.verifiedEmail === true
+                  ? <div className='Flex'>
+                    <div
+                      className={!likes ? 'LikesUpper BtnType6 Flex' : 'LikesUpper BtnType6 Btn6Active Flex'}
+                      onClick={likeHandler}
+                    >
+                      <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
+                      <div id='test'>{card.likesCount}</div>
 
-              </div>
-              <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
+                    </div>
+                    <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
+                    </div>
+                  : <div className='Flex'><div
+                      className='LikesUpperDisabled '
+                                          >
+                    <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
+                    <div id='test'>{card.likesCount}</div>
+
+                                          </div>
+                    <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
+                  </div>
+}
             </div>
           </div>
         </div>
@@ -258,21 +274,33 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
             <a href='#FAQ' className='MiddleUiBtn Title5'>FAQ</a>
           </div>
           <div className='Flex'>
-            <div
-              className='ParticipateLower BtnType5'
-              onMouseDown={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active')}
-              onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
-            >신청하기
-            </div>
-            <div
-              className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
-              onMouseDown={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6 Btn6Active')}
-              onMouseUp={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6')}
-              onClick={likeHandler}
-            >
-              <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
-              <div>{card.likesCount}</div>
-            </div>
+            {profile.verifiedEmail === true
+              ? <div
+                  className='ParticipateLower BtnType5'
+                  onMouseDown={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active')}
+                  onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
+                >신청하기
+              </div>
+              : <div
+                  className='ParticipateLowerDisabled'
+                >신청하기
+              </div>}
+            {profile.verifiedEmail === true
+              ? <div
+                  className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
+                  onMouseDown={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6 Btn6Active')}
+                  onMouseUp={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6')}
+                  onClick={likeHandler}
+                >
+                <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
+                <div>{card.likesCount}</div>
+                </div>
+              : <div
+                  className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
+                >
+                <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
+                <div>{card.likesCount}</div>
+                </div>}
           </div>
         </div>
         <div id='ModeratorIntro'>
