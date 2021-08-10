@@ -26,18 +26,18 @@
   position: relative;
 }
 .CareerTeachMiddelUI{
-
+  min-width: 100vw !important;
   position: sticky;
   top:0px;
   background-color: #ffffff;
   height:80px;
-  z-index: 10;
+  z-index: 15;
   justify-content: center;
 
   border-top: 1px solid black;
   border-bottom:  1px solid black;
-  margin-left: calc(-100vw / 2 + 800px / 2);
-  margin-right: calc(-100vw / 2 + 800px / 2);
+  margin-left: calc(-100vw / 2 + 750px / 2);
+
 
   margin-bottom: 50px;
 }
@@ -51,12 +51,107 @@
   width: 261px;
   height: 50px;
 }
+
+.ParticipateUpperDisabled{
+  width: 261px;
+  height: 50px;
+
+  border-radius: 10px;
+  font-family: "nanumSquare EBold";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  background-color: rgb(100,100,100);
+  color:#ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  
+}
+
 .ParticipateLower{
   width: 202px;
   height: 50px;
 }
+
+.ParticipateLowerDisabled{
+  width: 202px;
+  height: 50px;
+
+  border-radius: 10px;
+  font-family: "nanumSquare EBold";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  background-color: rgb(100, 100, 100);
+  color:#ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .LikeImg{
   padding-right: 3px;
+}
+
+.LikesUpperDisabled{
+  border-radius: 10px;
+  font-family: "nanumSquare EBold";
+  font-weight: bold;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+
+  color: rgb(100,100,100);
+  border: solid 2px rgb(100,100,100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 68px;
+  height: 50px;
+  margin-left: 8px;
+
+  z-index: 10;
+}
+.LikesUpperDisabled img{
+ filter: invert(42%) sepia(1%) saturate(1106%) hue-rotate(39deg) brightness(92%) contrast(96%);
+}
+
+.LikesLowerDisabled{
+  border-radius: 10px;
+  font-family: "nanumSquare EBold";
+  font-weight: bold;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+
+  color: rgb(100,100,100);
+  border: solid 2px rgb(100,100,100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 68px;
+  height: 50px;
+  margin-left: 8px;
+
+  z-index: 10;
+}
+.LikesLowerDisabled img{
+ filter: invert(42%) sepia(1%) saturate(1106%) hue-rotate(39deg) brightness(92%) contrast(96%);
 }
 
 .ShareBtn{

@@ -44,11 +44,11 @@ const PaginationList = ({ currentPages, maxPage, pagesHandler, basePage, baseHan
   }
 
   // props.maxPage에 따라 최대 10개 까지의 페이지를 동적으로 렌더링
-  for (let i = basePage; i < basePage + 10 && i < maxPage; i++) {
+  for (let i = basePage; i < basePage + 10 && i <= maxPage; i++) {
     list.push(<div key={i} className={currentPages === i ? 'PaginationItem PageIndicator' : 'PaginationItem'} onClick={() => setPage(i)}>{i}</div>);
   }
   // 더이상 넘어갈 페이지가 존재하는지에 따라 '>', '>.' 버튼 렝더링이 결정됨
-  if ((maxPage > basePage + 10)) { list.push(<div key='r' className='Flex PaginationUI'><div onClick={nextPage}>&#62;</div><div key='rr' onClick={goLast}>&raquo;</div></div>); }
+  if ((maxPage >= basePage + 10)) { list.push(<div key='r' className='Flex PaginationUI'><div onClick={nextPage}>&#62;</div><div key='rr' onClick={goLast}>&raquo;</div></div>); }
 
   return (
     <div className='PaginationContainer'>{list}</div>

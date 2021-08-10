@@ -33,7 +33,7 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
           tokenHandler(accessToken);
           profileHandler(trimedData);
 
-          if (signup === true) { history.push('/signup/detail/account'); } else { history.push('/'); }
+          if (signup === true) { history.push('/request'); } else { history.push('/'); }
           clearInterval(time);
         } else {
           history.push('/');
@@ -43,11 +43,18 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
     }, 1000);
   }
 
+  const kickToSignup = () => {
+    history.push('/signup');
+  };
+
   const onSubmit = async (data) => {
+    console.log(data);
     const { email, password } = data;
 
     try {
-      const { userData, token } = await axios.post(url, { email, password });
+      const { data } = await axios.post(url.concat('/email'), { email, password });
+      const { userData, accessToken: token } = data;
+      console.log(userData, token);
       profileHandler(userData);
       loginHandler(true);
       tokenHandler(token);
@@ -55,7 +62,8 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
 
       history.push('/');
     } catch (e) {
-      alert('이메일 혹은 비밀번호가 잘못되었습니다.');
+      console.log(e);
+      window.alert('이메일 혹은 비밀번호가 잘못되었습니다.');
     }
   };
   return (
@@ -108,31 +116,51 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
           <div className='Or'>or</div>
           <div className='DelimiterInner' />
         </div>
-        <div className='EmailContainer Flex '>
-          <form onSubmit={handleSubmit(onSubmit)} className='LimitWidth'>
+        <div className='EmailContainer Flex-Col '>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <label>
               <div className='Email'>
                 <div className='Ttile5, FormTitle'>이메일</div>
-                <textarea className='PlaceHolder LimitWidth' type='text' {...register('email')} />
+                <input className='PlaceHolder LimitWidth' type='text' {...register('email')} />
+                {
+              errors.email && (
+                <span role='alert' className='AlertMsg'>
+                  입력된 비밀번호와 일치하지 않습니다!
+                </span>
+              )
+            }
               </div>
             </label>
             <label>
               <div className='Password'>
                 <div className='Ttitle5 FormTitle'>비밀번호</div>
-                <textarea className='PlaceHolder LimitWidth' type='text' {...register('password')} />
+
               </div>
             </label>
+            <input className='PlaceHolder LimitWidth' type='password' {...register('password')} />
+            {
+              errors.password && (
+                <span role='alert' className='AlertMsg'>
+                  입력된 비밀번호와 일치하지 않습니다!
+                </span>
+              )
+            }
             <label>
               <div className='PlaceHolderBtnContainer'>
-                <div
+                <button
                   className='PlaceHolderBtn BtnType5'
-                  onMouseOver={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType5 Btn5Active')}
-                  onMouseLeave={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType5')}
+                  onMouseOver={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType1 Btn1Active')}
+                  onMouseLeave={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType1')}
                 >로그인
-                </div>
+                </button>
               </div>
+
             </label>
           </form>
+          <div>
+            <div className='FindPwd body2'>비밀번호를 잊으셨나요?</div>
+            <span className='body2 '>아직 아토링 계정이 없으신가요?</span><a className=' Caption1' href='/signup'>가입하기</a>
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, BrowserRouter as Router, Switch, useHistory } from 'react-router-dom';
+import { Route, Router, Switch, useHistory } from 'react-router-dom';
 import {
   Mentor,
   CareerTeach,
@@ -16,6 +16,10 @@ import Callback from '../../pages/callback';
 import Account from '../Personal/account';
 import Profile from '../Personal/profile';
 import Logout from '../../pages/Logout/Logout';
+import VerifyRequest from '../../pages/Signup/verify';
+import EmailSignup from '..//../pages/Signup/emailSignup';
+import AfterSignup from '../../pages/Signup/afterSignup';
+import ProfileRequest from '../SignUp/requestProfile';
 
 import axios from 'axios';
 
@@ -25,6 +29,7 @@ export default function Nav ({
   searchData, searchDataHandler
 }) {
   const history = useHistory();
+
   const [counter, countHandler] = useState(0);
 
   const trigger = () => {
@@ -33,7 +38,7 @@ export default function Nav ({
   useEffect(profileDetailHandler, [counter]);
 
   function accountDetailHandler () {
-    history.push('/signup/detail/profile');
+    history.push('/detail/profile');
   }
   function profileDetailHandler () {
     if (counter >= 1) {
@@ -53,14 +58,7 @@ export default function Nav ({
             }
           });
 
-          const updatedObj = {};
-          updatedObj.interestedIn = profile.interestedIn;
-          updatedObj.interestedIn = profile.interestedIn;
-          updatedObj.interestedIn = profile.interestedIn;
-          updatedObj.likedCareerEdu = [];
-          updatedObj.likedMentor = [];
-
-          profileHandler(updatedObj);
+          profileHandler(profile);
         }
       }, 10);
     }
@@ -103,9 +101,13 @@ export default function Nav ({
       {/*
        * 임시토큰을 전달하고 있으나 프로덕션 배포에서는 고정값이 아닌 Props의 값으로 대체
        */}
-      <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} accessToken={accessToken} loginType={loginType} />} />
-      <Route path='/signup/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
-      <Route path='/signup/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
+      <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} token={accessToken} loginType={loginType} />} />
+      <Route exact path='/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
+      <Route exact path='/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
+      <Route path='/signup' render={() => <EmailSignup tokenHandler={tokenHandler} loginHandler={loginHandler} typeHandler={typeHandler} />} />
+      <Route path='/after/signup' render={() => <AfterSignup />} />
+      <Route path='/request' component={ProfileRequest} />
+      <Route path='/verify' render={() => <VerifyRequest tokenHandler={tokenHandler} loginHandler={loginHandler} typeHandler={typeHandler} profileHandler={profileHandler} />} />
       <Route path='/logout' render={() => <Logout loginType={loginType} accessToken={accessToken} tokenHandler={tokenHandler} profileHandler={profileHandler} loginHandler={loginHandler} />} />
     </Router>
   );

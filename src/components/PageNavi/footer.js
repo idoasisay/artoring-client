@@ -5,7 +5,7 @@ import '../../css/navigation/Footer.css';
 const Footer = () => {
   return (
     <div className='FooterContainer  Flex JustifyCenter'>
-      <img src='img/logo.png' alt='artoring logo' className='FooterLogo' />
+      <img src='/img/logo.png' alt='artoring logo' className='FooterLogo' />
       <div>
         <div className='FooterUpper Flex-Start '>
           <div className='CustomerService'>
