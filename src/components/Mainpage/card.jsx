@@ -22,7 +22,7 @@ const Card = ({ data, liked }) => {
       }}
     >
       <img
-        src='img/like.svg' alt='likeImg' className={likes ? 'CardLikes LikeActive' : 'CardLikes'}
+        src='/img/like.svg' alt='likeImg' className={likes ? 'CardLikes LikeActive' : 'CardLikes'}
       />
       <div>
         <img className='CardThumb' alt='cardThumbnail' src={data.thumb} />

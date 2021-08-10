@@ -18,7 +18,7 @@ const CardList = ({ data }) => {
            * 좋아요 표시를 할것이 있는지 체크한다.
            * Card 컴포넌트는 전달받은 liked가 true여야만 하트의 색상이 검은색이아닌 빨간색으로 렌더링이 된다.
           */
-          liked={data.likedCareerEdu ? !!data.likedCareerEdu.includes(ele.id ? ele.id : -1) : false}
+          liked={data.likedCareerEdu ? !!data.likedCareerEdu.includes(ele._id ? ele._id : -1) : false}
 
                                     />)}
       </div>

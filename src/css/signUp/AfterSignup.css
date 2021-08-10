@@ -1,0 +1,49 @@
+.RequestEmail{
+  width: 163px;
+  height: 142px;
+
+  padding-top: 100px;
+  padding-bottom: 25px;
+}
+
+.RequestTitle{
+  padding-bottom: 30px;
+}
+
+.RequestDesc{
+  padding-bottom: 50px;
+  
+}
+
+.ResendVerify{
+  color: #868eee;
+}
+
+.SignupFinish{
+  color:#ff4a70;
+  padding-top: 15px;
+}
+
+.WelcomeImg{
+  width: 132px;
+  height: auto;
+
+  padding-top: 132px;
+}
+
+.WelcomeLogo{
+  padding-top: 15px;
+  width: 146px;
+}
+
+.WelcomeDesc{
+  padding-top: 30px;
+}
+
+.WelcomeBtn{
+  width: 336px;
+  height: 50px;
+
+  margin-top: 30px;
+  margin-bottom: 150px;
+}

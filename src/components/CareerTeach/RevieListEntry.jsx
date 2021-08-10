@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReviewListEntry = ({ thumb = 'https://artoring.com/img/1626247507674.jpeg', name, date, text }) => {
+const ReviewListEntry = ({ thumb = 'https://artoring.com/image/1626247507674.jpeg', name, date, text }) => {
   let modifiedDate = '';
   const tmpDate = new Date(date);
   const year = tmpDate.getFullYear();

@@ -12,11 +12,10 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
   const [isChangePwd, isChangePwdHandler] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
-  console.log('here!!!!!!!!!!');
   useEffect(() => {
     async function asyncFetch () {
       if (!profile) {
-        const url = process.env.NODE_ENV === 'development' ? `https://localhost:4000/profile?type=${loginType}` : `https://insideart-dev.artoring.com/profile?type=${loginType}`;
+        const url = process.env.NODE_ENV === 'development' ? `https://localhost:4000/profile?type=${loginType}&id=${profile._id}` : `https://insideart-dev.artoring.com/profile?type=${loginType}&id=${profile._id}`;
         const { data } = await axios.get(url, { headers: { authorization: `Bearer ${accessToken}` } });
         profileHandler(data);
       }
@@ -47,7 +46,7 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
     // ! 버그!!!!
     // ! 서버에 해당 유저데이터가 존재하면 화면에 해당 유저의 데이터들이 렌더링 된다.
     // ! 하지만 react-hook-form은 아무런 입력이 없으면 validation이 실패한다.
-    const imgUrl = 'https://artoring.com/'.concat(data[0].key);
+    const imgUrl = 'https://artoring.com/'.concat(data.key);
     imageHandler(imgUrl);
   };
 
@@ -117,7 +116,7 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
             ? <label>
               <div className='FormTitle'>비밀번호*</div>
               <div className='PlaceHolder' onClick={() => isChangePwdHandler()}>비밀번호 변경하기</div>
-            </label>
+              </label>
             : (
               <div>
                 <label>
@@ -160,7 +159,7 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
               </button>
             </div>
           </label>
-        </form>
+          </form>
         : <div>불러오는중.....</div>}
     </div>
   );

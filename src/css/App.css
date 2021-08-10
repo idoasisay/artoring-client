@@ -179,15 +179,8 @@ a {
   color: #ff4a70
 }
 
-.TextType3{
-  font-family: "nanumSquare Bold";
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
+.TextType3:hover img{
+  filter: invert(60%) sepia(12%) saturate(3617%) hue-rotate(203deg) brightness(97%) contrast(93%);
 }
 
 .TextType3:hover{
@@ -270,8 +263,31 @@ a {
   justify-content: center;
 }
 
+.BtnType3:hover{
+  background-color: #000000;
+  color: #ffffff;
+}
+
 .Btn3Active{
   background-color: #000000;
+  color: #ffffff;
+}
+
+.BtnType4{
+    border-radius: 10px;
+  background-color: #000;
+  font-family: "nanumSquare EBold";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.69;
+  letter-spacing: normal;
+  color: #fff;
+}
+.BtnType4:hover{
+  
+  background-color:#ff4a70;
   color: #ffffff;
 }
 

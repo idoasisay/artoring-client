@@ -6,8 +6,8 @@ import Whoisart from '../../components/Mainpage/whoisart.jsx';
 import '../../css/mainpage/Main.css';
 
 const url = process.env.REACT_APP_NODE_ENV === 'development'
-  ? 'https://localhost:4000/email/retry'
-  : 'https://back.artoring.com/email/retry';
+  ? 'https://localhost:4000/verify/retry'
+  : 'https://back.artoring.com/verify/retry';
 
 const MainPage = ({ isLogin, profile, accessToken, loginType }) => {
   const [cards, cardsHandler] = useState([]);
@@ -27,7 +27,7 @@ const MainPage = ({ isLogin, profile, accessToken, loginType }) => {
   useEffect(() => {
     const asyncAlert = async function () {
       if (isLogin && profile && profile.verifiedEmail === false) {
-        const t = new Date().getTime() - profile.createdAt.getTime();
+        const t = new Date().getTime() - new Date(profile.createdAt).getTime();
 
         if (t >= 600000) {
           window.alert('이메일 검증이 완료되어야 모든 기능을 사용할 수 있습니다.');
@@ -37,13 +37,13 @@ const MainPage = ({ isLogin, profile, accessToken, loginType }) => {
               type: loginType
             });
             window.alert(`메일을 전송했습니다.
-          회원가입때 사용했던 ${response.data.email}을 확인해주세요`);
+회원가입때 사용했던 ${response.data.accepted[0]} 을 확인해주세요`);
           }
         }
       }
     };
     asyncAlert();
-  });
+  }, []);
 
   useEffect(() => {
     getCards();

@@ -12,7 +12,7 @@ const FbLogin = ({ typeHandler, loginHandler, tokenHandler, profileHandler }) =>
 
   function onLoginHandler () {
     const time = setInterval(async () => {
-      const sessionKey = 'fbssls_290939452791975'
+      const sessionKey = `fbssls_${process.env.REACT_APP_FACEBOOK_APP_ID}`
       console.log(sessionKey,sessionStorage.getItem(sessionKey))
       const { authResponse } = sessionKey && sessionStorage.getItem(sessionKey)? JSON.parse(sessionStorage.getItem(sessionKey)) : null;
 
@@ -28,7 +28,7 @@ const FbLogin = ({ typeHandler, loginHandler, tokenHandler, profileHandler }) =>
 
         profileHandler(response.data.trimedData);
 
-        response.data.signup ? history.push('/signup/detail/account') :  history.push('/');
+        response.data.signup ? history.push('/request') :  history.push('/');
         clearInterval(time);
       } else {
          history.push('/');

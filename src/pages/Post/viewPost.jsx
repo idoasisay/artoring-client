@@ -61,10 +61,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
   // 포함되어 있는지를 확인한다.
   // String은 inludes 넘버타입으로 형변환이 이뤄지지 않는다.
 
-  console.log(profile);
-  const [likes, likesHandler] = useState(profile.likedCareerEdu
-    ? profile.likedCareerEdu.includes(Number(id))
-    : false);
+  const [likes, likesHandler] = useState(false);
 
   const history = useHistory();
 
@@ -79,14 +76,15 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
 
       // 좋아요 여부에 따라 좋아요 등록/삭제가 이뤄지게 된다
       likes
-        ? await axios.delete(uri.concat(`/likes/teach/${id}?type=${loginType}`), {
+        ? await axios.delete(uri.concat(`/likes/teach/${card._id}?type=${loginType}&id=${profile._id}`), {
             headers: {
               authorization: `Bearer ${accessToken}`
             }
           })
         : await axios.post(uri.concat('/likes/teach'), {
           type: loginType,
-          targetId: id
+          targetId: card._id,
+          _id: profile._id
         }, {
           headers: {
             authorization: `Bearer ${accessToken}`
@@ -97,14 +95,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
 
       if (likes) {
         // 좋아요를 눌렀다면 유저의 좋아요 목록에서 splice로 해당 항목 삭제
-        const pos = profile.likedCareerEdu.indexOf(id);
+        const pos = profile.likedCareerEdu.indexOf(card._id);
         profile.likedCareerEdu.splice(pos, 1);
 
         likedCareerEdu = profile.likedCareerEdu;
         cardHandler({ ...card, likesCount: card.likesCount - 1 });
       } else {
         // 좋아요가 안되어 있다면 유저의 좋아요 목록에 등록
-        likedCareerEdu.push(Number(id));
+        likedCareerEdu.push(card._id);
         cardHandler({ ...card, likesCount: card.likesCount + 1 });
       }
 
@@ -137,6 +135,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
       const { data } = await axios.get(url);
       console.log(data[0]);
       cardHandler(data[0]);
+
+      likesHandler(profile.likedCareerEdu
+        ? profile.likedCareerEdu.includes(data[0]._id)
+        : false);
+      console.log(data);
     }
 
     getCardInfo();
@@ -237,7 +240,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                     onMouseDown={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active')}
                     onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
                   >신청하기
-                  </div>
+                </div>
                 : <div className='ParticipateUpperDisabled'>신청하기</div>}
 
               {
@@ -252,16 +255,16 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
 
                     </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
-                    </div>
+                  </div>
                   : <div className='Flex'><div
                       className='LikesUpperDisabled '
-                                          >
+                      onClick={likeHandler}>
                     <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
                     <div id='test'>{card.likesCount}</div>
 
-                                          </div>
-                    <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
                   </div>
+                    <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
+                    </div>
 }
             </div>
           </div>
@@ -280,11 +283,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                   onMouseDown={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active')}
                   onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
                 >신청하기
-              </div>
+                </div>
               : <div
                   className='ParticipateLowerDisabled'
                 >신청하기
-              </div>}
+                </div>}
             {profile.verifiedEmail === true
               ? <div
                   className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
@@ -294,13 +297,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                 >
                 <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                 <div>{card.likesCount}</div>
-                </div>
+              </div>
               : <div
                   className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
+                  onClick={likeHandler}
                 >
                 <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                 <div>{card.likesCount}</div>
-                </div>}
+              </div>}
           </div>
         </div>
         <div id='ModeratorIntro'>
@@ -321,7 +325,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         </div>
         <div id='FAQ'><Faq /></div>
 
-      </div>
+        </div>
 
   );
 };
