@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import TagList from './tagList.jsx';
+import TagList from '../Mainpage/tagList.jsx';
 
-import utils from '../Common/index.js';
+import utils from './index.js';
 
 import '../../css/mainpage/Card.css';
 
 // 메인페이지에서 사용되는 카드를 렌더링하는 컴포넌트
 const Card = ({ data, liked }) => {
+  console.log(data);
   const history = useHistory();
 
   // 개인이 좋아요한걸 표현하기 위해 사용되는 상태.
@@ -28,7 +29,7 @@ const Card = ({ data, liked }) => {
         <img className='CardThumb' alt='cardThumbnail' src={data.thumb} />
       </div>
       <div className='CardCategory'>
-        <TagList tags={data.tag} />
+        <TagList tags={data.tags} />
       </div>
       <div className='CardTitle'>{data.title}</div>
       <div className='CardDate'>{utils.getDate(data.startDate) + ' - ' + utils.getDate(data.endDate)}</div>

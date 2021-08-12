@@ -33,3 +33,9 @@
   align-items: center;
   justify-content: center;
 }
+.CardListMoreBtn{
+  width: 150px;
+  height:50px;
+  border-radius: 10px;
+  justify-self: right;
+}

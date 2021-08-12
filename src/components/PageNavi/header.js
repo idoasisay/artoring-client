@@ -8,14 +8,13 @@ import axios from 'axios';
 
 const { classReplacer } = utils;
 
-function Header ({ isLogin, profile, searchDataHandler }) {
-  const [isSearching, searchingToggler] = useState(false);
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+function Header ({ isLogin, profile, searchDataHandler, isSearching, searchingToggler }) {
   const history = useHistory();
+
+  const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
   const handleSearch = (data) => {
     searchDataHandler(data.search);
-    searchingToggler(false);
 
     history.push(`/search?keyword=${data.search}`);
   };
@@ -23,7 +22,6 @@ function Header ({ isLogin, profile, searchDataHandler }) {
   // 로그인 이후 검색 이미지가 보이지 않는 문제를 해결하기 위한 훅.
   useEffect(() => {
     const t = document.querySelector('.SearchIcon');
-    console.log('t', t);
     t.src = process.env.PUBLIC_URL + '/img/search.svg';
   });
 

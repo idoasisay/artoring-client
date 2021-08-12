@@ -170,22 +170,28 @@ nav {
   margin-left: 1vw;
   margin-right: 1vw;
     width:-webkit-fill-available;
+  height: 50px;
+  position: relative;
+  top: -15px
 }
 
 .SearchPlaceHolder{
+  height: inherit;
     width:-webkit-fill-available;
       margin-left: 1vw;
   margin-right: 1vw;
   border: 0px;
-  border-bottom: 1px solid #aeaeae;
   font-family: 'nanumSquare Bold';
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
   padding:0;
-  padding-bottom: 5px;
   resize: none;
+}
+
+.SearchIcon {
+  align-self: flex-start;
 }
 
 .CloseSearch{
