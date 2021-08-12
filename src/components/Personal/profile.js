@@ -5,7 +5,6 @@ import InterestedList from './interesting';
 import TextareaAutosize from 'react-textarea-autosize';
 
 const Profile = (props) => {
-  console.log(props.match);
   const [count, countHandler] = useState(0);
   const [list, listHandler] = useState([
     { name: '창업', val: false },

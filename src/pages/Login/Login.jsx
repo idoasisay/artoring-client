@@ -25,7 +25,7 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
         const { code, type, state } = JSON.parse(sessionStorage.getItem(sessionKey));
         if (code) {
           sessionStorage.removeItem(sessionKey);
-          console.log(code, type, state);
+
           const { data } = await axios.post(url.concat(`/${type}`), { code, state });
           const { accessToken, trimedData, signup } = data;
           typeHandler(type);
@@ -48,13 +48,12 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     const { email, password } = data;
 
     try {
       const { data } = await axios.post(url.concat('/email'), { email, password });
       const { userData, accessToken: token } = data;
-      console.log(userData, token);
+
       profileHandler(userData);
       loginHandler(true);
       tokenHandler(token);
@@ -96,7 +95,7 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
           <div
             className='KakaoLogin' onClick={() => {
               const state = encodeURI('58randomstate/a');
-              console.log(state);
+
               const redirect_uri = process.env.REACT_APP_NODE_ENV === 'development' ? 'https://localhost:3000/callback/kakao' : 'https://insideart-dev.artoring.com/callback/kakao';
               window.open(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_APP_ID}&redirect_uri=${redirect_uri}&response_type=code&state=${state}`,
                 'popoup',

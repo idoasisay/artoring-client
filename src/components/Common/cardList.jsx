@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from './card.jsx';
 import '../../css/mainpage/CardList.css';
 import { useHistory } from 'react-router';
 
-const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, likedMentor, renderType, maxEle = undefined, sendTo, deepQuery, searchDataHandler }) => {
+const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, likedMentor, renderType, maxEle = undefined, sendTo, deepQuery, searchDataHandler, filter, filterHandler }) => {
+  const [isFiltering, toggleFiltering] = useState(false);
+
   const history = useHistory();
   const kickToDest = (path) => {
     if (sendTo) {
@@ -17,9 +19,35 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
   // data = profile이라 가정
   return (
     <div className='CardList'>
-      {!subTitle
-        ? <div className='CardListTitle'>{title}</div>
-        : <div className='CardListTitle'>{title}<span>{subTitle}</span></div>}
+      {filter
+        ? <div>{!subTitle
+          ? <div className='Flex' style={{ justifyContent: 'space-between' }}>
+            <div className='CardListTitle'>{title}</div>최신순
+            </div>
+          : <div className='Flex' style={{ justifyContent: 'space-between', paddingRight: '12px' }}>
+            <div className='CardListTitle'>{title}<span>{subTitle}</span>
+            </div>
+            <div
+              className='Flex CardFilter body2'
+              onClick={() => toggleFiltering(!isFiltering)}
+            >
+              <div style={{ position: 'static' }}>
+                {filter === 'new' ? '최신순' : filter === 'high' ? '가격높은순' : filter === 'low' ? '가격낮은순' : '인기순'}
+                <div className={isFiltering ? 'FilterContainerOpen' : 'FilterContainerClose'}>
+                  <div className='body2 TextType3' style={{ paddingBottom: '13px' }} onClick={() => filterHandler('new')}>최신순</div>
+                  <div className='body2 TextType3' style={{ paddingBottom: '13px' }} onClick={() => filterHandler('high')}>가격높은순</div>
+                  <div className='body2 TextType3' style={{ paddingBottom: '13px' }} onClick={() => filterHandler('low')}>가격낮은순</div>
+                  <div className='body2 TextType3' style={{ paddingBottom: '13px' }} onClick={() => filterHandler('popular')}>인기순</div>
+                </div>
+              </div>
+              <i className={isFiltering ? 'AccordionBtn BtnOpen' : 'AccordionBtn'} />
+
+            </div>
+            </div>}
+          </div>
+        : !subTitle
+            ? <div className='CardListTitle'>{title}</div>
+            : <div className='CardListTitle'>{title}<span>{subTitle}</span></div>}
       <div className='CardsContainer'>
         {cards.map((ele, i) => {
           if (maxEle) {

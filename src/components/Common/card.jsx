@@ -8,7 +8,6 @@ import '../../css/mainpage/Card.css';
 
 // 메인페이지에서 사용되는 카드를 렌더링하는 컴포넌트
 const Card = ({ data, liked }) => {
-  console.log(data);
   const history = useHistory();
 
   // 개인이 좋아요한걸 표현하기 위해 사용되는 상태.
@@ -19,7 +18,7 @@ const Card = ({ data, liked }) => {
   return (
     <div
       className='Card' onClick={() => {
-        history.push(`/career/teach/${data.id}`);
+        history.push(`/career/growing/${data.id}`);
       }}
     >
       <img

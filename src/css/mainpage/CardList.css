@@ -39,3 +39,24 @@
   border-radius: 10px;
   justify-self: right;
 }
+.CardFilter{
+  width: 113px;
+  justify-content: space-between;
+}
+
+.FilterContainerOpen{
+  margin-left: -1%;
+  margin-top:1%;
+  display: block;
+  position: absolute;
+  background-color: #ffffff;
+  z-index: 30;
+
+  width: 118px;
+  height: 132px;
+  border: solid 2px #000;
+  padding: 14px 0px 15px 15px;
+}
+.FilterContainerClose{
+  display: none;
+}

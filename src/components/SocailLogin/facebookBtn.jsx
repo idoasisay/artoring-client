@@ -13,7 +13,7 @@ const FbLogin = ({ typeHandler, loginHandler, tokenHandler, profileHandler }) =>
   function onLoginHandler () {
     const time = setInterval(async () => {
       const sessionKey = `fbssls_${process.env.REACT_APP_FACEBOOK_APP_ID}`
-      console.log(sessionKey,sessionStorage.getItem(sessionKey))
+
       const { authResponse } = sessionKey && sessionStorage.getItem(sessionKey)? JSON.parse(sessionStorage.getItem(sessionKey)) : null;
 
       if (authResponse) {
