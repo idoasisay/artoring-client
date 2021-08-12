@@ -409,6 +409,9 @@ a {
 .Flex-Start{
   justify-content: flex-start;
 }
+.Flex-End{
+  justify-content: flex-end;
+}
 
 .AlignLeft{
   justify-self: flex-start;

@@ -1,0 +1,31 @@
+.SearchContainer{
+  max-width: 1080px;
+  
+}
+.SearchTitle{
+  font-size:  30px;
+  font-family: "NanumSquareRound";
+  font-weight: lighter;
+
+  padding-top: 75px;
+  padding-bottom: 30px;
+
+  border-bottom: solid 1px #aeaeae ;
+
+  width:98%
+}
+
+.QueryDisplay{
+  font-size:  30px;
+  font-family: "NanumSquareRound";
+  color: #ff4a70;
+}
+.SearchContainer .CardListTitle{
+  padding-top:50px;
+  font-size: 20px;
+  width:fit-content
+}
+
+.SearchContainer .CardListTitle span{
+  color: #ff4a70
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CardList from '../../components/Mainpage/cardList.jsx';
+import CardList from '../../components/Common/cardList.jsx';
 import Slgoan from '../../components/Mainpage/slogan.jsx';
 import Whoisart from '../../components/Mainpage/whoisart.jsx';
 import '../../css/mainpage/Main.css';
@@ -9,7 +9,7 @@ const url = process.env.REACT_APP_NODE_ENV === 'development'
   ? 'https://localhost:4000/verify/retry'
   : 'https://back.artoring.com/verify/retry';
 
-const MainPage = ({ isLogin, profile, accessToken, loginType }) => {
+const MainPage = ({ isLogin, profile, accessToken, loginType, searchDataHandler }) => {
   const [cards, cardsHandler] = useState([]);
 
   function getCards () {
@@ -56,10 +56,14 @@ const MainPage = ({ isLogin, profile, accessToken, loginType }) => {
       </div>
       <div className='CareerFindContainer'>
         <CardList
-          data={{ title: '커리어 교육', cards: cards, likedCareerEdu: profile ? profile.likedCareerEdu : [] }}
+          title='커리어 교육'
+          cards={cards}
+          likedCareerEdu={profile ? profile.likedCareerEdu : []}
+          renderType='teach'
           loginType={loginType}
           accessToken={accessToken}
           isLogin={isLogin}
+          searchDataHandler={searchDataHandler}
         />
       </div>
       <div className='WhoisartContainer'>
