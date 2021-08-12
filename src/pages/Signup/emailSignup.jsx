@@ -14,7 +14,6 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
   const history = useHistory();
 
   const onSubmit = async (data) => {
-    console.log(data);
     const { email, name, gender, birth, phone, password } = data;
     // axios로 서버에 저장 요청을 보내고 리디렉션
     // 위로 프롭스 올렸구나!!!!!!

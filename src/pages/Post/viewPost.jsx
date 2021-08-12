@@ -37,12 +37,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
     // https://share.naver.com/web/shareView?url=인코딩한URL값&title=인코딩한title값
     const url = href.concat(`/career/teach${id}`);
 
-    console.log(url);
     window.FB.ui({
       method: 'share',
       href: url
     }, function (response) {
-      console.log(response);
+
     });
   };
 
@@ -133,13 +132,12 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         ? `https://localhost:4000/career/teach/${id}`
         : `https://back.artoring.com/career/teach/${id}`;
       const { data } = await axios.get(url);
-      console.log(data[0]);
+
       cardHandler(data[0]);
 
       likesHandler(profile.likedCareerEdu
         ? profile.likedCareerEdu.includes(data[0]._id)
         : false);
-      console.log(data);
     }
 
     getCardInfo();
@@ -174,7 +172,9 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
   });
   return (
     !card.title
-      ? <div> waiting...</div>
+      ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
+        <div>  </div>
+      </div>
       : <div className='CareerTeachContainer'>
         <div
           className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
@@ -258,7 +258,8 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                   </div>
                   : <div className='Flex'><div
                       className='LikesUpperDisabled '
-                      onClick={likeHandler}>
+                      onClick={likeHandler}
+                                          >
                     <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
                     <div id='test'>{card.likesCount}</div>
 

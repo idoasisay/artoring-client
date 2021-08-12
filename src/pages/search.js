@@ -7,7 +7,6 @@ import { useHistory } from 'react-router';
 const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler }) => {
   const history = useHistory();
 
-  console.log(history.location.search);
   const [careerTeachCards, careerCardTeachListHandler] = useState({});
   // const [mentorCards, mentorCardListHandler] = useState({});
   const [careerInfoCards, careerInfoCardListHandler] = useState({});
@@ -81,7 +80,7 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
                 deepQuery='true'
               />
             : ''}
-      </div>
+        </div>
       : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />
   );
 };

@@ -10,7 +10,7 @@ const Faq = (props) => {
 
     const keys = Object.keys(panel);
     for (const index in keys) {
-      if (index != num - 1) panel[index].style.maxHeight = null;
+      if (index !== num - 1) panel[index].style.maxHeight = null;
       else {
         if (panel[num - 1].style.maxHeight) {
           panel[num - 1].style.maxHeight = null;

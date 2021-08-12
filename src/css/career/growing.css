@@ -1,0 +1,21 @@
+.TeachContainer{
+  width: 1080px;
+}
+.CategoryBtnContainer{
+  padding-top: 70px;
+  padding-bottom: 75px;
+  padding-left: 12px;
+}
+.CategoryBtn{
+  width: 126px;
+  height: 44px;
+  margin-right: 12px;
+  color: #ffffff;
+}
+.CategoryActive{
+  color:#000000
+}
+.PageNationContainer{
+  padding-top:120px;
+  padding-bottom:120px;
+}

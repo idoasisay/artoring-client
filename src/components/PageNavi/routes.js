@@ -75,18 +75,19 @@ export default function Nav ({
 
       <Switch>
         <Route
-          path='/career/teach/:id' render={() => <ViewPost
+          exact='true'
+          path='/career/growing/:id' render={() => <ViewPost
             profile={profile}
             profileHandler={profileHandler}
             isLogin={isLogin}
             loginType={loginType}
             accessToken={accessToken}
-                                                 />}
+                                                   />}
         />
       </Switch>
-      <Route path='/career/growing' component={CareerTeach} />
+      <Route exact='true' path='/career/growing' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} />} />
       <Route path='/career/signature' component={CareerTeach} />
-      <Route path='/careerinfo' component={CareerInfo} />
+      <Route path='/career/info' component={CareerInfo} />
       <Route path='/about' component={About} />
       <Route exact='true' path='/search' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />
       <Route exact='true' path='/search/deep' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />

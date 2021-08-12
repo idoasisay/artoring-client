@@ -18,12 +18,13 @@ function getDate (date) {
   const now = new Date(date);
 
   const year = now.getFullYear();
-  let month = now.getMonth();
-  let day = now.getDay();
+  let month = now.getMonth() + 1;
+  let day = now.getDate();
   const index = now.getDay();
 
   month = month < 10 ? '0' + month : month;
   day = day < 10 ? '0' + day : day;
+
   return `${year}.${month}.${day}(${word[index]})`;
 }
 
