@@ -339,3 +339,20 @@
 .FaqTitle{
   padding-bottom: 31px;
 }
+
+/* 예약 신청 모달 */
+.ReservationModelContainer{
+  position:fixed;
+  transition: 0.5s;
+  top: 0;
+  left:0;
+  z-index: 100;
+  
+}
+.ReseveModal{
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+.ReserveImg{
+  height: 10vh;
+}

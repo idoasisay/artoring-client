@@ -19,7 +19,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
   const { id } = useParams();
   const [card, cardHandler] = useState({});
 
+  // 공유모달
   const [enableModal, modalToggler] = useState(false);
+
+  // 신청 완료 모달
+  const [isReservationReq, isRequestHandler] = useState(false);
+
+  // 신청 성공여부 저장
+  const [isSucceed, toggleSucceed] = useState(false);
 
   const naverShare = async () => {
     const { href } = window.location;
@@ -54,6 +61,28 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
     document.body.removeChild(el);
 
     alert('클립보드로 복사되었습니다.');
+  };
+
+  const requestReservation = async () => {
+    const url = process.env.REACT_APP_NODE_ENV === 'development'
+      ? 'https://localhost:4000/reserve'
+      : 'https://back.artoring.com/reserve';
+
+    try {
+      await axios.post(url, { cardId: card._id, userId: profile._id, loginType, reservationType: 'teaching' }, {
+        headers: {
+          authorization: `Bearer ${accessToken}`
+        }
+      });
+
+      // 예약 완료 모달 생
+      isRequestHandler(true);
+      toggleSucceed(true);
+      console.log('done');
+    } catch (e) {
+      isRequestHandler(true);
+      toggleSucceed(false);
+    }
   };
   // 로그인이 안되어 있으면 profile에 likedCareerEdu가 없다
   // 로그인이 되어있다면 상세 정보 렌더링 대상의 카드의 id를 바탕으로 유저가 좋아요를 누른 리스트에
@@ -174,8 +203,26 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
     !card.title
       ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
         <div>  </div>
-      </div>
+        </div>
       : <div className='CareerTeachContainer'>
+        {!isReservationReq
+          ? <div
+              className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
+              style={{ zIndex: -1, minWidth: '99vw', minHeight: '99vh', backgroundColor: 'rgba(0,0,0,0)' }}
+            />
+          : <div
+              className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
+              style={{ minWidth: '99vw', minHeight: '99vh', backgroundColor: 'rgba(0, 0, 0, 0.208)' }}
+            >
+            <div className='ReseveModal Flex-Col AlignCenter'>
+              <img src={process.env.PUBLIC_URL + '/img/shinyLogo.png'} alt='로고' className='ReserveImg' />
+              <div>{isSucceed ? '예약이 완료되었어요!' : '예약에 실패했습니다...'}</div>
+              <div>{isSucceed ? '아래 버튼을 누르면 예약 확인 페이지로 이동합니다!' : ''}</div>
+              <div className='ReservationBtn' onClick={isSucceed ? () => history.push('/user/reserve') : () => isRequestHandler(false)}>
+                닫기
+              </div>
+            </div>
+            </div>}
         <div
           className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
         >
@@ -239,8 +286,9 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                     className='ParticipateUpper BtnType5'
                     onMouseDown={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active')}
                     onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
+                    onClick={requestReservation}
                   >신청하기
-                </div>
+                  </div>
                 : <div className='ParticipateUpperDisabled'>신청하기</div>}
 
               {
@@ -255,7 +303,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
 
                     </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
-                  </div>
+                    </div>
                   : <div className='Flex'><div
                       className='LikesUpperDisabled '
                       onClick={likeHandler}
@@ -263,9 +311,9 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                     <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
                     <div id='test'>{card.likesCount}</div>
 
-                  </div>
+                                          </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
-                    </div>
+                  </div>
 }
             </div>
           </div>
@@ -283,12 +331,13 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                   className='ParticipateLower BtnType5'
                   onMouseDown={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active')}
                   onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
+                  onClick={requestReservation}
                 >신청하기
-                </div>
+              </div>
               : <div
                   className='ParticipateLowerDisabled'
                 >신청하기
-                </div>}
+              </div>}
             {profile.verifiedEmail === true
               ? <div
                   className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
@@ -298,14 +347,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                 >
                 <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                 <div>{card.likesCount}</div>
-              </div>
+                </div>
               : <div
                   className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
                   onClick={likeHandler}
                 >
                 <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                 <div>{card.likesCount}</div>
-              </div>}
+                </div>}
           </div>
         </div>
         <div id='ModeratorIntro'>
@@ -326,7 +375,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         </div>
         <div id='FAQ'><Faq /></div>
 
-        </div>
+      </div>
 
   );
 };

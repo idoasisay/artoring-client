@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PaginationList from '../components/CareerTeach/PaginationList';
 import '../css/search/Search.css';
 import axios from 'axios';
 import CardList from '../components/Common/cardList';
@@ -13,6 +14,16 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
   const [total, totalUpdater] = useState(0); // 검색결과 모든 도큐먼트의 총합을 추적
   const [isDeepQuery, toggleDeepQuery] = useState(history.location.pathname.includes('deep'));
 
+  // 페이지 네이션, 현재 페이지
+  const [currentPages, currentPageHandler] = useState(1);
+
+  // 페이지 내이션, 10의 자리수 이상의 페이지를 렌더링 하는 기준
+  const [basePage, baseHandler] = useState(1);
+
+  function pagesHandler (num) {
+    currentPageHandler(num);
+  }
+
   useEffect(() => {
     async function asyncFetch () {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
@@ -20,7 +31,7 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
         : 'https://back.artoring.com/search';
 
       if (!history.location.pathname.includes('deep')) {
-        const { data: response } = await axios.get(url.concat(`?keyword=${searchData}`));
+        const { data: response } = await axios.get(url.concat(`?keyword=${searchData}&page=${currentPages}`));
         const { teachQueryResult, mentorQueryResult } = response;
 
         const sum = teachQueryResult.total.value;
@@ -29,7 +40,7 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
         // mentorCardListHandler(mentorQueryResult);
         totalUpdater(sum);
       } else {
-        const { data: response } = await axios.get(url.concat(history.location.search));
+        const { data: response } = await axios.get(url.concat(history.location.search.concat(`&page=${currentPages}`)));
 
         const { total, hits } = response;
 
@@ -40,11 +51,7 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
     }
 
     asyncFetch();
-    return () => {
-      searchingToggler(false);
-      toggleDeepQuery(false);
-    };
-  }, [searchData]);
+  }, [searchData, currentPages]);
 
   return (
     total !== 0
@@ -70,7 +77,7 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
               sendTo={`/search/deep?keyword=${searchData}&model=`}
             />
           : isDeepQuery && careerTeachCards.length
-            ? <CardList
+            ? <div><CardList
                 title='커리어 교육 '
                 subTitle={`${total}개`}
                 cards={careerTeachCards}
@@ -78,8 +85,11 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
                 renderType='teach'
                 maxEle='16'
                 deepQuery='true'
-              />
+                   />
+              <PaginationList maxPage={Math.ceil(total / 16)} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
+              </div>
             : ''}
+
         </div>
       : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />
   );

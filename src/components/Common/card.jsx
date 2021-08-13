@@ -18,7 +18,7 @@ const Card = ({ data, liked }) => {
   return (
     <div
       className='Card' onClick={() => {
-        history.push(`/career/growing/${data.id}`);
+        history.push(`/career/growing/${data._id}`);
       }}
     >
       <img

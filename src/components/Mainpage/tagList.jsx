@@ -5,7 +5,7 @@ const TagList = (props) => {
     props.tags
       ? props.tags.map((ele, i) =>
         // 오프라인인 경우에만 색상이 변화하지만 다른 값에 대해서도 다른 색으로 변화해야함
-        <div className='Tag' style={{ 'background-color': ele === '오프라인' ? 'rgb(220, 220, 250)' : ele === '온라인' ? '#ffd3dc' : '' }} key={i}>{ele}</div>
+        <div className='Tag' style={{ backgroundColor: ele === '오프라인' ? 'rgb(220, 220, 250)' : ele === '온라인' ? '#ffd3dc' : '' }} key={i}>{ele}</div>
         )
       : ''
   );

@@ -12,7 +12,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
       history.push(sendTo.concat(path));
     } else {
       searchDataHandler([]);
-      history.push('/search?keyword=%20');
+      history.push('/career/growing');
     }
   };
 
@@ -23,7 +23,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
         ? <div>{!subTitle
           ? <div className='Flex' style={{ justifyContent: 'space-between' }}>
             <div className='CardListTitle'>{title}</div>최신순
-            </div>
+          </div>
           : <div className='Flex' style={{ justifyContent: 'space-between', paddingRight: '12px' }}>
             <div className='CardListTitle'>{title}<span>{subTitle}</span>
             </div>
@@ -43,8 +43,8 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
               <i className={isFiltering ? 'AccordionBtn BtnOpen' : 'AccordionBtn'} />
 
             </div>
-            </div>}
-          </div>
+          </div>}
+        </div>
         : !subTitle
             ? <div className='CardListTitle'>{title}</div>
             : <div className='CardListTitle'>{title}<span>{subTitle}</span></div>}
@@ -143,7 +143,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
                         className='BtnType1 CardListMoreBtn'
                         onClick={() => { kickToDest('mentor'); }}
                       >View more1
-                      </div>
+                    </div>
                     : ''
                 : cards.length >= 6
                   ? <div
@@ -151,7 +151,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
                       onClick={() => { kickToDest('info'); }}
                     >
                     View more
-                  </div>
+                    </div>
                   : ''
             : cards.length >= 8
               ? <div
@@ -159,9 +159,9 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
                   onClick={() => { kickToDest('career'); }}
                 >
                 View more
-              </div>
+                </div>
               : ''}
-        </div>
+          </div>
         : ''}
     </div>
   );
