@@ -61,7 +61,7 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
     asyncFetch();
   }, []);
 
-  // 카테고리 및 필터가 변경될 때 마다 페이지네이션 초기화 및 렌더링할 카드들을 업데이트
+  // 카테고리 및 필터가 변경될 때 마다 페이지네이션 초기화 및 렌더링할 카드들을 ajax 업데이트
   useEffect(() => {
     async function asyncFetch () {
       const url = process.env.NODE_ENV === 'development'
@@ -130,7 +130,8 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
         </div>
       </div>
       {categoryList
-        ? <CardList
+        ? <div>
+          <CardList
             title='전체'
             subTitle={`(${category === '' ? total : category === 'teach' ? eduTotal : category === 'gether' ? getherTotal : lectureTotal}개)`}
             cards={categoryList}
@@ -142,10 +143,12 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
             filter={filter}
             filterHandler={filterHandler}
           />
+          <div className='PageNationContainer'>
+            <PaginationList maxPage={maxPage} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
+          </div>
+        </div>
         : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />}
-      <div className='PageNationContainer'>
-        <PaginationList maxPage={maxPage} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
-      </div>
+
     </div>
   );
 };

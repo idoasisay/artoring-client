@@ -5,6 +5,9 @@ import '../../css/navigation/PageNavi.css';
 const OnLogin = ({ profile }) => {
   const history = useHistory();
 
+  function kickToPurchasedHistory () {
+    history.push('/user/reserve');
+  }
   function kickToLogout () {
     history.push('/logout');
   }
@@ -26,7 +29,7 @@ const OnLogin = ({ profile }) => {
         <div className='Flex-Col JustifyCenter AlignCenter CommonalityContainer BorderBlack2px-bottom'>
           <div className='Commonality JustifyAround Flex-Col AlignCenter'>
             <div className='TextType3 Title5'>좋아요</div>
-            <div className='TextType3 Title5'>구매내역</div>
+            <div className='TextType3 Title5' onClick={kickToPurchasedHistory}>구매내역</div>
             <div className='TextType3 Title5' onClick={kickToLogout}>로그아웃</div>
           </div>
         </div>

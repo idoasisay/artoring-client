@@ -3,7 +3,7 @@ import Card from './card.jsx';
 import '../../css/mainpage/CardList.css';
 import { useHistory } from 'react-router';
 
-const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, likedMentor, renderType, maxEle = undefined, sendTo, deepQuery, searchDataHandler, filter, filterHandler }) => {
+const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, likedMentor, renderType, maxEle = undefined, sendTo, deepQuery, searchDataHandler, filter, filterHandler, isPurchasedHistory }) => {
   const [isFiltering, toggleFiltering] = useState(false);
 
   const history = useHistory();
@@ -12,7 +12,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
       history.push(sendTo.concat(path));
     } else {
       searchDataHandler([]);
-      history.push('/search?keyword=%20');
+      history.push('/career/growing');
     }
   };
 
@@ -49,6 +49,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
             ? <div className='CardListTitle'>{title}</div>
             : <div className='CardListTitle'>{title}<span>{subTitle}</span></div>}
       <div className='CardsContainer'>
+        <div className='Delimiter' />
         {cards.map((ele, i) => {
           if (maxEle) {
             if (i >= maxEle) return;
@@ -57,6 +58,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
                 <Card
                   data={!ele._source ? ele : ele._source}
                   key={i}
+                  isPurchasedHistory={isPurchasedHistory}
           /**
            * 프로필에 likedCareerEdu가 존재하지 않다면 서버에 로그인이 되어 있지 않는 상태이므로 당연히 false
            * 하지만 likedCareerEdu가 존재한다면 로그인이 되어있는 상태. 유저가 좋아요한것을 렌더링 해야 하는지

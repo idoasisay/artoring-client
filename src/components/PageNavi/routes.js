@@ -20,6 +20,7 @@ import VerifyRequest from '../../pages/Signup/verify';
 import EmailSignup from '..//../pages/Signup/emailSignup';
 import AfterSignup from '../../pages/Signup/afterSignup';
 import ProfileRequest from '../SignUp/requestProfile';
+import PurchaseHistory from '../../pages/Personal/purchaseHistory';
 
 import axios from 'axios';
 
@@ -105,12 +106,13 @@ export default function Nav ({
       {/*
        * 임시토큰을 전달하고 있으나 프로덕션 배포에서는 고정값이 아닌 Props의 값으로 대체
        */}
-      <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} token={accessToken} loginType={loginType} />} />
-      <Route exact path='/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
-      <Route exact path='/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
+      <Route exact='true' path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} token={accessToken} loginType={loginType} />} />
+      <Route exact='true' path='/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
+      <Route exact='true' path='/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
       <Route path='/signup' render={() => <EmailSignup tokenHandler={tokenHandler} loginHandler={loginHandler} typeHandler={typeHandler} />} />
       <Route path='/after/signup' render={() => <AfterSignup />} />
       <Route path='/request' component={ProfileRequest} />
+      <Route exact='true' path='/user/reserve' render={() => <PurchaseHistory loginType={loginType} profile={profile} accessToken={accessToken} />} />
       <Route path='/verify' render={() => <VerifyRequest tokenHandler={tokenHandler} loginHandler={loginHandler} typeHandler={typeHandler} profileHandler={profileHandler} />} />
       <Route path='/logout' render={() => <Logout loginType={loginType} accessToken={accessToken} tokenHandler={tokenHandler} profileHandler={profileHandler} loginHandler={loginHandler} />} />
     </Router>

@@ -54,7 +54,7 @@ function Header ({ isLogin, profile, searchDataHandler, isSearching, searchingTo
           </div>
         </div>
         <div className='navBox'>
-          <Link to='/careerInfo'>커리어 정보</Link>
+          <Link to='/career/info'>커리어 정보</Link>
           <div className='OnMouseUP' />
         </div>
         <div className='navBox'>
@@ -81,18 +81,18 @@ function Header ({ isLogin, profile, searchDataHandler, isSearching, searchingTo
                 onMouseOver={() => classReplacer('.isLogin', 'isLogin ClickOrMouseUp')}
                 onMouseLeave={() => classReplacer('.isLogin', 'isLogin')}
               >로그인/회원가입
-            </Link>}
+              </Link>}
 
         </div>
       </div>
-    </div>
+      </div>
     : <div className='nav Flex'>
       <img src={process.env.PUBLIC_URL + '/img/search.svg'} className='SearchIcon' alt='검색' />
       <form onSubmit={handleSubmit(handleSearch)} className='SearchForm'>
         <input type='text' {...register('search')} placeholder='검색어를 입력해 주세요. ' className='SearchPlaceHolder TextType2' />
       </form>
       <div className='CloseSearch' onClick={() => searchingToggler(false)}>&times;</div>
-      </div>
+    </div>
   );
 }
 

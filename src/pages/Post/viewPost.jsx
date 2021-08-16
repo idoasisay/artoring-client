@@ -19,7 +19,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
   const { id } = useParams();
   const [card, cardHandler] = useState({});
 
+  // 공유모달
   const [enableModal, modalToggler] = useState(false);
+
+  // 신청 완료 모달
+  const [isReservationReq, isRequestHandler] = useState(false);
+
+  // 신청 성공여부 저장
+  const [isSucceed, toggleSucceed] = useState(false);
 
   const naverShare = async () => {
     const { href } = window.location;
@@ -54,6 +61,28 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
     document.body.removeChild(el);
 
     alert('클립보드로 복사되었습니다.');
+  };
+
+  const requestReservation = async () => {
+    const url = process.env.REACT_APP_NODE_ENV === 'development'
+      ? 'https://localhost:4000/reserve'
+      : 'https://back.artoring.com/reserve';
+
+    try {
+      await axios.post(url, { cardId: card._id, userId: profile._id, loginType, reservationType: 'teaching' }, {
+        headers: {
+          authorization: `Bearer ${accessToken}`
+        }
+      });
+
+      // 예약 완료 모달 생
+      isRequestHandler(true);
+      toggleSucceed(true);
+      console.log('done');
+    } catch (e) {
+      isRequestHandler(true);
+      toggleSucceed(false);
+    }
   };
   // 로그인이 안되어 있으면 profile에 likedCareerEdu가 없다
   // 로그인이 되어있다면 상세 정보 렌더링 대상의 카드의 id를 바탕으로 유저가 좋아요를 누른 리스트에
@@ -176,6 +205,24 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         <div>  </div>
       </div>
       : <div className='CareerTeachContainer'>
+        {!isReservationReq
+          ? <div
+              className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
+              style={{ zIndex: -1, minWidth: '100vw', minHeight: '100vh', backgroundColor: 'rgba(0,0,0,0)' }}
+            />
+          : <div
+              className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
+              style={{ minWidth: '100vw', minHeight: '100vh', backgroundColor: 'rgba(0, 0, 0, 0.208)' }}
+            >
+            <div className='ReseveModal Flex-Col AlignCenter'>
+              <img src={process.env.PUBLIC_URL + '/img/shinyLogo.png'} alt='로고' className='ReserveImg' />
+              <div className='body2'>{isSucceed ? '예약이 완료되었어요!' : '예약에 실패했습니다...'}</div>
+              <div className='body2'>{isSucceed ? '아래 버튼을 누르면 예약 확인 페이지로 이동합니다!' : ''}</div>
+              <div className='BtnType5 ReservationBtn' onClick={isSucceed ? () => history.push('/user/reserve') : () => isRequestHandler(false)}>
+                닫기
+              </div>
+            </div>
+          </div>}
         <div
           className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
         >
@@ -239,6 +286,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                     className='ParticipateUpper BtnType5'
                     onMouseDown={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active')}
                     onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
+                    onClick={requestReservation}
                   >신청하기
                 </div>
                 : <div className='ParticipateUpperDisabled'>신청하기</div>}
@@ -283,6 +331,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                   className='ParticipateLower BtnType5'
                   onMouseDown={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active')}
                   onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
+                  onClick={requestReservation}
                 >신청하기
                 </div>
               : <div
