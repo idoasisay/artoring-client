@@ -1,15 +1,17 @@
 import axios from 'axios';
 import * as React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import '../../css/signUp/EmailSignup.css';
+import TOUmodal from './TOUmodal';
 
 const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm();
   const history = useHistory();
 
@@ -17,12 +19,20 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
     const { email, name, gender, birth, phone, password } = data;
     // axios로 서버에 저장 요청을 보내고 리디렉션
     // 위로 프롭스 올렸구나!!!!!!
-    const url = process.env.REACT_APP_NODE_ENV === 'development'
-      ? 'https://localhost:4000/signup'
-      : 'https://back.artoring.com/signup';
+    const url =
+      process.env.REACT_APP_NODE_ENV === 'development'
+        ? 'https://localhost:4000/signup'
+        : 'https://back.artoring.com/signup';
 
     try {
-      const { data: axiosResult } = await axios.post(url, { email, name, gender, birth, phone, password });
+      const { data: axiosResult } = await axios.post(url, {
+        email,
+        name,
+        gender,
+        birth,
+        phone,
+        password,
+      });
 
       const { response, accessToken } = axiosResult;
 
@@ -49,6 +59,26 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
         {message}
       </span>
     );
+  };
+
+  // modal
+  const [isCheckedToTOUModalOn, setIsCheckedToTOUModalOn] = useState(false);
+  const [isCheckedToPIModalOn, setIsCheckedToPIModalOn] = useState(false);
+
+  const handleCheckedToTOUOpen = (e) => {
+    setIsCheckedToTOUModalOn(true);
+  };
+
+  const handleCheckedToTOUClose = (e) => {
+    setIsCheckedToTOUModalOn(false);
+  };
+
+  const handleCheckedToPIOpen = (e) => {
+    setIsCheckedToPIModalOn(true);
+  };
+
+  const handleCheckedToPIClose = (e) => {
+    setIsCheckedToPIModalOn(false);
   };
 
   return (
@@ -80,15 +110,14 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
               {...register('email', {
                 required: true,
                 pattern: {
-                  value: emailRegex
-                }
+                  value: emailRegex,
+                },
               })}
             />
             {errors.email?.type === 'required' &&
               errorMessageTag('이메일을 입력해 주세요.')}
             {/* {errors.email && errorMessageTag(이메일 유효성이 맞지 않음)} */}
           </label>
-
           {/* 성별 */}
           <label htmlFor='gender'>
             <div className='FormTitle'>성별</div>
@@ -129,7 +158,6 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
             </div>
             {errors.gender && errorMessageTag('반드시 하나를 선택해 주세요.')}
           </label>
-
           {/* 생년월일 */}
           <label htmlFor='birth'>
             <div className='FormTitle'>생년월일</div>
@@ -142,13 +170,12 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
               {...register('birth', {
                 required: true,
                 pattern: {
-                  value: birthRegex
-                }
+                  value: birthRegex,
+                },
               })}
             />
             {errors.birth && errorMessageTag('생년월일을 작성해 주세요.')}
           </label>
-
           {/* 휴대전화번호 */}
           <label htmlFor='phone'>
             <div className='FormTitle'>휴대전화번호</div>
@@ -162,7 +189,6 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
             />
             {errors.phone && errorMessageTag('전화번호를 적어 주세요.')}
           </label>
-
           {/* 주소 */}
           <label htmlFor='adress'>
             <div className='FormTitle'>주소</div>
@@ -175,7 +201,6 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
             />
             {errors.adress && errorMessageTag('주소를 적어 주세요.')}
           </label>
-
           {/* 비밀번호 */}
           <label htmlFor='password'>
             <div className='FormTitle'>
@@ -187,7 +212,7 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
               className='PlaceHolder LimitWidth FormMargin'
               {...register('password', {
                 required: true,
-                pattern: passwordRegex
+                pattern: passwordRegex,
               })}
             />
             {errors.password && (
@@ -204,7 +229,7 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
               className='PlaceHolder LimitWidth FormMargin'
               {...register('passwordCheck', {
                 required: true,
-                validate: (str) => str === watch('password')
+                validate: (str) => str === watch('password'),
               })}
             />
             {errors.passwordCheck && (
@@ -214,45 +239,77 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
             )}
           </label>
 
+          {/* 개인정보 확인 */}
           <div className='TOSContainer'>
             <label htmlFor='agreeToTermsOfUse'>
               <div className='TOSFontSize'>
                 <input
                   type='checkbox'
-                  {...register('이용약관동의')}
+                  {...register('이용약관동의', { required: true })}
                   id='agreeToTermsOfUse'
+                  name='agreeToTermsOfUse'
                 />
                 <span className='TOSMargin'>아토링 이용 약관 동의</span>
-                <button className='TOSBtnType TOSFontSize'>내용보기</button>
+                <button
+                  type='button'
+                  className='TOSBtnType TOSFontSize'
+                  onClick={handleCheckedToTOUOpen}
+                >
+                  내용보기
+                </button>
               </div>
+              <TOUmodal
+                open={isCheckedToTOUModalOn}
+                close={handleCheckedToTOUClose}
+                header='아토링 이용 약관 동의'
+              >
+                아토링 이용 약관 동의
+              </TOUmodal>
             </label>
             <label htmlFor='agreeToPersonalInfo'>
               <div className='TOSFontSize'>
                 <input
                   type='checkbox'
-                  {...register('개인정보수집이용동의')}
+                  {...register('개인정보수집이용동의', { required: true })}
                   id='agreeToPersonalInfo'
                 />
+                {errors.agreeToPersonalInfo &&
+                  errorMessageTag('해당 항목에 동의해 주세요.')}
                 <span className='TOSMargin'>개인정보 수집, 이용 동의</span>
-                <button className='TOSBtnType TOSFontSize'>내용보기</button>
+                <button
+                  type='button'
+                  className='TOSBtnType TOSFontSize'
+                  onClick={handleCheckedToPIOpen}
+                >
+                  내용보기
+                </button>
               </div>
+              <TOUmodal
+                open={isCheckedToPIModalOn}
+                close={handleCheckedToPIClose}
+                header='개인정보 수집, 이용 동의'
+              >
+                개인정보 수집, 이용 동의
+              </TOUmodal>
             </label>
             <label htmlFor='agreeToAdult'>
               <div className='TOSFontSize'>
                 <input
                   type='checkbox'
-                  {...register('14세이상동의')}
+                  {...register('14세이상동의', { required: true })}
                   id='agreeToAdult'
                 />
                 <span className='TOSMargin'>만 14세 이상입니다.</span>
               </div>
             </label>
-            <label>
-              <div className='PlaceHolderBtnContainer'>
-                <button className='PlaceHolderBtn BtnType1'>가입하기</button>
-              </div>
-            </label>
           </div>
+          <label>
+            <div className='PlaceHolderBtnContainer'>
+              <button type='submit' className='PlaceHolderBtn BtnType1'>
+                가입하기
+              </button>
+            </div>
+          </label>
         </form>
       </div>
     </div>

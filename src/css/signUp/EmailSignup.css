@@ -33,6 +33,10 @@ input[type='checkbox'] {
   top: 6px;
 }
 
+button {
+  cursor: pointer;
+}
+
 input[type='checkbox']:checked {
   background-color: #ff4a70;
 }
