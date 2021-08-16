@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../css/mainpage/Tag.css';
-
 /**
  *
  * @param {*} props

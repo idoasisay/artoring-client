@@ -21,32 +21,6 @@
   margin-left:  2px;;
   border-radius: 4px;
 }
-.CardDate{
-  width: 181px;
-  height: 27px;
-  font-family: 'nanumSquare';
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 2.25;
-  letter-spacing: normal;
-  color: #767677;
-}
-
-.CardTitle{
-  width: 246px;
-  min-height: 52px;
-  font-family: 'nanumSquare';
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  color: #000000;
-  margin-bottom: 6px;
-}
 
 .CardPrice{
   width: 60px;
