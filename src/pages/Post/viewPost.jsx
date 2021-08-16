@@ -203,26 +203,26 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
     !card.title
       ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
         <div>  </div>
-        </div>
+      </div>
       : <div className='CareerTeachContainer'>
         {!isReservationReq
           ? <div
               className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
-              style={{ zIndex: -1, minWidth: '99vw', minHeight: '99vh', backgroundColor: 'rgba(0,0,0,0)' }}
+              style={{ zIndex: -1, minWidth: '100vw', minHeight: '100vh', backgroundColor: 'rgba(0,0,0,0)' }}
             />
           : <div
               className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
-              style={{ minWidth: '99vw', minHeight: '99vh', backgroundColor: 'rgba(0, 0, 0, 0.208)' }}
+              style={{ minWidth: '100vw', minHeight: '100vh', backgroundColor: 'rgba(0, 0, 0, 0.208)' }}
             >
             <div className='ReseveModal Flex-Col AlignCenter'>
               <img src={process.env.PUBLIC_URL + '/img/shinyLogo.png'} alt='로고' className='ReserveImg' />
-              <div>{isSucceed ? '예약이 완료되었어요!' : '예약에 실패했습니다...'}</div>
-              <div>{isSucceed ? '아래 버튼을 누르면 예약 확인 페이지로 이동합니다!' : ''}</div>
-              <div className='ReservationBtn' onClick={isSucceed ? () => history.push('/user/reserve') : () => isRequestHandler(false)}>
+              <div className='body2'>{isSucceed ? '예약이 완료되었어요!' : '예약에 실패했습니다...'}</div>
+              <div className='body2'>{isSucceed ? '아래 버튼을 누르면 예약 확인 페이지로 이동합니다!' : ''}</div>
+              <div className='BtnType5 ReservationBtn' onClick={isSucceed ? () => history.push('/user/reserve') : () => isRequestHandler(false)}>
                 닫기
               </div>
             </div>
-            </div>}
+          </div>}
         <div
           className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
         >
@@ -288,7 +288,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                     onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
                     onClick={requestReservation}
                   >신청하기
-                  </div>
+                </div>
                 : <div className='ParticipateUpperDisabled'>신청하기</div>}
 
               {
@@ -303,7 +303,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
 
                     </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
-                    </div>
+                  </div>
                   : <div className='Flex'><div
                       className='LikesUpperDisabled '
                       onClick={likeHandler}
@@ -311,9 +311,9 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                     <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
                     <div id='test'>{card.likesCount}</div>
 
-                                          </div>
-                    <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
                   </div>
+                    <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
+                    </div>
 }
             </div>
           </div>
@@ -333,11 +333,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                   onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
                   onClick={requestReservation}
                 >신청하기
-              </div>
+                </div>
               : <div
                   className='ParticipateLowerDisabled'
                 >신청하기
-              </div>}
+                </div>}
             {profile.verifiedEmail === true
               ? <div
                   className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
@@ -347,14 +347,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                 >
                 <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                 <div>{card.likesCount}</div>
-                </div>
+              </div>
               : <div
                   className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
                   onClick={likeHandler}
                 >
                 <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                 <div>{card.likesCount}</div>
-                </div>}
+              </div>}
           </div>
         </div>
         <div id='ModeratorIntro'>
@@ -375,7 +375,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
         </div>
         <div id='FAQ'><Faq /></div>
 
-      </div>
+        </div>
 
   );
 };
