@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Router, Switch, useHistory } from 'react-router-dom';
 import {
-  Mentor,
   CareerTeach,
-  CareerInfo,
   About,
   Search
 } from '../../pages';
@@ -21,7 +19,8 @@ import EmailSignup from '..//../pages/Signup/emailSignup';
 import AfterSignup from '../../pages/Signup/afterSignup';
 import ProfileRequest from '../SignUp/requestProfile';
 import PurchaseHistory from '../../pages/Personal/purchaseHistory';
-
+import Mentor from '../../pages/Career/Mentor';
+import CareerInfo from '../../pages/Career/careerInfo';
 import axios from 'axios';
 
 export default function Nav ({
@@ -72,23 +71,33 @@ export default function Nav ({
        * 렌더를 사용하면 프롭을 내려줄수가 있다. 최상단에서 전달받은 프롭들을 입맛대로 전달한다.
        */}
       <Route exact='true' path='/' render={() => <MainPage profile={profile} profileHandler={profileHandler} isLogin={isLogin} accessToken={accessToken} loginType={loginType} searchDataHandler={searchDataHandler} />} />
-      <Route path='/mentor' component={Mentor} />
 
       <Switch>
         <Route
           exact='true'
-          path='/career/growing/:id' render={() => <ViewPost
+          path='/career/growing/:model/:id' render={() => <ViewPost
             profile={profile}
             profileHandler={profileHandler}
             isLogin={isLogin}
             loginType={loginType}
             accessToken={accessToken}
-                                                   />}
+                                                          />}
+        />
+        <Route
+          exact='true' path='/career/:model/:id' render={() => <ViewPost
+            profile={profile}
+            profileHandler={profileHandler}
+            isLogin={isLogin}
+            loginType={loginType}
+            accessToken={accessToken}
+            isInfo='true'
+                                                               />}
         />
       </Switch>
+      <Route path='/mentor' render={() => <Mentor profile={profile} searchDataHandler={searchDataHandler} />} />
       <Route exact='true' path='/career/growing' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} />} />
-      <Route path='/career/signature' component={CareerTeach} />
-      <Route path='/career/info' component={CareerInfo} />
+      <Route path='/career/signature' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} />} />
+      <Route exact='true' path='/career/info' component={CareerInfo} />
       <Route path='/about' component={About} />
       <Route exact='true' path='/search' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />
       <Route exact='true' path='/search/deep' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />

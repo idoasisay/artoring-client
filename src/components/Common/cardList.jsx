@@ -3,7 +3,12 @@ import Card from './card.jsx';
 import '../../css/mainpage/CardList.css';
 import { useHistory } from 'react-router';
 
-const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, likedMentor, renderType, maxEle = undefined, sendTo, deepQuery, searchDataHandler, filter, filterHandler, isPurchasedHistory }) => {
+const CardList = ({
+  cards, title, subTitle,
+  likedCareerEdu, likedCareerInfo, likedMentor,
+  renderType, maxEle = undefined, sendTo, deepQuery,
+  searchDataHandler, filter, filterHandler, isPurchasedHistory, isInfo
+}) => {
   const [isFiltering, toggleFiltering] = useState(false);
 
   const history = useHistory();
@@ -56,11 +61,13 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
           if (maxEle) {
             if (i >= maxEle) return;
             else {
+              if (ele._source)ele._source._id = ele._id;
               return (
                 <Card
                   data={!ele._source ? ele : ele._source}
                   key={i}
                   isPurchasedHistory={isPurchasedHistory}
+                  isInfo={isInfo}
           /**
            * 프로필에 likedCareerEdu가 존재하지 않다면 서버에 로그인이 되어 있지 않는 상태이므로 당연히 false
            * 하지만 likedCareerEdu가 존재한다면 로그인이 되어있는 상태. 유저가 좋아요한것을 렌더링 해야 하는지

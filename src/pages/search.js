@@ -9,7 +9,7 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
   const history = useHistory();
 
   const [careerTeachCards, careerCardTeachListHandler] = useState({});
-  // const [mentorCards, mentorCardListHandler] = useState({});
+  const [mentorCards, mentorCardListHandler] = useState({});
   const [careerInfoCards, careerInfoCardListHandler] = useState({});
   const [total, totalUpdater] = useState(0); // 검색결과 모든 도큐먼트의 총합을 추적
   const [isDeepQuery, toggleDeepQuery] = useState(history.location.pathname.includes('deep'));
@@ -34,10 +34,10 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
         const { data: response } = await axios.get(url.concat(`?keyword=${searchData}&page=${currentPages}`));
         const { teachQueryResult, mentorQueryResult } = response;
 
-        const sum = teachQueryResult.total.value;
-        // sum += mentorQueryResult.total.value;
+        let sum = teachQueryResult.total.value;
+        sum += mentorQueryResult.total.value;
         careerCardTeachListHandler(teachQueryResult);
-        // mentorCardListHandler(mentorQueryResult);
+        mentorCardListHandler(mentorQueryResult);
         totalUpdater(sum);
       } else {
         const { data: response } = await axios.get(url.concat(history.location.search.concat(`&page=${currentPages}`)));
@@ -45,7 +45,7 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
         const { total, hits } = response;
 
         const model = history.location.search.split('&')[1].split('=')[1];
-        model === 'career' ? careerCardTeachListHandler(hits) : careerInfoCardListHandler(hits);
+        model === 'career' ? careerCardTeachListHandler(hits) : mentorCardListHandler(hits);
         totalUpdater(total.value);
       }
     }
@@ -59,23 +59,34 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
         <div className='SearchTitle'>
           <span className='Title2'>'{searchData}'</span> 검색결과 <span className='Title4 QueryDisplay'>{total}개</span>
         </div>
-        {careerTeachCards.hits
-          ? <CardList
+        {careerTeachCards.hits && mentorCards.hits
+          ? <span>
+            <CardList
+              title='멘토 찾기 '
+              subTitle={`${mentorCards.total.value}개`}
+              cards={mentorCards.hits}
+              likedMentor={profile.LikedMentor}
+              renderType='mentor'
+              maxEle='4'
+              sendTo={`/search/deep?keyword=${searchData}&model=`}
+            />
+            <CardList
               title='커리어 교육 '
               subTitle={`${careerTeachCards.total.value}개`}
               cards={careerTeachCards.hits}
-              likedCareerEdu={profile.likedCareerEdu}
+              likedMentor={profile.likedCareerEdu}
               renderType='teach'
               maxEle='8'
               sendTo={`/search/deep?keyword=${searchData}&model=`}
             />
-          : isDeepQuery && careerTeachCards.length
+            </span>
+          : isDeepQuery && (careerTeachCards.length || mentorCards.length)
             ? <div><CardList
                 title='커리어 교육 '
                 subTitle={`${total}개`}
-                cards={careerTeachCards}
-                likedCareerEdu={profile.likedCareerEdu}
-                renderType='teach'
+                cards={careerTeachCards && careerTeachCards.length > 0 ? careerTeachCards : mentorCards}
+                likedMentor={profile.likedCareerEdu}
+                renderType={careerTeachCards && careerTeachCards.length > 0 ? 'teach' : 'mentor'}
                 maxEle='16'
                 deepQuery='true'
                    />
@@ -84,7 +95,8 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
             : ''}
 
       </div>
-      : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />
+      : // 가림막 없으면 블링킹때문에 눈이 아픔
+      <div style={{ minWidth: '99vw', minHeight: '99vh' }} />
   );
 };
 

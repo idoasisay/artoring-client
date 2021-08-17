@@ -45,3 +45,9 @@
 .LikeActive{
   filter: invert(44%) sepia(70%) saturate(2582%) hue-rotate(319deg) brightness(99%) contrast(105%);
 }
+
+.InfoContainer{
+  width: 336px;
+  height: 426px;
+  margin: 12px;
+}

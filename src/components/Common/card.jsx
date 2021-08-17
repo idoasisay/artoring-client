@@ -7,7 +7,7 @@ import utils from './index.js';
 import '../../css/mainpage/Card.css';
 
 // 메인페이지에서 사용되는 카드를 렌더링하는 컴포넌트
-const Card = ({ data, liked, isPurchasedHistory }) => {
+const Card = ({ data, liked, isPurchasedHistory, isInfo }) => {
   const history = useHistory();
   const curDate = new Date();
   const endDate = new Date(data.endDate);
@@ -17,11 +17,12 @@ const Card = ({ data, liked, isPurchasedHistory }) => {
   // 사용되지 않음
   const [likes, likesHandler] = useState(liked);
 
-  // 구매내역에서 사용되는 컴포넌트는 모양새가 조금 달라짐
   return !isPurchasedHistory
     ? <div
-        className={isPurchasedHistory ? 'PurchaseHisotryContianer' : 'Card'} onClick={() => {
-          history.push(`/career/growing/${data._id}`);
+        className={isPurchasedHistory ? 'PurchaseHisotryContianer' : isInfo ? 'InfoContainer' : 'Card'} onClick={() => {
+          isInfo
+            ? history.push(`/career/info/${data._id}`)
+            : history.push(`/career/growing/${data.isGroup ? 'teach' : 'mentor'}/${data._id}`);
         }}
       > <div>
         <img
@@ -33,15 +34,15 @@ const Card = ({ data, liked, isPurchasedHistory }) => {
         <div className='CardCategory'>
           <TagList tags={data.tags} />
         </div>
-        <div className='CardTitle'>{data.title}</div>
-        <div className='CardDate'>{utils.getDate(data.startDate) + ' - ' + utils.getDate(data.endDate)}</div>
-        <div className='CardPrice'>{!isNaN(Number(data.price)) ? `${data.price}원` : `${data.price}`}</div>
-      </div>
+        <div className='CardTitle Title4'>{data.title}</div>
+        {isInfo ? <div className='Caption2-Grey'>{utils.getDate(data.issuedDate)}</div> : <div className='CardDate'>{utils.getDate(data.startDate) + ' - ' + utils.getDate(data.endDate)}</div>}
+        {isInfo ? '' : <div className='CardPrice'>{!isNaN(Number(data.price)) ? `${data.price}원` : `${data.price}`}</div>}
+        </div>
 
-    </div>
+      </div>
     : <div
         className={isPurchasedHistory ? 'PurchaseHisotryContianer' : 'Card'} onClick={() => {
-          history.push(`/career/growing/${data._id}`);
+          history.push(`/career/growing/${data.isGroup ? 'teach' : 'mentor'}/${data._id}`);
         }}
       >
       <div className='Flex JustifyBetween'>
@@ -63,7 +64,7 @@ const Card = ({ data, liked, isPurchasedHistory }) => {
         </div>
       </div>
       {isPurchasedHistory ? <div className='Delimiter' /> : ''}
-      </div>;
+    </div>;
 };
 
 export default Card;

@@ -17,7 +17,7 @@ const MainPage = ({ isLogin, profile, accessToken, loginType, searchDataHandler 
       const uri = process.env.REACT_APP_NODE_ENV === 'development'
         ? 'https://localhost:4000'
         : 'https://back.artoring.com';
-      const { data } = await axios.get(uri.concat('/career/teach?size=8'));
+      const { data } = await axios.get(uri.concat('/career/teach?size=8&isGroup=true'));
 
       cardsHandler(data.cardList);
     }

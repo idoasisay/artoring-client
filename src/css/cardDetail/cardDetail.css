@@ -366,3 +366,8 @@
 
   margin-top:3vh
 }
+
+.InfoContainer{
+  position: relative;
+  text-align: center;
+}
