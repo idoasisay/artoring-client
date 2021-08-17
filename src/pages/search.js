@@ -59,13 +59,6 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
         <div className='SearchTitle'>
           <span className='Title2'>'{searchData}'</span> 검색결과 <span className='Title4 QueryDisplay'>{total}개</span>
         </div>
-        {/* {mentorCards.hits ? <CardList
-        title={`멘토 찾기 ${mentorCards.total.value}개`}
-        cards={mentorCards.hits}
-        likedCareerEdu={profile.likedCareerEdu}
-        renderType='mentor'
-                          /> : ''} */
-}
         {careerTeachCards.hits
           ? <CardList
               title='커리어 교육 '
@@ -87,10 +80,10 @@ const Search = ({ searchData = '', profile, searchingToggler, searchDataHandler 
                 deepQuery='true'
                    />
               <PaginationList maxPage={Math.ceil(total / 16)} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
-              </div>
+            </div>
             : ''}
 
-        </div>
+      </div>
       : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />
   );
 };

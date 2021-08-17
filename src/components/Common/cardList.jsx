@@ -20,6 +20,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
   return (
     <div className='CardList'>
       {filter
+      // 검색페이지에서 사용되는 우측 상단의 최신순, 가격 높은순 등의 드랍다운 메뉴
         ? <div>{!subTitle
           ? <div className='Flex' style={{ justifyContent: 'space-between' }}>
             <div className='CardListTitle'>{title}</div>최신순
@@ -47,6 +48,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
           </div>
         : !subTitle
             ? <div className='CardListTitle'>{title}</div>
+            // 결과 N개 등에서 N개를 표현하기 위해 사용하는 서브 타이틀
             : <div className='CardListTitle'>{title}<span>{subTitle}</span></div>}
       <div className='CardsContainer'>
         <div className='Delimiter' />
@@ -67,15 +69,6 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
            * Card 컴포넌트는 전달받은 liked가 true여야만 하트의 색상이 검은색이아닌 빨간색으로 렌더링이 된다.
           */
                   liked={
-            // renderType === 'teach'
-            //   ? likedCareerEdu
-            //       ? !!likedCareerEdu.includes(ele._id ? ele._id : -1)
-            //       : false
-            //   : renderType === 'info'
-            //     ? !!likedCareerInfo.includes(ele._id ? ele._id : -1)
-            //     : renderType === 'mentor'
-            //       ? !!likedMentor.includes(ele._id ? ele._id : -1)
-            //       : false
             renderType !== 'teach'
               ? renderType !== 'info'
                   ? likedMentor
@@ -105,15 +98,6 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
            * Card 컴포넌트는 전달받은 liked가 true여야만 하트의 색상이 검은색이아닌 빨간색으로 렌더링이 된다.
           */
                 liked={
-            // renderType === 'teach'
-            //   ? likedCareerEdu
-            //       ? !!likedCareerEdu.includes(ele._id ? ele._id : -1)
-            //       : false
-            //   : renderType === 'info'
-            //     ? !!likedCareerInfo.includes(ele._id ? ele._id : -1)
-            //     : renderType === 'mentor'
-            //       ? !!likedMentor.includes(ele._id ? ele._id : -1)
-            //       : false
             renderType !== 'teach'
               ? renderType !== 'info'
                   ? likedMentor
@@ -132,10 +116,7 @@ const CardList = ({ cards, title, subTitle, likedCareerEdu, likedCareerInfo, lik
           }
         })}
       </div>
-      {/**
-         * 어디로 연결되어야 할지 몰라 비워둠
-         * 하지만 상세 검색페이지라던지 등으로 연결이 필요함
-         */}
+      {/* 메인페이지 혹은 검색 페이지에서 사용되는 View more 버튼을 렌더링  */}
       {!deepQuery
         ? <div className='Flex Flex-End'>
           {renderType !== 'teach'

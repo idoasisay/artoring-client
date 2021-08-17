@@ -17,6 +17,7 @@ const Card = ({ data, liked, isPurchasedHistory }) => {
   // 사용되지 않음
   const [likes, likesHandler] = useState(liked);
 
+  // 구매내역에서 사용되는 컴포넌트는 모양새가 조금 달라짐
   return !isPurchasedHistory
     ? <div
         className={isPurchasedHistory ? 'PurchaseHisotryContianer' : 'Card'} onClick={() => {
@@ -35,9 +36,9 @@ const Card = ({ data, liked, isPurchasedHistory }) => {
         <div className='CardTitle'>{data.title}</div>
         <div className='CardDate'>{utils.getDate(data.startDate) + ' - ' + utils.getDate(data.endDate)}</div>
         <div className='CardPrice'>{!isNaN(Number(data.price)) ? `${data.price}원` : `${data.price}`}</div>
-        </div>
-
       </div>
+
+    </div>
     : <div
         className={isPurchasedHistory ? 'PurchaseHisotryContianer' : 'Card'} onClick={() => {
           history.push(`/career/growing/${data._id}`);
@@ -62,7 +63,7 @@ const Card = ({ data, liked, isPurchasedHistory }) => {
         </div>
       </div>
       {isPurchasedHistory ? <div className='Delimiter' /> : ''}
-    </div>;
+      </div>;
 };
 
 export default Card;
