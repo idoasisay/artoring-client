@@ -5,7 +5,7 @@ import CardList from '../../components/Common/cardList';
 
 import '../../css/career/growing.css';
 
-const CareerTeach = ({ profile, searchDataHandler }) => {
+const Mentor = ({ profile, searchDataHandler }) => {
   // 카테고리에 따라 분류될 카드가 저장될 상태
   const [categoryList, categoryListUpdater] = useState([]);
 
@@ -49,7 +49,7 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
         ? 'https://localhost:4000/career/teach'
         : 'https://insideart-dev.artoring.com/career/teach';
 
-      const { data: response } = await axios.get(url.concat('?isGroup=true'));
+      const { data: response } = await axios.get(url.concat('?isGroup=false'));
 
       totalHandler(response.total.basic);
       eduTotalHandler(response.total.edu);
@@ -69,7 +69,7 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
         : 'https://insideart-dev.artoring.com/career/teach';
 
       if (category === '') {
-        const { data } = await axios.get(url.concat(`?page=1&orderby=${filter}&isGroup=true`));
+        const { data } = await axios.get(url.concat(`?page=1&orderby=${filter}&isGroup=false`));
         console.log(data);
         categoryListUpdater(data.cardList);
         currentPageHandler(1);
@@ -81,7 +81,7 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
         else if (category === 'lecture') categoryToQuery = '특강';
         else categoryToQuery = '모임';
 
-        const { data } = await axios.get(url.concat(`?page=1&category=${categoryToQuery}&orderby=${filter}&isGroup=true`));
+        const { data } = await axios.get(url.concat(`?page=1&category=${categoryToQuery}&orderby=${filter}&isGroup=false`));
 
         categoryListUpdater(data.cardList);
         currentPageHandler(1);
@@ -101,7 +101,7 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
         ? 'https://localhost:4000/career/teach'
         : 'https://insideart-dev.artoring.com/career/teach';
 
-      const { data: response } = await axios.get(url.concat(category === '' ? `?page=${currentPages}&orderby=${filter}&isGroup=true` : `?page=${currentPages}&category=${category}&orderby=${filter}&isGroup=true`));
+      const { data: response } = await axios.get(url.concat(category === '' ? `?page=${currentPages}&orderby=${filter}&isGroup=false` : `?page=${currentPages}&category=${category}&orderby=${filter}&isGroup=false`));
       categoryListUpdater(response.cardList);
     }
     asyncFetch();
@@ -155,5 +155,5 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
   );
 };
 
-export default CareerTeach
+export default Mentor
 ;

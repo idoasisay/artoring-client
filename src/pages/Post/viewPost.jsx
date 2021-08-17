@@ -12,11 +12,11 @@ import ReviewList from '../../components/CareerTeach/ReviesList';
 
 import '../../css/cardDetail/cardDetail.css';
 
-const { classReplacer } = utils;
+const { classReplacer, getDate } = utils;
 
-const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) => {
+const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, isInfo }) => {
   const ref = useRef();
-  const { id } = useParams();
+  const { id, model } = useParams();
   const [card, cardHandler] = useState({});
 
   // 공유모달
@@ -31,7 +31,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
   const naverShare = async () => {
     const { href } = window.location;
     // https://share.naver.com/web/shareView?url=인코딩한URL값&title=인코딩한title값
-    const url = encodeURI(encodeURIComponent(href.concat(`/career/teach${id}`)));
+    const url = encodeURI(encodeURIComponent(href.concat(`/career/${model === 'info' ? 'info' : 'teach'}/${id}`)));
     const title = encodeURI(card.title);
     window.open(`https://share.naver.com/web/shareView?url=${url}&title=${title}`, 'popoup',
               `toolbar=no, location=no, status=no,
@@ -42,7 +42,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
   const facebookShare = () => {
     const { href } = window.location;
     // https://share.naver.com/web/shareView?url=인코딩한URL값&title=인코딩한title값
-    const url = href.concat(`/career/teach${id}`);
+    const url = href.concat(`/career/${model === 'info' ? 'info' : 'teach'}/${id}`);
 
     window.FB.ui({
       method: 'share',
@@ -69,7 +69,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
       : 'https://back.artoring.com/reserve';
 
     try {
-      await axios.post(url, { cardId: card._id, userId: profile._id, loginType, reservationType: 'teaching' }, {
+      await axios.post(url, { cardId: card._id, userId: profile._id, loginType, reservationType: model }, {
         headers: {
           authorization: `Bearer ${accessToken}`
         }
@@ -104,12 +104,12 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
 
       // 좋아요 여부에 따라 좋아요 등록/삭제가 이뤄지게 된다
       likes
-        ? await axios.delete(uri.concat(`/likes/teach/${card._id}?type=${loginType}&id=${profile._id}`), {
+        ? await axios.delete(uri.concat(`/likes/${model}/${card._id}?type=${loginType}&id=${profile._id}`), {
             headers: {
               authorization: `Bearer ${accessToken}`
             }
           })
-        : await axios.post(uri.concat('/likes/teach'), {
+        : await axios.post(uri.concat(`/likes/${model}`), {
           type: loginType,
           targetId: card._id,
           _id: profile._id
@@ -119,6 +119,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
           }
         });
 
+      /*
       let likedCareerEdu = profile.likedCareerEdu;
 
       if (likes) {
@@ -135,7 +136,33 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
       }
 
       profileHandler({ ...profile, likedCareerEdu });
-      likesHandler(!likes);
+      likesHandler(!likes); */
+
+      const likedList = model === 'teach'
+        ? profile.likedCareerEdu
+        : model === 'mentor'
+          ? profile.likedMentor
+          : profile.likedInfo;
+      if (likes) {
+        const pos = likedList.indexOf(card._id);
+        likedList.splice(pos, 1);
+
+        cardHandler({ ...card, likesCount: card.likesCount - 1 });
+      } else {
+        likedList.push(card._id);
+        cardHandler({ ...card, likesCount: card.likesCount + 1 });
+      }
+
+      if (model === 'teach' && profile.likedCareerEdu) {
+        profileHandler({ ...profile, likedCareerEdu: likedList });
+        likesHandler(!likes);
+      } else if (model === 'mentor' && profile.likedMentor) {
+        profileHandler({ ...profile, likedMentor: likedList });
+        likesHandler(!likes);
+      } else if (model === 'info' && profile.likedInfo) {
+        profileHandler({ ...profile, likedInfo: likedList });
+        likesHandler(!likes);
+      }
     }
   };
 
@@ -158,15 +185,15 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
   useEffect(() => {
     async function getCardInfo () {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
-        ? `https://localhost:4000/career/teach/${id}`
-        : `https://back.artoring.com/career/teach/${id}`;
+        ? `https://localhost:4000/career/${model === 'info' ? 'info' : 'teach'}/${id}`
+        : `https://back.artoring.com/career/${model === 'info' ? 'info' : 'teach'}/${id}`;
       const { data } = await axios.get(url);
 
-      cardHandler(data[0]);
+      cardHandler(data);
 
-      likesHandler(profile.likedCareerEdu
-        ? profile.likedCareerEdu.includes(data[0]._id)
-        : false);
+      if (model === 'teach' && profile.likedCareerEdu) likesHandler(profile.likedCareerEdu.includes(data._id));
+      else if (model === 'mentor' && profile.likedMentor) likesHandler(profile.likedMentor.includes(data._id));
+      else if (model === 'info' && profile.likedInfo) likesHandler(profile.likedInfo.includes(data._id));
     }
 
     getCardInfo();
@@ -183,14 +210,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
           description: card.detailInfo,
           imageUrl: '',
           link: {
-            mobileWebUrl: `https://localhost:3000/card/teach/${id}`
+            mobileWebUrl: `https://localhost:3000/career/${model === 'info' ? 'info' : 'teach'}/${id}`
           }
         },
         buttons: [
           {
             title: '웹으로 이동',
             link: {
-              mobileWebUrl: `https://localhost:3000/card/teach/${id}`
+              mobileWebUrl: `https://localhost:3000/career/${model === 'info' ? 'info' : 'teach'}/${id}`
             }
           }
 
@@ -199,99 +226,99 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
       );
     }
   });
-  return (
-    !card.title
-      ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
-        <div>  </div>
-      </div>
-      : <div className='CareerTeachContainer'>
-        {!isReservationReq
-          ? <div
-              className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
-              style={{ zIndex: -1, minWidth: '100vw', minHeight: '100vh', backgroundColor: 'rgba(0,0,0,0)' }}
-            />
-          : <div
-              className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
-              style={{ minWidth: '100vw', minHeight: '100vh', backgroundColor: 'rgba(0, 0, 0, 0.208)' }}
-            >
-            <div className='ReseveModal Flex-Col AlignCenter'>
-              <img src={process.env.PUBLIC_URL + '/img/shinyLogo.png'} alt='로고' className='ReserveImg' />
-              <div className='body2'>{isSucceed ? '예약이 완료되었어요!' : '예약에 실패했습니다...'}</div>
-              <div className='body2'>{isSucceed ? '아래 버튼을 누르면 예약 확인 페이지로 이동합니다!' : ''}</div>
-              <div className='BtnType5 ReservationBtn' onClick={isSucceed ? () => history.push('/user/reserve') : () => isRequestHandler(false)}>
-                닫기
+  return !isInfo
+    ? !card.title
+        ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
+          <div>  </div>
+        </div>
+        : <div className='CareerTeachContainer'>
+          {!isReservationReq
+            ? <div
+                className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
+                style={{ zIndex: -1, minWidth: '100vw', minHeight: '100vh', backgroundColor: 'rgba(0,0,0,0)' }}
+              />
+            : <div
+                className='ReservationModelContainer Flex-Col AlignCenter JustifyCenter'
+                style={{ minWidth: '100vw', minHeight: '100vh', backgroundColor: 'rgba(0, 0, 0, 0.208)' }}
+              >
+              <div className='ReseveModal Flex-Col AlignCenter'>
+                <img src={process.env.PUBLIC_URL + '/img/shinyLogo.png'} alt='로고' className='ReserveImg' />
+                <div className='body2'>{isSucceed ? '예약이 완료되었어요!' : '예약에 실패했습니다...'}</div>
+                <div className='body2'>{isSucceed ? '아래 버튼을 누르면 예약 확인 페이지로 이동합니다!' : ''}</div>
+                <div className='BtnType5 ReservationBtn' onClick={isSucceed ? () => history.push('/user/reserve') : () => isRequestHandler(false)}>
+                  닫기
+                </div>
               </div>
-            </div>
-          </div>}
-        <div
-          className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
-        >
-          <div className='ShareModal' ref={ref}>
-            <div className='ModalTop Flex'>
-              <div className='ModalTitle'>공유하기</div>
-              <div className='ModalExit' onClick={() => modalToggler(false)}>&#88;</div>
-            </div>
-            <div className='Flex JustifyCenter'>
-              <a id='create-kakao-link-btn'>
-                <img
-                  src='https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png'
-                  alt='kakaoShare'
-                  className='ModalShareBtns'
-                />
-              </a>
-              <div className='create-naver-link-btn'>
-                <img
-                  src={process.env.PUBLIC_URL + '/img/naver_square.png'}
-                  alt='naverShare'
-                  onClick={naverShare}
-                  className='ModalShareBtns'
-                />
+            </div>}
+          <div
+            className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
+          >
+            <div className='ShareModal' ref={ref}>
+              <div className='ModalTop Flex'>
+                <div className='ModalTitle'>공유하기</div>
+                <div className='ModalExit' onClick={() => modalToggler(false)}>&#88;</div>
               </div>
-              <div className='create-facebook-link-btn'>
-                <img
-                  src={process.env.PUBLIC_URL + '/img/facebook_logo.png'}
-                  alt='facebookShare'
-                  onClick={facebookShare}
-                  className='ModalShareBtns'
-                />
-              </div>
-              <div className='create-url-link-btn'>
-                <img
-                  src={process.env.PUBLIC_URL + '/img/url.svg'}
-                  alt='copyUrl'
-                  onClick={copyUrl}
-                  className='ModalShareBtns'
-                />
+              <div className='Flex JustifyCenter'>
+                <a id='create-kakao-link-btn'>
+                  <img
+                    src='https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png'
+                    alt='kakaoShare'
+                    className='ModalShareBtns'
+                  />
+                </a>
+                <div className='create-naver-link-btn'>
+                  <img
+                    src={process.env.PUBLIC_URL + '/img/naver_square.png'}
+                    alt='naverShare'
+                    onClick={naverShare}
+                    className='ModalShareBtns'
+                  />
+                </div>
+                <div className='create-facebook-link-btn'>
+                  <img
+                    src={process.env.PUBLIC_URL + '/img/facebook_logo.png'}
+                    alt='facebookShare'
+                    onClick={facebookShare}
+                    className='ModalShareBtns'
+                  />
+                </div>
+                <div className='create-url-link-btn'>
+                  <img
+                    src={process.env.PUBLIC_URL + '/img/url.svg'}
+                    alt='copyUrl'
+                    onClick={copyUrl}
+                    className='ModalShareBtns'
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className='CareerTeachHeader Flex'>
-          <img src={card.thumb} alt='Card Thumbnail' className='CareerTeachHeaderImg' />
-          <div className='CareerTeachHeaderDesc'>
-            <div className='Flex'>
-              <TagList tags={card.tags} />
-            </div>
-            <div className='Title3 CareerTeachHeaderTitle'>
-              {card.title}
-            </div>
-            <div className='CareerTeachHeaderDate Title5'>
-              {utils.getDate(card.startDate) + ' - ' + utils.getDate(card.endDate)}
-            </div>
-            <div className='CareerTeachHeaderPrice Title5'>{card.price} 원</div>
-            <div className='Flex'>
+          <div className='CareerTeachHeader Flex'>
+            <img src={card.thumb} alt='Card Thumbnail' className='CareerTeachHeaderImg' />
+            <div className='CareerTeachHeaderDesc'>
+              <div className='Flex'>
+                <TagList tags={card.tags} />
+              </div>
+              <div className='Title3 CareerTeachHeaderTitle'>
+                {card.title}
+              </div>
+              <div className='CareerTeachHeaderDate Title5'>
+                {utils.getDate(card.startDate) + ' - ' + utils.getDate(card.endDate)}
+              </div>
+              <div className='CareerTeachHeaderPrice Title5'>{card.price} 원</div>
+              <div className='Flex'>
 
-              {profile.verifiedEmail === true
-                ? <div
-                    className='ParticipateUpper BtnType5'
-                    onMouseDown={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active')}
-                    onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
-                    onClick={requestReservation}
-                  >신청하기
-                </div>
-                : <div className='ParticipateUpperDisabled'>신청하기</div>}
+                {profile.verifiedEmail === true
+                  ? <div
+                      className='ParticipateUpper BtnType5'
+                      onMouseDown={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active')}
+                      onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
+                      onClick={requestReservation}
+                    >신청하기
+                    </div>
+                  : <div className='ParticipateUpperDisabled'>신청하기</div>}
 
-              {
+                {
                 profile.verifiedEmail === true
                   ? <div className='Flex'>
                     <div
@@ -303,7 +330,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
 
                     </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
-                  </div>
+                    </div>
                   : <div className='Flex'><div
                       className='LikesUpperDisabled '
                       onClick={likeHandler}
@@ -311,73 +338,120 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken }) 
                     <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
                     <div id='test'>{card.likesCount}</div>
 
-                  </div>
+                                          </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
-                    </div>
+                  </div>
 }
+              </div>
             </div>
           </div>
+          <div className='CareerTeachMiddelUI Flex'>
+            <div className='MiddleUiInner Flex'>
+              <a href='#ModeratorIntro' className='MiddleUiBtn Title5'>강연자 소개</a>
+              <a href='#TeachDetail' className='MiddleUiBtn Title5'>상세정보</a>
+              <a href='#Reviews' className='MiddleUiBtn Title5'>프로그램 후기</a>
+              <a href='#FAQ' className='MiddleUiBtn Title5'>FAQ</a>
+            </div>
+            <div className='Flex'>
+              {profile.verifiedEmail === true
+                ? <div
+                    className='ParticipateLower BtnType5'
+                    onMouseDown={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active')}
+                    onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
+                    onClick={requestReservation}
+                  >신청하기
+                </div>
+                : <div
+                    className='ParticipateLowerDisabled'
+                  >신청하기
+                </div>}
+              {profile.verifiedEmail === true
+                ? <div
+                    className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
+                    onMouseDown={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6 Btn6Active')}
+                    onMouseUp={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6')}
+                    onClick={likeHandler}
+                  >
+                  <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
+                  <div>{card.likesCount}</div>
+                </div>
+                : <div
+                    className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
+                    onClick={likeHandler}
+                  >
+                  <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
+                  <div>{card.likesCount}</div>
+                </div>}
+            </div>
+          </div>
+          <div id='ModeratorIntro'>
+            <div className='Title4 Moderator'>강연자 소개</div>
+
+            <div id='EditorRenderPosition1' className='EditorHolder'>
+              {/* 서버에서 내려준 url 인코딩된 html을 렌더링 */}
+              {parse(decodeURIComponent(card.descriptionForMentor[0]))}
+            </div>
+          </div>
+          <div id='TeachDetail'>
+            <div className='Title4'>상세정보</div>
+
+            <div id='EditorRenderPosition2' className='EditorHolder' />
+          </div>
+          <div id='Reviews'>
+            <ReviewList id='Reviews' list={card.reviews} />
+          </div>
+          <div id='FAQ'><Faq /></div>
+
         </div>
-        <div className='CareerTeachMiddelUI Flex'>
-          <div className='MiddleUiInner Flex'>
-            <a href='#ModeratorIntro' className='MiddleUiBtn Title5'>강연자 소개</a>
-            <a href='#TeachDetail' className='MiddleUiBtn Title5'>상세정보</a>
-            <a href='#Reviews' className='MiddleUiBtn Title5'>프로그램 후기</a>
-            <a href='#FAQ' className='MiddleUiBtn Title5'>FAQ</a>
+
+    : !card.title
+        ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
+          <div>  </div>
+        </div>
+        : <div className='InfoConatiner Flex-Col AlignCenter'>
+          <div className='Flex InfoTitle Title1'>
+            {card.title}
+          </div>
+          <div className='Flex Caption2-Grey JustifyCenter'>
+            {utils.getDate(card.issuedDate)}
           </div>
           <div className='Flex'>
-            {profile.verifiedEmail === true
-              ? <div
-                  className='ParticipateLower BtnType5'
-                  onMouseDown={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active')}
-                  onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
-                  onClick={requestReservation}
-                >신청하기
-                </div>
-              : <div
-                  className='ParticipateLowerDisabled'
-                >신청하기
-                </div>}
-            {profile.verifiedEmail === true
-              ? <div
-                  className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
-                  onMouseDown={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6 Btn6Active')}
-                  onMouseUp={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6')}
-                  onClick={likeHandler}
-                >
-                <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
-                <div>{card.likesCount}</div>
-              </div>
-              : <div
-                  className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
-                  onClick={likeHandler}
-                >
-                <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
-                <div>{card.likesCount}</div>
-              </div>}
+            {parse(decodeURIComponent(card.detailInfo))}
           </div>
-        </div>
-        <div id='ModeratorIntro'>
-          <div className='Title4 Moderator'>강연자 소개</div>
-
-          <div id='EditorRenderPosition1' className='EditorHolder'>
-            {/* 서버에서 내려준 url 인코딩된 html을 렌더링 */}
-            {parse(decodeURIComponent(card.descriptionForMentor[0]))}
+          <div className='Flex JustifyCenter'>
+            <a id='create-kakao-link-btn'>
+              <img
+                src='https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png'
+                alt='kakaoShare'
+                className='ModalShareBtns'
+              />
+            </a>
+            <div className='create-naver-link-btn'>
+              <img
+                src={process.env.PUBLIC_URL + '/img/naver_square.png'}
+                alt='naverShare'
+                onClick={naverShare}
+                className='ModalShareBtns'
+              />
+            </div>
+            <div className='create-facebook-link-btn'>
+              <img
+                src={process.env.PUBLIC_URL + '/img/facebook_logo.png'}
+                alt='facebookShare'
+                onClick={facebookShare}
+                className='ModalShareBtns'
+              />
+            </div>
+            <div className='create-url-link-btn'>
+              <img
+                src={process.env.PUBLIC_URL + '/img/url.svg'}
+                alt='copyUrl'
+                onClick={copyUrl}
+                className='ModalShareBtns'
+              />
+            </div>
           </div>
-        </div>
-        <div id='TeachDetail'>
-          <div className='Title4'>상세정보</div>
-
-          <div id='EditorRenderPosition2' className='EditorHolder' />
-        </div>
-        <div id='Reviews'>
-          <ReviewList id='Reviews' list={card.reviews} />
-        </div>
-        <div id='FAQ'><Faq /></div>
-
-        </div>
-
-  );
+        </div>;
 };
 
 export default ViewPost;

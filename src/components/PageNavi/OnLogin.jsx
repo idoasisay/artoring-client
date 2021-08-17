@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import '../../css/navigation/PageNavi.css';
 
+// 로그인 이후 로그인/회원가입 대신 렌더링되는 섬네일, 드랍다운 메뉴
 const OnLogin = ({ profile }) => {
   const history = useHistory();
 
