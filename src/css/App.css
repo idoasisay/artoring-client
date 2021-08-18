@@ -107,7 +107,7 @@ a {
 }
 
 .body1{
-  font-family: "nanumSquare EBold";
+  font-family: "nanumSquare Bold";
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -118,7 +118,7 @@ a {
 }
 
 .body2{
-  font-family: "nanumSquare EBold";
+  font-family: "nanumSquare Bold";
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -360,7 +360,7 @@ a {
 }
 
 .Caption2-Black{
-  font-family:  "nanumSquare EBold";
+  font-family:  "nanumSquare Bold";
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -382,7 +382,7 @@ a {
 }
 
 .Caption3{
-  font-family:  "nanumSquare EBold";
+  font-family:  "nanumSquare Bold";
   font-size: 10px;
   font-weight: normal;
   font-stretch: normal;
@@ -433,6 +433,7 @@ a {
 }
 
 .Delimiter{
+  align-items: center;
   width:100%;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -443,6 +444,16 @@ a {
   border-left: 2px solid black;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
+}
+
+.OTFEB{
+  font-family: "nanumSquare EBold";;
+}
+.OTFB{
+  font-family: "nanumSquare Bold";;
+}
+.OTFR{
+  font-family: "nanumSquare";;
 }
 
 .App {

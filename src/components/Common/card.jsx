@@ -35,11 +35,11 @@ const Card = ({ data, liked, isPurchasedHistory, isInfo }) => {
           <TagList tags={data.tags} />
         </div>
         <div className='CardTitle Title4'>{data.title}</div>
-        {isInfo ? <div className='Caption2-Grey'>{utils.getDate(data.issuedDate)}</div> : <div className='CardDate'>{utils.getDate(data.startDate) + ' - ' + utils.getDate(data.endDate)}</div>}
+        {isInfo ? <div className='Caption2-Grey OTFB'>{utils.getDate(data.issuedDate)}</div> : <div className='Caption2-Grey OTFB'>{utils.getDate(data.startDate) + ' - ' + utils.getDate(data.endDate)}</div>}
         {isInfo ? '' : <div className='CardPrice'>{!isNaN(Number(data.price)) ? `${data.price}원` : `${data.price}`}</div>}
-        </div>
-
       </div>
+
+    </div>
     : <div
         className={isPurchasedHistory ? 'PurchaseHisotryContianer' : 'Card'} onClick={() => {
           history.push(`/career/growing/${data.isGroup ? 'teach' : 'mentor'}/${data._id}`);
@@ -64,7 +64,7 @@ const Card = ({ data, liked, isPurchasedHistory, isInfo }) => {
         </div>
       </div>
       {isPurchasedHistory ? <div className='Delimiter' /> : ''}
-    </div>;
+      </div>;
 };
 
 export default Card;

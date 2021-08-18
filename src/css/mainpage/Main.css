@@ -17,7 +17,7 @@
 
   display: flex;
   justify-content: center;
-  background-color: rgb(241,241,254);
+  background-color: #fff2f5;;
   padding-top: 2vw;
   padding-bottom: 2vw;
   width: 100%;
@@ -57,40 +57,14 @@
 
 
 .WhoisartImgContainer{
-  margin-right: 1vw;
+
   display: flex;
   justify-content: flex-end;
   min-width: 50%
 }
 .WhoisartImg{
-  width: 267px;
-  height: 302px;
-  margin: 0 159px 2px 0;
-}
-.OTFEB{
-  font-family: 'nanumSquare EBold' !important;
-}
-.OTFR{
-  font-family: 'nanumSquare' !important;
-}
-.OTFRL{
-  font-family: 'nanumSquare Light' !important;
-}
-.OTRRB{
-  font-family: 'nanumSquare Bold' !important;
-}
-.Size36px{
-  font-size: 36px !important;
-}
-.Size32px{
-  font-size: 32px !important;
-}
-.Size16px{
-  font-size: 16px !important;
-}
-.Height48px{
-  line-height: 1.5 !important;
-}
-.Height56px{
-  line-height: 1.56 !important;
+  width: 403px;
+  height: 269px;
+  margin: 0 90px 2px 0;
+  justify-content:flex-end;
 }

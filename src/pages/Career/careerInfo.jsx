@@ -52,7 +52,7 @@ const CareerInfo = ({ profile, searchDataHandler }) => {
   }, [currentPages]);
 
   return (
-    <div className='TeachContainer'>
+    <div className='InfoTopContainer'>
       <div className='Flex Flex-Start CategoryBtnContainer'>
         {/* <div
           className={category === '' ? 'BtnType2 BtnType1 CategoryBtn' : 'BtnType2 CategoryBtn CategoryActive'}
@@ -95,7 +95,7 @@ const CareerInfo = ({ profile, searchDataHandler }) => {
               baseHandler={baseHandler}
             />
           </div>
-        </div>
+          </div>
         : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />}
 
     </div>
