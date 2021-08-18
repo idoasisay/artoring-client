@@ -5,7 +5,7 @@ import CardList from '../../components/Common/cardList';
 
 import '../../css/career/growing.css';
 
-const Mentor = ({ profile, searchDataHandler }) => {
+const Mentor = ({ profile, searchDataHandler, setDropdown }) => {
   // 카테고리에 따라 분류될 카드가 저장될 상태
   const [categoryList, categoryListUpdater] = useState([]);
 
@@ -144,6 +144,7 @@ const Mentor = ({ profile, searchDataHandler }) => {
             deepQuery='true'
             filter={filter}
             filterHandler={filterHandler}
+            setDropdown={setDropdown}
           />
           <div className='PageNationContainer'>
             <PaginationList maxPage={maxPage} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
