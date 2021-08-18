@@ -33,6 +33,9 @@ export default function Nav ({
   const [counter, countHandler] = useState(0);
   const [isSearching, searchingToggler] = useState(false);
 
+  // 헤더에서 어떤 드랍다운을 보여줄지 결정함.
+  const [dropdownNumber, setDropdown] = useState(0);
+
   const trigger = () => {
     countHandler(counter + 1);
   };
@@ -66,7 +69,17 @@ export default function Nav ({
   }
   return (
     <Router history={history}>
-      <Header isLogin={isLogin} loginHandler={loginHandler} profile={profile} searchData={searchData} searchDataHandler={searchDataHandler} isSearching={isSearching} searchingToggler={searchingToggler} />
+      <Header
+        isLogin={isLogin}
+        loginHandler={loginHandler}
+        profile={profile}
+        searchData={searchData}
+        searchDataHandler={searchDataHandler}
+        isSearching={isSearching}
+        searchingToggler={searchingToggler}
+        dropdownNumber={dropdownNumber}
+        setDropdown={setDropdown}
+      />
       {/**
        * 렌더를 사용하면 프롭을 내려줄수가 있다. 최상단에서 전달받은 프롭들을 입맛대로 전달한다.
        */}
@@ -94,10 +107,10 @@ export default function Nav ({
                                                                />}
         />
       </Switch>
-      <Route path='/mentor' render={() => <Mentor profile={profile} searchDataHandler={searchDataHandler} />} />
-      <Route exact='true' path='/career/growing' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} />} />
-      <Route path='/career/signature' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} />} />
-      <Route exact='true' path='/career/info' component={CareerInfo} />
+      <Route path='/mentor' render={() => <Mentor profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
+      <Route exact='true' path='/career/growing' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
+      <Route path='/career/signature' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
+      <Route exact='true' path='/career/info' render={() => <CareerInfo setDropdown={setDropdown} />} />
       <Route path='/about' component={About} />
       <Route exact='true' path='/search' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />
       <Route exact='true' path='/search/deep' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />

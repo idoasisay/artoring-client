@@ -5,7 +5,7 @@ import CardList from '../../components/Common/cardList';
 
 import '../../css/career/growing.css';
 
-const CareerTeach = ({ profile, searchDataHandler }) => {
+const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
   // 카테고리에 따라 분류될 카드가 저장될 상태
   const [categoryList, categoryListUpdater] = useState([]);
 
@@ -144,11 +144,12 @@ const CareerTeach = ({ profile, searchDataHandler }) => {
             deepQuery='true'
             filter={filter}
             filterHandler={filterHandler}
+            setDropdown={setDropdown}
           />
           <div className='PageNationContainer'>
             <PaginationList maxPage={maxPage} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
           </div>
-          </div>
+        </div>
         : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />}
 
     </div>
