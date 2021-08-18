@@ -5,19 +5,21 @@ nav {
   color: #000000;
   height: 80px;
   width: 100%;
-  background-color: white;
-  border-bottom: 1px solid #d6d6d6;
+
   box-sizing: border-box;
   padding: 29px 0px 27px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .nav {
-  width: 55%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  background-color: white;
+  border-bottom: 1px solid #d6d6d6;
   font-family: NanumSquareRound, sans-serif;
 }
 
@@ -54,13 +56,12 @@ nav {
 .navCareerSubTabActive {
   display: block;
   height: 80px;
-  width: 100vw;
+  width: 90vw;
 
   background-color: #FFFFFF;
   position: absolute;
-  margin-left: -40vw;
-  padding-right: 3vw;
-  padding-left: -10vw;;
+  margin-left: -30vw;
+  padding-right: 11vw;
   left:0;
   z-index: 200;
   top: 51px;
@@ -81,23 +82,21 @@ nav {
 
 .NavSubTabFlex {
   display: flex;
-  position: absolute;
-  justify-content: center;
-  align-content: center;
-
-  justify-content: flex-start;
-  width: 100%;
-  left: 30%;
-
-  right:11%;
+    position: absolute;
+    justify-content: flex-start;
+    align-content: center;
+    
+    width: inherit;
+    left: 20%;
+  max-width: 50vw;
 
 }
 
 .navCareerSubTabBox {
-  float: left;
   text-align: center;
   position: relative;
-  width:10%;
+  width:100%;
+  max-width: 12vw;
 }
 
 .navCareerSubTabInner{
