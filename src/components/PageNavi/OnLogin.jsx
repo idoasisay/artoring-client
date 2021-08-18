@@ -22,7 +22,7 @@ const OnLogin = ({ profile }) => {
         <img src={profile.thumb} alt='계정 썸네일' className='OnLoginThumb' />
       </div>
       <div className='Dropdown JustifyCenter AlignCenter Flex-Col'>
-        <div className='Flex JustifyCenter IsMentor BorderBlack2px TextType3 Title5'>
+        <div className='Flex JustifyCenter AlignCenter IsMentor BorderBlack2px TextType3 Title5'>
           {!profile.isMentor ? <div onClick={kickToMentiProfile}>일반회원</div> : <div>멘토회원</div>}
           <img src={process.env.PUBLIC_URL + '/img/setting.svg'} alt='setting' />
         </div>

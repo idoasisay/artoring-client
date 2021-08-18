@@ -85,13 +85,13 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
           <label>
             <div className='FormTitle'>성별*</div>
             <div className='Flex Gender'>
-              <input type='radio' name='gender' id='male' value='male' className='AlignCenter' {...register('gender', { required: true })} />
+              <input type='radio' name='gender' id='male' value='male' className='AlignCenter' {...register('gender', { required: true })} checked={profile.gender === 'male' ? 'true' : ''} />
               <label htmlFor='male' className='GenderSelect'>남성</label>
 
-              <input type='radio' name='gender' id='female' value='female' className='AlignCenter' {...register('gender', { required: true })} />
+              <input type='radio' name='gender' id='female' value='female' className='AlignCenter' {...register('gender', { required: true })} checked={profile.gender === 'female' ? 'true' : ''} />
               <label htmlFor='female' className='GenderSelect'>여성</label>
 
-              <input type='radio' name='gender' id='hidden' value='hidden' className='AlignCenter' {...register('gender', { required: true })} />
+              <input type='radio' name='gender' id='hidden' value='hidden' className='AlignCenter' {...register('gender', { required: true })} checked={profile.gender === 'hidden' ? 'true' : ''} />
               <label htmlFor='male' className='GenderSelect'>비공개</label>
             </div>
             {errors.gender && (
@@ -116,7 +116,7 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
             ? <label>
               <div className='FormTitle'>비밀번호*</div>
               <div className='PlaceHolder' onClick={() => isChangePwdHandler()}>비밀번호 변경하기</div>
-              </label>
+            </label>
             : (
               <div>
                 <label>
@@ -159,7 +159,7 @@ const Account = ({ profileHandler, onClickHandler, profile, isSignup, accessToke
               </button>
             </div>
           </label>
-          </form>
+        </form>
         : <div>불러오는중.....</div>}
     </div>
   );

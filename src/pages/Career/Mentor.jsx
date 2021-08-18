@@ -108,7 +108,7 @@ const Mentor = ({ profile, searchDataHandler }) => {
   }, [currentPages]);
 
   return (
-    <div className='TeachContainer'>
+    <div className='MentorContainer'>
       <div className='Flex Flex-Start CategoryBtnContainer'>
         <div
           className={category === '' ? 'BtnType2 BtnType1 CategoryBtn' : 'BtnType2 CategoryBtn CategoryActive'}
@@ -148,7 +148,7 @@ const Mentor = ({ profile, searchDataHandler }) => {
           <div className='PageNationContainer'>
             <PaginationList maxPage={maxPage} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
           </div>
-          </div>
+        </div>
         : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />}
 
     </div>

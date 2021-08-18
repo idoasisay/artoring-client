@@ -12,12 +12,13 @@ div{
   padding-bottom: 30px;
 }
 
-.Delimiter{
+.DelimiterLogin{
+  align-items: center;
   justify-content: space-between;
 }
 .DelimiterInner{
   height: 0px;
-  border: 1px solid black;
+  border: 1px solid #000000;
   width: 45%;
 }
 
