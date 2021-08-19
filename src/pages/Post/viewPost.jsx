@@ -18,7 +18,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
   const ref = useRef();
   const { id, model } = useParams();
   const [card, cardHandler] = useState({});
-
+  const [isTerminated, toggleTerminate] = useState(false);
   // 공유모달
   const [enableModal, modalToggler] = useState(false);
 
@@ -69,12 +69,13 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
       : 'https://back.artoring.com/reserve';
 
     try {
+      if (isTerminated) throw new Error();
       await axios.post(url, { cardId: card._id, userId: profile._id, loginType, reservationType: model }, {
         headers: {
           authorization: `Bearer ${accessToken}`
         }
       });
-
+      console.log(isTerminated);
       // 예약 완료 모달 생
       isRequestHandler(true);
       toggleSucceed(true);
@@ -191,6 +192,18 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
 
       cardHandler(data);
 
+      // 신청 가능여부 판단. 카드뉴스일때는 필요가 없음
+      if (model === 'teach') {
+        const current = new Date();
+        const startDate = new Date(data.startDate);
+
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+
+        const tDate = new Date(startDate.getTime() - 1000 * 3600 * 24);
+        if (tDate <= current) toggleTerminate(true);
+      }
       if (model === 'teach' && profile.likedCareerEdu) likesHandler(profile.likedCareerEdu.includes(data._id));
       else if (model === 'mentor' && profile.likedMentor) likesHandler(profile.likedMentor.includes(data._id));
       else if (model === 'info' && profile.likedInfo) likesHandler(profile.likedInfo.includes(data._id));
@@ -230,7 +243,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
     ? !card.title
         ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
           <div>  </div>
-          </div>
+        </div>
         : <div className='CareerTeachContainer'>
           {!isReservationReq
             ? <div
@@ -243,13 +256,13 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
               >
               <div className='ReseveModal Flex-Col AlignCenter'>
                 <img src={process.env.PUBLIC_URL + '/img/shinyLogo.png'} alt='로고' className='ReserveImg' />
-                <div className='body2'>{isSucceed ? '예약이 완료되었어요!' : '예약에 실패했습니다...'}</div>
+                <div className='body2'>{isSucceed ? '예약이 완료되었어요!' : isTerminated ? '신청기간이 지났습니다' : '예약에 실패했습니다...'}</div>
                 <div className='body2'>{isSucceed ? '아래 버튼을 누르면 예약 확인 페이지로 이동합니다!' : ''}</div>
                 <div className='BtnType5 ReservationBtn' onClick={isSucceed ? () => history.push('/user/reserve') : () => isRequestHandler(false)}>
                   닫기
                 </div>
               </div>
-              </div>}
+            </div>}
           <div
             className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
           >
@@ -310,12 +323,12 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
 
                 {profile.verifiedEmail === true
                   ? <div
-                      className='ParticipateUpper BtnType5'
-                      onMouseDown={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active')}
-                      onMouseUp={(e) => classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5')}
+                      className={!isTerminated ? 'ParticipateUpper BtnType5' : 'ParticipateUpperDisabled'}
+                      onMouseDown={(e) => !isTerminated ? classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5 Btn5Active') : ''}
+                      onMouseUp={(e) => !isTerminated ? classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5') : ''}
                       onClick={requestReservation}
                     >신청하기
-                  </div>
+                    </div>
                   : <div className='ParticipateUpperDisabled'>신청하기</div>}
 
                 {
@@ -330,7 +343,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
 
                     </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
-                  </div>
+                    </div>
                   : <div className='Flex'><div
                       className='LikesUpperDisabled '
                       onClick={likeHandler}
@@ -338,9 +351,9 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
                     <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
                     <div id='test'>{card.likesCount}</div>
 
-                  </div>
+                                          </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
-                    </div>
+                  </div>
 }
               </div>
             </div>
@@ -355,16 +368,16 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
             <div className='Flex'>
               {profile.verifiedEmail === true
                 ? <div
-                    className='ParticipateLower BtnType5'
-                    onMouseDown={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active')}
-                    onMouseUp={(e) => classReplacer('.ParticipateLower', 'ParticipateLower BtnType5')}
+                    className={!isTerminated ? 'ParticipateUpper BtnType5' : 'ParticipateUpperDisabled'}
+                    onMouseDown={(e) => !isTerminated ? classReplacer('.ParticipateLower', 'ParticipateLower BtnType5 Btn5Active') : ''}
+                    onMouseUp={(e) => !isTerminated ? classReplacer('.ParticipateLower', 'ParticipateLower BtnType5') : ''}
                     onClick={requestReservation}
                   >신청하기
-                  </div>
+                </div>
                 : <div
                     className='ParticipateLowerDisabled'
                   >신청하기
-                  </div>}
+                </div>}
               {profile.verifiedEmail === true
                 ? <div
                     className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
@@ -374,14 +387,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
                   >
                   <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                   <div>{card.likesCount}</div>
-                  </div>
+                </div>
                 : <div
                     className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
                     onClick={likeHandler}
                   >
                   <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                   <div>{card.likesCount}</div>
-                  </div>}
+                </div>}
             </div>
           </div>
           <div id='ModeratorIntro'>
@@ -402,12 +415,12 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
           </div>
           <div id='FAQ'><Faq /></div>
 
-          </div>
+        </div>
 
     : !card.title
         ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
           <div>  </div>
-          </div>
+        </div>
         : <div className='InfoConatiner Flex-Col AlignCenter'>
           <div className='Flex InfoTitle Title1'>
             {card.title}
@@ -451,7 +464,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
               />
             </div>
           </div>
-          </div>;
+        </div>;
 };
 
 export default ViewPost;

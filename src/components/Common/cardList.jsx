@@ -32,7 +32,7 @@ const CardList = ({
         ? <div>{!subTitle
           ? <div className='Flex' style={{ justifyContent: 'space-between' }}>
             <div className='CardListTitle'>{title}</div>최신순
-            </div>
+          </div>
           : <div className='Flex' style={{ justifyContent: 'space-between', paddingRight: '12px' }}>
             <div className='CardListTitle'>{title}<span>{subTitle}</span>
             </div>
@@ -52,8 +52,8 @@ const CardList = ({
               <i className={isFiltering ? 'AccordionBtn BtnOpen' : 'AccordionBtn'} />
 
             </div>
-            </div>}
-          </div>
+          </div>}
+        </div>
         : !subTitle
             ? <div className='CardListTitle'>{title}</div>
             // 결과 N개 등에서 N개를 표현하기 위해 사용하는 서브 타이틀
@@ -101,6 +101,7 @@ const CardList = ({
               <Card
                 data={!ele._source ? ele : ele._source}
                 key={i}
+                setDropdown={setDropdown}
           /**
            * 프로필에 likedCareerEdu가 존재하지 않다면 서버에 로그인이 되어 있지 않는 상태이므로 당연히 false
            * 하지만 likedCareerEdu가 존재한다면 로그인이 되어있는 상태. 유저가 좋아요한것을 렌더링 해야 하는지
@@ -137,7 +138,7 @@ const CardList = ({
                         className='BtnType1 CardListMoreBtn'
                         onClick={() => { kickToDest('mentor'); }}
                       >View more1
-                      </div>
+                    </div>
                     : ''
                 : cards.length >= 6
                   ? <div
@@ -145,7 +146,7 @@ const CardList = ({
                       onClick={() => { kickToDest('info'); }}
                     >
                     View more
-                  </div>
+                    </div>
                   : ''
             : cards.length >= 8
               ? <div
@@ -153,9 +154,9 @@ const CardList = ({
                   onClick={() => { kickToDest('career'); }}
                 >
                 View more
-              </div>
+                </div>
               : ''}
-        </div>
+          </div>
         : ''}
     </div>
   );

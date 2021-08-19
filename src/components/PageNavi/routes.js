@@ -83,7 +83,7 @@ export default function Nav ({
       {/**
        * 렌더를 사용하면 프롭을 내려줄수가 있다. 최상단에서 전달받은 프롭들을 입맛대로 전달한다.
        */}
-      <Route exact='true' path='/' render={() => <MainPage profile={profile} profileHandler={profileHandler} isLogin={isLogin} accessToken={accessToken} loginType={loginType} searchDataHandler={searchDataHandler} />} />
+      <Route exact='true' path='/' render={() => <MainPage profile={profile} profileHandler={profileHandler} isLogin={isLogin} accessToken={accessToken} loginType={loginType} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
 
       <Switch>
         <Route
