@@ -1,0 +1,14 @@
+.LikeFilter{
+  width: 198px;
+  height: 44px;
+  border-radius: 10px;
+  border: solid 2px #000;
+}
+
+.LikeFilterContainer{
+  width: 608px;
+}
+.LikesTitle{
+  margin-top:80px;
+  margin-bottom: 50px;;
+}

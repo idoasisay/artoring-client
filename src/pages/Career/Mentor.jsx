@@ -39,6 +39,9 @@ const Mentor = ({ profile, searchDataHandler, setDropdown }) => {
   // 페이지 네이션에서 현재 페이지를 변경
   function pagesHandler (num) {
     currentPageHandler(num);
+    categoryListUpdater([]);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
   // 렌더링 이후 서버에서 데이터를 요청한 이후 단 한번 모든 카드의 총합, 카테고리별 카드의 수, 페이지 네이션 설정
@@ -58,6 +61,7 @@ const Mentor = ({ profile, searchDataHandler, setDropdown }) => {
 
       maxPageHandler(Math.ceil(response.total.basic / 16));
     }
+    console.log(window.pageYOffset);
     asyncFetch();
   }, []);
 
@@ -88,6 +92,7 @@ const Mentor = ({ profile, searchDataHandler, setDropdown }) => {
         maxPageHandler(Math.ceil(eduTotal / 16));
         baseHandler(1);
       }
+      console.log(window.pageYOffset);
     }
     asyncFetch();
   }, [category, filter]);
@@ -149,7 +154,7 @@ const Mentor = ({ profile, searchDataHandler, setDropdown }) => {
           <div className='PageNationContainer'>
             <PaginationList maxPage={maxPage} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
           </div>
-        </div>
+          </div>
         : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />}
 
     </div>

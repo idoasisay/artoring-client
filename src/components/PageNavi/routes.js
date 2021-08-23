@@ -21,6 +21,8 @@ import ProfileRequest from '../SignUp/requestProfile';
 import PurchaseHistory from '../../pages/Personal/purchaseHistory';
 import Mentor from '../../pages/Career/Mentor';
 import CareerInfo from '../../pages/Career/careerInfo';
+import LikesPage from '../../pages/Likes';
+
 import axios from 'axios';
 
 export default function Nav ({
@@ -110,7 +112,7 @@ export default function Nav ({
       <Route path='/mentor' render={() => <Mentor profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
       <Route exact='true' path='/career/growing' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
       <Route path='/career/signature' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
-      <Route exact='true' path='/career/info' render={() => <CareerInfo setDropdown={setDropdown} />} />
+      <Route exact='true' path='/career/info' render={() => <CareerInfo setDropdown={setDropdown} profile={profile} />} />
       <Route path='/about' component={About} />
       <Route exact='true' path='/search' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />
       <Route exact='true' path='/search/deep' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />
@@ -135,6 +137,7 @@ export default function Nav ({
       <Route path='/after/signup' render={() => <AfterSignup />} />
       <Route path='/request' component={ProfileRequest} />
       <Route exact='true' path='/user/reserve' render={() => <PurchaseHistory loginType={loginType} profile={profile} accessToken={accessToken} />} />
+      <Route exact='true' path='/user/likes' render={() => <LikesPage isLogin={isLogin} loginType={loginType} profile={profile} accessToken={accessToken} />} />
       <Route path='/verify' render={() => <VerifyRequest tokenHandler={tokenHandler} loginHandler={loginHandler} typeHandler={typeHandler} profileHandler={profileHandler} />} />
       <Route path='/logout' render={() => <Logout loginType={loginType} accessToken={accessToken} tokenHandler={tokenHandler} profileHandler={profileHandler} loginHandler={loginHandler} />} />
     </Router>
