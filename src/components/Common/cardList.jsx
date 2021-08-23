@@ -60,10 +60,12 @@ const CardList = ({
             : <div className='CardListTitle'>{title}<span>{subTitle}</span></div>}
       <div className='CardsContainer'>
         <div className='Delimiter' />
+        {console.log('---------')}
         {cards.map((ele, i) => {
           if (maxEle) {
             if (i >= maxEle) return;
             else {
+              console.log(ele._id);
               if (ele._source)ele._source._id = ele._id;
               return (
                 <Card
@@ -79,19 +81,20 @@ const CardList = ({
            * 좋아요 표시를 할것이 있는지 체크한다.
            * Card 컴포넌트는 전달받은 liked가 true여야만 하트의 색상이 검은색이아닌 빨간색으로 렌더링이 된다.
           */
-                  liked={
-            renderType !== 'teach'
-              ? renderType !== 'info'
-                  ? likedMentor
-                      ? !!likedMentor.includes(ele._id ? ele._id : -1)
-                      : false
-                  : likedCareerInfo
-                    ? !!likedCareerInfo.includes(ele._id ? ele._id : -1)
-                    : false
-              : likedCareerEdu
-                ? !!likedCareerEdu.includes(ele._id ? ele._id : -1)
-                : false
-                }
+                  likeList={likedCareerEdu || likedMentor || likedCareerInfo || []}
+            //       liked={
+            // renderType !== 'teach'
+            //   ? renderType !== 'info'
+            //       ? likedMentor
+            //           ? !!likedMentor.includes(ele._id)
+            //           : false
+            //       : likedCareerInfo
+            //         ? !!likedCareerInfo.includes(ele._id)
+            //         : false
+            //   : likedCareerEdu
+            //     ? !!likedCareerEdu.includes(ele._id)
+            //     : false
+            //     }
                 />
               )
               ;
@@ -109,19 +112,20 @@ const CardList = ({
            * 좋아요 표시를 할것이 있는지 체크한다.
            * Card 컴포넌트는 전달받은 liked가 true여야만 하트의 색상이 검은색이아닌 빨간색으로 렌더링이 된다.
           */
-                liked={
-            renderType !== 'teach'
-              ? renderType !== 'info'
-                  ? likedMentor
-                      ? !!likedMentor.includes(ele._id ? ele._id : -1)
-                      : false
-                  : likedCareerInfo
-                    ? !!likedCareerInfo.includes(ele._id ? ele._id : -1)
-                    : false
-              : likedCareerEdu
-                ? !!likedCareerEdu.includes(ele._id ? ele._id : -1)
-                : false
-                }
+                likeList={likedCareerEdu || likedMentor || likedCareerInfo || []}
+            //     liked={
+            // renderType !== 'teach'
+            //   ? renderType !== 'info'
+            //       ? likedMentor
+            //           ? !!likedMentor.includes(ele._id ? ele._id : -1)
+            //           : false
+            //       : likedCareerInfo
+            //         ? !!likedCareerInfo.includes(ele._id ? ele._id : -1)
+            //         : false
+            //   : likedCareerEdu
+            //     ? !!likedCareerEdu.includes(ele._id ? ele._id : -1)
+            //     : false
+            //     }
               />
             )
             ;

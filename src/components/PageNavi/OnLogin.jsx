@@ -15,6 +15,9 @@ const OnLogin = ({ profile }) => {
   function kickToMentiProfile () {
     history.push('/user/edit');
   }
+  function kickToLikes () {
+    history.push('/user/likes');
+  }
   return (
 
     <div className='OnLoginContainer TextType2 AlignCenter '>
@@ -29,7 +32,7 @@ const OnLogin = ({ profile }) => {
         {profile.isMentor ? <div className='MyMentoring Flex AlignCenter JustifyCenter BorderBlack2px-bottom TextType3 Title5'>나의 멘토링</div> : ''}
         <div className='Flex-Col JustifyCenter AlignCenter CommonalityContainer BorderBlack2px-bottom'>
           <div className='Commonality JustifyAround Flex-Col AlignCenter'>
-            <div className='TextType3 Title5'>좋아요</div>
+            <div className='TextType3 Title5' onClick={kickToLikes}>좋아요</div>
             <div className='TextType3 Title5' onClick={kickToPurchasedHistory}>구매내역</div>
             <div className='TextType3 Title5' onClick={kickToLogout}>로그아웃</div>
           </div>

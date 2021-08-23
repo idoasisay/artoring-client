@@ -39,6 +39,9 @@ const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
   // 페이지 네이션에서 현재 페이지를 변경
   function pagesHandler (num) {
     currentPageHandler(num);
+    categoryListUpdater([]);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
   // 렌더링 이후 서버에서 데이터를 요청한 이후 단 한번 모든 카드의 총합, 카테고리별 카드의 수, 페이지 네이션 설정

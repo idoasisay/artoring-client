@@ -105,15 +105,16 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
 
       // 좋아요 여부에 따라 좋아요 등록/삭제가 이뤄지게 된다
       likes
-        ? await axios.delete(uri.concat(`/likes/${model}/${card._id}?type=${loginType}&id=${profile._id}`), {
+        ? await axios.delete(uri.concat(`/likes/${model === 'teach' || model === 'mentor' ? 'teach' : 'info'}/${card._id}?type=${loginType}&id=${profile._id}`), {
             headers: {
               authorization: `Bearer ${accessToken}`
             }
           })
-        : await axios.post(uri.concat(`/likes/${model}`), {
+        : await axios.post(uri.concat(`/likes/${model === 'teach' || model === 'mentor' ? 'teach' : 'info'}`), {
           type: loginType,
           targetId: card._id,
-          _id: profile._id
+          _id: profile._id,
+          targetModel: model
         }, {
           headers: {
             authorization: `Bearer ${accessToken}`
@@ -139,11 +140,9 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
       profileHandler({ ...profile, likedCareerEdu });
       likesHandler(!likes); */
 
-      const likedList = model === 'teach'
+      const likedList = model === 'teach' || model === 'mentor'
         ? profile.likedCareerEdu
-        : model === 'mentor'
-          ? profile.likedMentor
-          : profile.likedInfo;
+        : profile.likedInfo;
       if (likes) {
         const pos = likedList.indexOf(card._id);
         likedList.splice(pos, 1);
@@ -154,11 +153,8 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
         cardHandler({ ...card, likesCount: card.likesCount + 1 });
       }
 
-      if (model === 'teach' && profile.likedCareerEdu) {
+      if ((model === 'teach' || model === 'mentor') && profile.likedCareerEdu) {
         profileHandler({ ...profile, likedCareerEdu: likedList });
-        likesHandler(!likes);
-      } else if (model === 'mentor' && profile.likedMentor) {
-        profileHandler({ ...profile, likedMentor: likedList });
         likesHandler(!likes);
       } else if (model === 'info' && profile.likedInfo) {
         profileHandler({ ...profile, likedInfo: likedList });
@@ -193,7 +189,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
       cardHandler(data);
 
       // 신청 가능여부 판단. 카드뉴스일때는 필요가 없음
-      if (model === 'teach') {
+      if (model === 'teach' || model === 'mentor') {
         const current = new Date();
         const startDate = new Date(data.startDate);
 
@@ -422,11 +418,31 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
           <div>  </div>
         </div>
         : <div className='InfoConatiner Flex-Col AlignCenter'>
-          <div className='Flex InfoTitle Title1'>
-            {card.title}
-          </div>
-          <div className='Flex Caption2-Grey JustifyCenter'>
-            {utils.getDate(card.issuedDate)}
+          <div className='Flex JustifyAround AlignCenter' style={{ width: '100%', minHeight: '30%' }}>
+            <div>
+              <div className='Flex InfoTitle Title1'>
+                {card.title}
+              </div>
+              <div className='Flex Caption2-Grey JustifyCenter'>
+                {utils.getDate(card.issuedDate)}
+              </div>
+            </div>
+            {profile.verifiedEmail === true
+              ? <div
+                  className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
+                  onMouseDown={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6 Btn6Active')}
+                  onMouseUp={(e) => classReplacer('.LikesLower', 'LikesLower BtnType6')}
+                  onClick={likeHandler}
+                >
+                좋아요
+
+                </div>
+              : <div
+                  className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
+                  onClick={likeHandler}
+                >
+                좋아요
+                </div>}
           </div>
           <div className='Flex'>
             {parse(decodeURIComponent(card.detailInfo))}

@@ -21,6 +21,9 @@ const CareerInfo = ({ profile, searchDataHandler, setDropdown }) => {
   // 페이지 네이션에서 현재 페이지를 변경
   function pagesHandler (num) {
     currentPageHandler(num);
+    listHandler([]);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
   useEffect(() => {
@@ -79,7 +82,7 @@ const CareerInfo = ({ profile, searchDataHandler, setDropdown }) => {
         ? <div>
           <CardList
             cards={cardList}
-            likedCareerInfo={profile ? profile.likedCareerInfo : []}
+            likedCareerInfo={profile ? profile.likedInfo : []}
             renderType='info'
             maxEle={9}
             searchDataHandler={searchDataHandler}
@@ -96,7 +99,7 @@ const CareerInfo = ({ profile, searchDataHandler, setDropdown }) => {
               baseHandler={baseHandler}
             />
           </div>
-        </div>
+          </div>
         : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />}
 
     </div>

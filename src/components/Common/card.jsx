@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import TagList from '../Mainpage/tagList.jsx';
 
@@ -7,7 +7,7 @@ import utils from './index.js';
 import '../../css/mainpage/Card.css';
 
 // 메인페이지에서 사용되는 카드를 렌더링하는 컴포넌트
-const Card = ({ data, liked, isPurchasedHistory, isInfo, setDropdown }) => {
+const Card = ({ data, liked, isPurchasedHistory, isInfo, setDropdown, likeList }) => {
   const history = useHistory();
   const curDate = new Date();
   const endDate = new Date(data.endDate);
@@ -15,12 +15,17 @@ const Card = ({ data, liked, isPurchasedHistory, isInfo, setDropdown }) => {
   // 개인이 좋아요한걸 표현하기 위해 사용되는 상태.
   // 핸들러는 클릭하면 해당 카드의 상세페이지로 전환되어야 하기 때문에
   // 사용되지 않음
-  const [likes, likesHandler] = useState(liked);
+  console.log(likeList);
+  const [likes, likesHandler] = useState(false);
+
+  useEffect(() => {
+    likesHandler(likeList.includes(data._id));
+  }, [likeList]);
 
   return !isPurchasedHistory
     ? <div
         className={isPurchasedHistory ? 'PurchaseHisotryContianer' : isInfo ? 'InfoContainer' : 'Card'} onClick={() => {
-          setDropdown(0);
+          if (setDropdown) setDropdown(0);
           isInfo
             ? history.push(`/career/info/${data._id}`)
             : history.push(`/career/growing/${data.isGroup ? 'teach' : 'mentor'}/${data._id}`);

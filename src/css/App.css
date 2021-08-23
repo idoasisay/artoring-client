@@ -456,8 +456,15 @@ a {
   font-family: "nanumSquare";;
 }
 
+.Wide {
+  max-width: calc(100vh /0.5625);
+}
+.EmptyPage{
+  min-width: 100%;
+  min-height: 50vh;
+}
+
 .App {
-  max-width: 3248px;
 html,
 body,
 div,
