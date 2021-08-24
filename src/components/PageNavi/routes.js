@@ -6,6 +6,7 @@ import {
   Search
 } from '../../pages';
 import Header from './header';
+import Whoisart from '../../pages/WhoisArt';
 import MainPage from '../../pages/Main/main';
 import Personal from '../../pages/Personal/personal';
 import ViewPost from '../../pages/Post/viewPost';
@@ -111,7 +112,7 @@ export default function Nav ({
       </Switch>
       <Route path='/mentor' render={() => <Mentor profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
       <Route exact='true' path='/career/growing' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
-      <Route path='/career/signature' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
+      <Route path='/career/signature' render={() => <Whoisart />} />
       <Route exact='true' path='/career/info' render={() => <CareerInfo setDropdown={setDropdown} profile={profile} />} />
       <Route path='/about' component={About} />
       <Route exact='true' path='/search' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />

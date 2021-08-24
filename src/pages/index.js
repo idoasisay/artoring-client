@@ -1,4 +1,4 @@
-export { default as About } from './about';
+export { default as About } from './About/index.jsx';
 export { default as Mentor } from './mentor';
 export { default as CareerInfo } from './careerInfo';
 export { default as CareerTeach } from './Career/careerTeach';

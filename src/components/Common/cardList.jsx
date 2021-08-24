@@ -32,7 +32,7 @@ const CardList = ({
         ? <div>{!subTitle
           ? <div className='Flex' style={{ justifyContent: 'space-between' }}>
             <div className='CardListTitle'>{title}</div>최신순
-          </div>
+            </div>
           : <div className='Flex' style={{ justifyContent: 'space-between', paddingRight: '12px' }}>
             <div className='CardListTitle'>{title}<span>{subTitle}</span>
             </div>
@@ -52,20 +52,18 @@ const CardList = ({
               <i className={isFiltering ? 'AccordionBtn BtnOpen' : 'AccordionBtn'} />
 
             </div>
-          </div>}
-        </div>
+            </div>}
+          </div>
         : !subTitle
             ? <div className='CardListTitle'>{title}</div>
             // 결과 N개 등에서 N개를 표현하기 위해 사용하는 서브 타이틀
             : <div className='CardListTitle'>{title}<span>{subTitle}</span></div>}
       <div className='CardsContainer'>
         <div className='Delimiter' />
-        {console.log('---------')}
         {cards.map((ele, i) => {
           if (maxEle) {
             if (i >= maxEle) return;
             else {
-              console.log(ele._id);
               if (ele._source)ele._source._id = ele._id;
               return (
                 <Card
@@ -142,7 +140,7 @@ const CardList = ({
                         className='BtnType1 CardListMoreBtn'
                         onClick={() => { kickToDest('mentor'); }}
                       >View more1
-                    </div>
+                      </div>
                     : ''
                 : cards.length >= 6
                   ? <div
@@ -150,7 +148,7 @@ const CardList = ({
                       onClick={() => { kickToDest('info'); }}
                     >
                     View more
-                    </div>
+                  </div>
                   : ''
             : cards.length >= 8
               ? <div
@@ -158,9 +156,9 @@ const CardList = ({
                   onClick={() => { kickToDest('career'); }}
                 >
                 View more
-                </div>
+              </div>
               : ''}
-          </div>
+        </div>
         : ''}
     </div>
   );
