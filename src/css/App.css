@@ -284,6 +284,9 @@ a {
   line-height: 1.69;
   letter-spacing: normal;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .BtnType4:hover{
   
@@ -306,6 +309,9 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.BtnType5:hover{
+  background-color: #e04062
 }
 
 .Btn5Active{
@@ -416,9 +422,14 @@ a {
 .Flex-End{
   justify-content: flex-end;
 }
-
+.AlignStart{
+  align-items: start;
+}
 .AlignLeft{
   justify-self: flex-start;
+}
+.JustifyEnd{
+  justify-content: flex-end;
 }
 
 .AlignCenter{

@@ -1,0 +1,57 @@
+
+
+.Section1{
+  width: 100vw;
+  height:440px;
+  background-color:#fff3cb;
+}
+.Section2{
+  padding-top: 115px;
+  width: 100vw;
+
+  background-color: #fffcf4;
+  padding-bottom: 130px;
+}
+.Section3{
+  padding-top:120px;
+  padding-bottom: 120px;
+}
+.Section4{
+  padding-top:115px;
+  padding-bottom: 115px;;
+  width: 100vw;
+
+  background-color: #fafafa;
+}
+.AboutImg{
+  width:365px;
+}
+.AboutPlay{
+  width: 250px;
+}
+.SectionContainer{
+  max-width: 70%;
+}
+.AboutHifive{
+  width: 234px;
+}
+.AboutStair{
+  width: 252px;
+}
+.AboutTogether{
+  width: 285px;
+}
+.AboutWhoisartTitle{
+  margin-bottom: 35px;
+}
+.ToWhois{
+  margin-top:35px;
+  width: 336px;
+  height: 50px;
+}
+.ToSignup{
+   width: 336px;
+  height: 50px;
+
+  margin-top: 50px;
+}

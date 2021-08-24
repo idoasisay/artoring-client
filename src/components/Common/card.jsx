@@ -15,7 +15,7 @@ const Card = ({ data, liked, isPurchasedHistory, isInfo, setDropdown, likeList }
   // 개인이 좋아요한걸 표현하기 위해 사용되는 상태.
   // 핸들러는 클릭하면 해당 카드의 상세페이지로 전환되어야 하기 때문에
   // 사용되지 않음
-  console.log(likeList);
+
   const [likes, likesHandler] = useState(false);
 
   useEffect(() => {
@@ -43,9 +43,9 @@ const Card = ({ data, liked, isPurchasedHistory, isInfo, setDropdown, likeList }
         <div className='CardTitle Title4'>{data.title}</div>
         {isInfo ? <div className='Caption2-Grey OTFB'>{utils.getDate(data.issuedDate)}</div> : <div className='Caption2-Grey OTFB'>{utils.getDate(data.startDate) + ' - ' + utils.getDate(data.endDate)}</div>}
         {isInfo ? '' : <div className='CardPrice'>{!isNaN(Number(data.price)) ? `${data.price}원` : `${data.price}`}</div>}
-        </div>
-
       </div>
+
+    </div>
     : <div
         className={isPurchasedHistory ? 'PurchaseHisotryContianer' : 'Card'} onClick={() => {
           history.push(`/career/growing/${data.isGroup ? 'teach' : 'mentor'}/${data._id}`);
@@ -70,7 +70,7 @@ const Card = ({ data, liked, isPurchasedHistory, isInfo, setDropdown, likeList }
         </div>
       </div>
       {isPurchasedHistory ? <div className='Delimiter' /> : ''}
-    </div>;
+      </div>;
 };
 
 export default Card;
