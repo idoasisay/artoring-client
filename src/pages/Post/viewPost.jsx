@@ -105,12 +105,12 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
 
       // 좋아요 여부에 따라 좋아요 등록/삭제가 이뤄지게 된다
       likes
-        ? await axios.delete(uri.concat(`/likes/${model === 'teach' || model === 'mentor' ? 'teach' : 'info'}/${card._id}?type=${loginType}&id=${profile._id}`), {
+        ? await axios.delete(uri.concat(`/likes/${model}/${card._id}?type=${loginType}&id=${profile._id}`), {
             headers: {
               authorization: `Bearer ${accessToken}`
             }
           })
-        : await axios.post(uri.concat(`/likes/${model === 'teach' || model === 'mentor' ? 'teach' : 'info'}`), {
+        : await axios.post(uri.concat(`/likes/${model}`), {
           type: loginType,
           targetId: card._id,
           _id: profile._id,
@@ -153,8 +153,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
         cardHandler({ ...card, likesCount: card.likesCount + 1 });
       }
 
-      if ((model === 'teach' || model === 'mentor') && profile.likedCareerEdu) {
+      if (model === 'teach' && profile.likedCareerEdu) {
         profileHandler({ ...profile, likedCareerEdu: likedList });
+        likesHandler(!likes);
+      } else if (model === 'mentor' && profile.likedMentor) {
+        profileHandler({ ...profile, likedMentor: likedList });
         likesHandler(!likes);
       } else if (model === 'info' && profile.likedInfo) {
         profileHandler({ ...profile, likedInfo: likedList });
@@ -239,7 +242,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
     ? !card.title
         ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
           <div>  </div>
-        </div>
+          </div>
         : <div className='CareerTeachContainer'>
           {!isReservationReq
             ? <div
@@ -258,7 +261,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
                   닫기
                 </div>
               </div>
-            </div>}
+              </div>}
           <div
             className={enableModal ? 'ModalContainer Flex JustifyCenter' : 'ModalContainer ModalHidden Flex JustifyCenter'}
           >
@@ -324,7 +327,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
                       onMouseUp={(e) => !isTerminated ? classReplacer('.ParticipateUpper', 'ParticipateUpper BtnType5') : ''}
                       onClick={requestReservation}
                     >신청하기
-                    </div>
+                  </div>
                   : <div className='ParticipateUpperDisabled'>신청하기</div>}
 
                 {
@@ -339,7 +342,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
 
                     </div>
                     <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' onClick={() => modalToggler(true)} />
-                    </div>
+                  </div>
                   : <div className='Flex'><div
                       className='LikesUpperDisabled '
                       onClick={likeHandler}
@@ -347,9 +350,9 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
                     <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='LikeImg' />
                     <div id='test'>{card.likesCount}</div>
 
-                                          </div>
-                    <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
                   </div>
+                    <img src={process.env.PUBLIC_URL + '/img/share.svg'} alt='shareBtn' className='ShareBtn' />
+                    </div>
 }
               </div>
             </div>
@@ -369,11 +372,11 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
                     onMouseUp={(e) => !isTerminated ? classReplacer('.ParticipateLower', 'ParticipateLower BtnType5') : ''}
                     onClick={requestReservation}
                   >신청하기
-                </div>
+                  </div>
                 : <div
                     className='ParticipateLowerDisabled'
                   >신청하기
-                </div>}
+                  </div>}
               {profile.verifiedEmail === true
                 ? <div
                     className={!likes ? 'LikesLower BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
@@ -383,14 +386,14 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
                   >
                   <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                   <div>{card.likesCount}</div>
-                </div>
+                  </div>
                 : <div
                     className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
                     onClick={likeHandler}
                   >
                   <img src={process.env.PUBLIC_URL + '/img/like.svg'} alt='likeImg' className='likeImg' />
                   <div>{card.likesCount}</div>
-                </div>}
+                  </div>}
             </div>
           </div>
           <div id='ModeratorIntro'>
@@ -403,7 +406,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
           </div>
           <div id='TeachDetail'>
             <div className='Title4'>상세정보</div>
-
+            {parse(decodeURIComponent(card.detailInfo))}
             <div id='EditorRenderPosition2' className='EditorHolder' />
           </div>
           <div id='Reviews'>
@@ -411,12 +414,12 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
           </div>
           <div id='FAQ'><Faq /></div>
 
-        </div>
+          </div>
 
     : !card.title
         ? <div style={{ minWidth: '99vw', minHeight: '99vh' }} className='Flex JustifyCenter AlignCenter'>
           <div>  </div>
-        </div>
+          </div>
         : <div className='InfoConatiner Flex-Col AlignCenter'>
           <div className='Flex JustifyAround AlignCenter' style={{ width: '100%', minHeight: '30%' }}>
             <div>
@@ -436,13 +439,13 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
                 >
                 좋아요
 
-                </div>
+              </div>
               : <div
                   className={!likes ? 'LikesLowerDisabled BtnType6 Flex' : 'LikesLower BtnType6 Btn6Active Flex'}
                   onClick={likeHandler}
                 >
                 좋아요
-                </div>}
+              </div>}
           </div>
           <div className='Flex'>
             {parse(decodeURIComponent(card.detailInfo))}
@@ -480,7 +483,7 @@ const ViewPost = ({ profile, profileHandler, isLogin, loginType, accessToken, is
               />
             </div>
           </div>
-        </div>;
+          </div>;
 };
 
 export default ViewPost;
