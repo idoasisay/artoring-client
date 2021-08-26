@@ -1,7 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import '../../css/mainpage/Slogan.css';
 
 const Slogan = (props) => {
+  const history = useHistory();
   return (
     <div className='SloganContainer container'>
       <div className='SloganDesc Flex-Col Flex-Start'>
@@ -11,7 +13,13 @@ const Slogan = (props) => {
           <div className='Title1 OTFRL'>아토링과 함께 해주세요!</div>
         </div>
         <div className=''>
-          <div className='BtnType2 SloganBtn body1'>View more</div>
+          <div
+            className='BtnType2 SloganBtn body1'
+            onClick={() => {
+              history.push('/about');
+            }}
+          >View more
+          </div>
         </div>
       </div>
       <div className='SloganImgContainer'>

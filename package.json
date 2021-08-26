@@ -20,7 +20,6 @@
     "web-vitals": "^1.1.2",
     "webpack": "4.44.2"
   },
-  "homepage": "./",
   "scripts": {
     "start": "HTTPS=true SSL_CRT_FILE=cert.pem SSL_KEY_FILE=key.pem react-scripts start",
     "build": "react-scripts build",

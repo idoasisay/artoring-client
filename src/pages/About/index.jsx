@@ -43,7 +43,7 @@ const About = () => {
       <div className='Section3 Flex AlignCenter JustifyCenter'>
         <div className='Flex SectionContainer'>
           <div className='Flex-Col JustifyCenter AlignCenter'>
-            <img alt='하이파이브' src={process.env.PUBLIC_URL + 'img/mentoring.png'} className='AboutHifive' />
+            <img alt='하이파이브' src={process.env.PUBLIC_URL + '/img/mentoring.png'} className='AboutHifive' />
             <div className='Title3' style={{ color: '#868eee' }}>멘토링</div>
             <div className='body1'>문화예술계 현직자와
               1:1 멘토링을 통해 나의 고민과 관심사에 대한
@@ -51,7 +51,7 @@ const About = () => {
             </div>
           </div>
           <div className='Flex-Col JustifyCenter AlignCenter'>
-            <img alt='성장하기' src={process.env.PUBLIC_URL + 'img/careerTeach.png'} className='AboutStair' />
+            <img alt='성장하기' src={process.env.PUBLIC_URL + '/img/careerTeach.png'} className='AboutStair' />
             <div className='Title3' style={{ color: '#868eee' }}>커리어 교육</div>
             <div className='body1'>현직자가 직접 예술계에서
               필요한 역량을 가르치며 청년 예술인들의
