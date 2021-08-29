@@ -1,7 +1,7 @@
 import React from 'react';
 import './../../css/signUp/Modal.css';
 
-const TOUmodal = (props) => {
+const Modal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, header } = props;
 
@@ -30,4 +30,4 @@ const TOUmodal = (props) => {
   );
 };
 
-export default TOUmodal;
+export default Modal;
