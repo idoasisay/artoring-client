@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import '../../css/signUp/EmailSignup.css';
-import TOUmodal from './TOUmodal';
+import Modal from './modal';
 
 const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
   const {
@@ -65,19 +65,19 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
   const [isCheckedToTOUModalOn, setIsCheckedToTOUModalOn] = useState(false);
   const [isCheckedToPIModalOn, setIsCheckedToPIModalOn] = useState(false);
 
-  const handleCheckedToTOUOpen = (e) => {
+  const handleCheckedToTOUOpen = () => {
     setIsCheckedToTOUModalOn(true);
   };
 
-  const handleCheckedToTOUClose = (e) => {
+  const handleCheckedToTOUClose = () => {
     setIsCheckedToTOUModalOn(false);
   };
 
-  const handleCheckedToPIOpen = (e) => {
+  const handleCheckedToPIOpen = () => {
     setIsCheckedToPIModalOn(true);
   };
 
-  const handleCheckedToPIClose = (e) => {
+  const handleCheckedToPIClose = () => {
     setIsCheckedToPIModalOn(false);
   };
 
@@ -239,77 +239,92 @@ const EmailSignup = ({ tokenHandler, loginHandler, typeHandler }) => {
             )}
           </label>
 
-          {/* 개인정보 확인 */}
-          <div className='TOSContainer'>
-            <label htmlFor='agreeToTermsOfUse'>
-              <div className='TOSFontSize'>
-                <input
-                  type='checkbox'
-                  {...register('이용약관동의', { required: true })}
-                  id='agreeToTermsOfUse'
-                  name='agreeToTermsOfUse'
-                />
-                <span className='TOSMargin'>아토링 이용 약관 동의</span>
-                <button
-                  type='button'
-                  className='TOSBtnType TOSFontSize'
-                  onClick={handleCheckedToTOUOpen}
-                >
-                  내용보기
-                </button>
-              </div>
-              <TOUmodal
+          <label htmlFor='termsOfusers'>
+            <div className='TOSFontSize'>
+              <span className='TOSMargin'>아토링 이용 약관 동의</span>
+              <input
+                type='checkbox'
+                className=''
+                {...register('termsOfusers', {
+                  required: true,
+                })}
+              />
+              <button
+                type='button'
+                className='TOSBtnType TOSFontSize'
+                onClick={handleCheckedToTOUOpen}
+              >
+                내용보기
+              </button>
+              <Modal
                 open={isCheckedToTOUModalOn}
                 close={handleCheckedToTOUClose}
                 header='아토링 이용 약관 동의'
               >
                 아토링 이용 약관 동의
-              </TOUmodal>
-            </label>
-            <label htmlFor='agreeToPersonalInfo'>
-              <div className='TOSFontSize'>
-                <input
-                  type='checkbox'
-                  {...register('개인정보수집이용동의', { required: true })}
-                  id='agreeToPersonalInfo'
-                />
-                {errors.agreeToPersonalInfo &&
-                  errorMessageTag('해당 항목에 동의해 주세요.')}
-                <span className='TOSMargin'>개인정보 수집, 이용 동의</span>
-                <button
-                  type='button'
-                  className='TOSBtnType TOSFontSize'
-                  onClick={handleCheckedToPIOpen}
-                >
-                  내용보기
-                </button>
-              </div>
-              <TOUmodal
-                open={isCheckedToPIModalOn}
-                close={handleCheckedToPIClose}
-                header='개인정보 수집, 이용 동의'
-              >
-                개인정보 수집, 이용 동의
-              </TOUmodal>
-            </label>
-            <label htmlFor='agreeToAdult'>
-              <div className='TOSFontSize'>
-                <input
-                  type='checkbox'
-                  {...register('14세이상동의', { required: true })}
-                  id='agreeToAdult'
-                />
-                <span className='TOSMargin'>만 14세 이상입니다.</span>
-              </div>
-            </label>
-          </div>
-          <label>
-            <div className='PlaceHolderBtnContainer'>
-              <button type='submit' className='PlaceHolderBtn BtnType1'>
-                가입하기
-              </button>
+              </Modal>
+              {errors.termsOfusers && (
+                <span role='alert' className='AlertMsg'>
+                  이용 약관에 동의해 주세요.
+                </span>
+              )}
             </div>
           </label>
+
+          <label htmlFor='agreeToPersonalInfo'>
+            <div className='TOSFontSize'>
+              <span className='TOSMargin'>개인정보수집이용동의</span>
+              <input
+                type='checkbox'
+                className=''
+                {...register('agreeToPersonalInfo', {
+                  required: true,
+                })}
+              />
+              <button
+                type='button'
+                className='TOSBtnType TOSFontSize'
+                onClick={handleCheckedToPIOpen}
+              >
+                내용보기
+              </button>
+              <Modal
+                open={isCheckedToPIModalOn}
+                close={handleCheckedToPIClose}
+                header='개인정보수집이용동의'
+              >
+                개인정보수집이용동의
+              </Modal>
+              {errors.agreeToPersonalInfo && (
+                <span role='alert' className='AlertMsg'>
+                  수집 이용에 동의해 주세요.
+                </span>
+              )}
+            </div>
+          </label>
+
+          <label htmlFor='agreeToAdult'>
+            <div className='TOSFontSize'>
+              <span className='TOSMargin'>만 14세 이상입니다.</span>
+              <input
+                type='checkbox'
+                className=''
+                {...register('agreeToAdult', {
+                  required: true,
+                })}
+              />
+              {errors.agreeToAdult && (
+                <span role='alert' className='AlertMsg'>
+                  만 14세 미만은 서비스를 이용할 수 없습니다.
+                </span>
+              )}
+            </div>
+          </label>
+          <div className='PlaceHolderBtnContainer'>
+            <button type='submit' className='PlaceHolderBtn BtnType1'>
+              가입하기
+            </button>
+          </div>
         </form>
       </div>
     </div>
