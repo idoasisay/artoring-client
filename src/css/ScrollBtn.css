@@ -1,0 +1,21 @@
+.ScrollBtn{
+  position: fixed;
+  width: 85px;
+  height: 85px;
+  bottom: 12vh;
+  right:2vw;
+  z-index: 50;
+  color: white;
+;
+}
+
+.ToggleTop{
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-135deg);
+
+  width: 30%;
+  height: 30%;
+}

@@ -5,7 +5,7 @@ import CardList from '../../components/Common/cardList';
 
 import '../../css/career/growing.css';
 
-const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
+const Mentor = ({ profile, searchDataHandler, setDropdown }) => {
   // 카테고리에 따라 분류될 카드가 저장될 상태
   const [categoryList, categoryListUpdater] = useState([]);
 
@@ -52,7 +52,7 @@ const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
         ? 'https://localhost:4000/career/teach'
         : 'https://insideart-dev.artoring.com/career/teach';
 
-      const { data: response } = await axios.get(url.concat('?isGroup=true'));
+      const { data: response } = await axios.get(url.concat('?isGroup=false'));
 
       totalHandler(response.total.basic);
       eduTotalHandler(response.total.edu);
@@ -61,6 +61,7 @@ const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
 
       maxPageHandler(Math.ceil(response.total.basic / 16));
     }
+    console.log(window.pageYOffset);
     asyncFetch();
   }, []);
 
@@ -72,7 +73,7 @@ const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
         : 'https://insideart-dev.artoring.com/career/teach';
 
       if (category === '') {
-        const { data } = await axios.get(url.concat(`?page=1&orderby=${filter}&isGroup=true`));
+        const { data } = await axios.get(url.concat(`?page=1&orderby=${filter}&isGroup=false`));
         console.log(data);
         categoryListUpdater(data.cardList);
         currentPageHandler(1);
@@ -84,13 +85,14 @@ const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
         else if (category === 'lecture') categoryToQuery = '특강';
         else categoryToQuery = '모임';
 
-        const { data } = await axios.get(url.concat(`?page=1&category=${categoryToQuery}&orderby=${filter}&isGroup=true`));
+        const { data } = await axios.get(url.concat(`?page=1&category=${categoryToQuery}&orderby=${filter}&isGroup=false`));
 
         categoryListUpdater(data.cardList);
         currentPageHandler(1);
         maxPageHandler(Math.ceil(eduTotal / 16));
         baseHandler(1);
       }
+      console.log(window.pageYOffset);
     }
     asyncFetch();
   }, [category, filter]);
@@ -104,14 +106,14 @@ const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
         ? 'https://localhost:4000/career/teach'
         : 'https://insideart-dev.artoring.com/career/teach';
 
-      const { data: response } = await axios.get(url.concat(category === '' ? `?page=${currentPages}&orderby=${filter}&isGroup=true` : `?page=${currentPages}&category=${category}&orderby=${filter}&isGroup=true`));
+      const { data: response } = await axios.get(url.concat(category === '' ? `?page=${currentPages}&orderby=${filter}&isGroup=false` : `?page=${currentPages}&category=${category}&orderby=${filter}&isGroup=false`));
       categoryListUpdater(response.cardList);
     }
     asyncFetch();
   }, [currentPages]);
 
   return (
-    <div className='TeachContainer'>
+    <div className='MentorContainer'>
       <div className='Flex Flex-Start CategoryBtnContainer'>
         <div
           className={category === '' ? 'BtnType2 BtnType1 CategoryBtn' : 'BtnType2 CategoryBtn CategoryActive'}
@@ -152,12 +154,12 @@ const CareerTeach = ({ profile, searchDataHandler, setDropdown }) => {
           <div className='PageNationContainer'>
             <PaginationList maxPage={maxPage} currentPages={currentPages} pagesHandler={pagesHandler} basePage={basePage} baseHandler={baseHandler} />
           </div>
-        </div>
+          </div>
         : <div style={{ minWidth: '99vw', minHeight: '99vh' }} />}
 
     </div>
   );
 };
 
-export default CareerTeach
+export default Mentor
 ;

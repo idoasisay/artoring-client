@@ -107,7 +107,7 @@ a {
 }
 
 .body1{
-  font-family: "nanumSquare EBold";
+  font-family: "nanumSquare Bold";
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -118,7 +118,7 @@ a {
 }
 
 .body2{
-  font-family: "nanumSquare EBold";
+  font-family: "nanumSquare Bold";
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -284,6 +284,9 @@ a {
   line-height: 1.69;
   letter-spacing: normal;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .BtnType4:hover{
   
@@ -306,6 +309,9 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.BtnType5:hover{
+  background-color: #e04062
 }
 
 .Btn5Active{
@@ -360,7 +366,7 @@ a {
 }
 
 .Caption2-Black{
-  font-family:  "nanumSquare EBold";
+  font-family:  "nanumSquare Bold";
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -382,7 +388,7 @@ a {
 }
 
 .Caption3{
-  font-family:  "nanumSquare EBold";
+  font-family:  "nanumSquare Bold";
   font-size: 10px;
   font-weight: normal;
   font-stretch: normal;
@@ -406,15 +412,24 @@ a {
   justify-content: space-around;
 }
 
+.JustifyBetween{
+  justify-content: space-between;
+}
+
 .Flex-Start{
   justify-content: flex-start;
 }
 .Flex-End{
   justify-content: flex-end;
 }
-
+.AlignStart{
+  align-items: start;
+}
 .AlignLeft{
   justify-self: flex-start;
+}
+.JustifyEnd{
+  justify-content: flex-end;
 }
 
 .AlignCenter{
@@ -428,14 +443,39 @@ a {
   border: 2px solid black;
 }
 
+.Delimiter{
+  align-items: center;
+  width:100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: solid 1px #d6d6d6;;
+}
+
 .BorderBlack2px-bottom{
   border-left: 2px solid black;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
 }
 
+.OTFEB{
+  font-family: "nanumSquare EBold";;
+}
+.OTFB{
+  font-family: "nanumSquare Bold";;
+}
+.OTFR{
+  font-family: "nanumSquare";;
+}
+
+.Wide {
+  max-width: calc(100vh /0.5625);
+}
+.EmptyPage{
+  min-width: 100%;
+  min-height: 50vh;
+}
+
 .App {
-  max-width: 3248px;
 html,
 body,
 div,

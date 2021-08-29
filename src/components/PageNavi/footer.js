@@ -49,7 +49,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className='Flex JustifyCenter'>
+        <div className='Flex JustifyCenter FooterLower'>
           <div className='FooterInner Caption3'>
             <div>
               인사이드아트 | 대표 오설윤

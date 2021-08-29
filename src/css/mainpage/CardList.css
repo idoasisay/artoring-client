@@ -4,14 +4,14 @@
   max-width: 100%;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 120px;
 }
 .CardList{
   width: 1080px;
   margin-bottom: 80px;
 }
 .CardListTitle{
-  width: 116px;
+
   height: 52px;
   padding-left:12px;
   font-family: 'nanumSquare EBold';

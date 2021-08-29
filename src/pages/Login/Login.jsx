@@ -110,7 +110,7 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
             <div className='KakaoDesc'>카카오톡으로 로그인</div>
           </div>
         </div>
-        <div className='Delimiter LimitWidth Flex'>
+        <div className='DelimiterLogin LimitWidth Flex'>
           <div className='DelimiterInner' />
           <div className='Or'>or</div>
           <div className='DelimiterInner' />
@@ -147,9 +147,9 @@ const Login = ({ profileHandler, loginHandler, tokenHandler, typeHandler }) => {
             <label>
               <div className='PlaceHolderBtnContainer'>
                 <button
-                  className='PlaceHolderBtn BtnType5'
-                  onMouseOver={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType1 Btn1Active')}
-                  onMouseLeave={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType1')}
+                  className='PlaceHolderBtn BtnType4'
+                  onMouseOver={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType4 Btn4Active')}
+                  onMouseLeave={(e) => classReplacer('.PlaceHolderBtn', 'PlaceHolderBtn BtnType4')}
                 >로그인
                 </button>
               </div>

@@ -1,6 +1,5 @@
 .FooterUpper{
     height: 50%;
-    margin-bottom: 2vh;
     display: flex;
     align-items: flex-start;
 }
@@ -35,4 +34,7 @@
   height: 27px;
 
   padding-bottom: 5px;
+}
+.FooterLower{
+  padding-top: 46px;
 }

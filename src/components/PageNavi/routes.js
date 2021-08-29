@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Router, Switch, useHistory } from 'react-router-dom';
 import {
-  Mentor,
   CareerTeach,
-  CareerInfo,
   About,
   Search
 } from '../../pages';
 import Header from './header';
+import Whoisart from '../../pages/WhoisArt';
 import MainPage from '../../pages/Main/main';
 import Personal from '../../pages/Personal/personal';
 import ViewPost from '../../pages/Post/viewPost';
@@ -20,6 +19,10 @@ import VerifyRequest from '../../pages/Signup/verify';
 import EmailSignup from '..//../pages/Signup/emailSignup';
 import AfterSignup from '../../pages/Signup/afterSignup';
 import ProfileRequest from '../SignUp/requestProfile';
+import PurchaseHistory from '../../pages/Personal/purchaseHistory';
+import Mentor from '../../pages/Career/Mentor';
+import CareerInfo from '../../pages/Career/careerInfo';
+import LikesPage from '../../pages/Likes';
 
 import axios from 'axios';
 
@@ -32,6 +35,9 @@ export default function Nav ({
 
   const [counter, countHandler] = useState(0);
   const [isSearching, searchingToggler] = useState(false);
+
+  // 헤더에서 어떤 드랍다운을 보여줄지 결정함.
+  const [dropdownNumber, setDropdown] = useState(0);
 
   const trigger = () => {
     countHandler(counter + 1);
@@ -66,28 +72,48 @@ export default function Nav ({
   }
   return (
     <Router history={history}>
-      <Header isLogin={isLogin} loginHandler={loginHandler} profile={profile} searchData={searchData} searchDataHandler={searchDataHandler} isSearching={isSearching} searchingToggler={searchingToggler} />
+      <Header
+        isLogin={isLogin}
+        loginHandler={loginHandler}
+        profile={profile}
+        searchData={searchData}
+        searchDataHandler={searchDataHandler}
+        isSearching={isSearching}
+        searchingToggler={searchingToggler}
+        dropdownNumber={dropdownNumber}
+        setDropdown={setDropdown}
+      />
       {/**
        * 렌더를 사용하면 프롭을 내려줄수가 있다. 최상단에서 전달받은 프롭들을 입맛대로 전달한다.
        */}
-      <Route exact='true' path='/' render={() => <MainPage profile={profile} profileHandler={profileHandler} isLogin={isLogin} accessToken={accessToken} loginType={loginType} searchDataHandler={searchDataHandler} />} />
-      <Route path='/mentor' component={Mentor} />
+      <Route exact='true' path='/' render={() => <MainPage profile={profile} profileHandler={profileHandler} isLogin={isLogin} accessToken={accessToken} loginType={loginType} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
 
       <Switch>
         <Route
           exact='true'
-          path='/career/growing/:id' render={() => <ViewPost
+          path='/career/growing/:model/:id' render={() => <ViewPost
             profile={profile}
             profileHandler={profileHandler}
             isLogin={isLogin}
             loginType={loginType}
             accessToken={accessToken}
-                                                   />}
+                                                          />}
+        />
+        <Route
+          exact='true' path='/career/:model/:id' render={() => <ViewPost
+            profile={profile}
+            profileHandler={profileHandler}
+            isLogin={isLogin}
+            loginType={loginType}
+            accessToken={accessToken}
+            isInfo='true'
+                                                               />}
         />
       </Switch>
-      <Route exact='true' path='/career/growing' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} />} />
-      <Route path='/career/signature' component={CareerTeach} />
-      <Route path='/career/info' component={CareerInfo} />
+      <Route path='/mentor' render={() => <Mentor profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
+      <Route exact='true' path='/career/growing' render={() => <CareerTeach profile={profile} searchDataHandler={searchDataHandler} setDropdown={setDropdown} />} />
+      <Route path='/career/signature' render={() => <Whoisart />} />
+      <Route exact='true' path='/career/info' render={() => <CareerInfo setDropdown={setDropdown} profile={profile} />} />
       <Route path='/about' component={About} />
       <Route exact='true' path='/search' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />
       <Route exact='true' path='/search/deep' render={() => <Search searchData={searchData} searchDataHandler={searchDataHandler} profile={profile} searchingToggler={searchingToggler} />} />
@@ -105,12 +131,14 @@ export default function Nav ({
       {/*
        * 임시토큰을 전달하고 있으나 프로덕션 배포에서는 고정값이 아닌 Props의 값으로 대체
        */}
-      <Route path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} token={accessToken} loginType={loginType} />} />
-      <Route exact path='/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
-      <Route exact path='/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
+      <Route exact='true' path='/user/edit' render={() => <Personal profile={profile} profileHandler={profileHandler} token={accessToken} loginType={loginType} />} />
+      <Route exact='true' path='/detail/profile' render={() => <Profile profile={profile} profileHandler={profileHandler} onClickHandler={trigger} accessToken={accessToken} />} />
+      <Route exact='true' path='/detail/account' render={() => <Account profile={profile} profileHandler={profileHandler} isSignup='true' onClickHandler={accountDetailHandler} accessToken={accessToken} loginType={loginType} />} />
       <Route path='/signup' render={() => <EmailSignup tokenHandler={tokenHandler} loginHandler={loginHandler} typeHandler={typeHandler} />} />
       <Route path='/after/signup' render={() => <AfterSignup />} />
       <Route path='/request' component={ProfileRequest} />
+      <Route exact='true' path='/user/reserve' render={() => <PurchaseHistory loginType={loginType} profile={profile} accessToken={accessToken} />} />
+      <Route exact='true' path='/user/likes' render={() => <LikesPage isLogin={isLogin} loginType={loginType} profile={profile} accessToken={accessToken} />} />
       <Route path='/verify' render={() => <VerifyRequest tokenHandler={tokenHandler} loginHandler={loginHandler} typeHandler={typeHandler} profileHandler={profileHandler} />} />
       <Route path='/logout' render={() => <Logout loginType={loginType} accessToken={accessToken} tokenHandler={tokenHandler} profileHandler={profileHandler} loginHandler={loginHandler} />} />
     </Router>

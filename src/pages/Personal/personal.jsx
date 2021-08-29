@@ -4,10 +4,13 @@ import Account from '../../components/Personal/account';
 
 import '../../css/Personal/Personal.css';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 const Personal = ({ profile, profileHandler, loginType, token }) => {
   const [counter, countHandler] = useState(0);
   const [isProfile, flagToggler] = useState(false);
+  const history = useHistory();
+
   useEffect(() => {
     async function awaitFetch () {
       const url = process.env.REACT_APP_NODE_ENV === 'development'
@@ -33,16 +36,20 @@ const Personal = ({ profile, profileHandler, loginType, token }) => {
     countHandler(counter + 1);
   };
   const uploader = () => {
-    if (counter !== 0) {
-      const url = process.env.REACT_APP_NODE_ENV === 'development'
-        ? `https://localhost:4000/profile?type=${loginType}`
-        : `https://temp.artoring.com/profile?type=${loginType}`;
-      axios.put(url, { profile, type: loginType }, {
-        headers: {
-          authorization: `Bearer ${token}`
-        }
-      });
+    async function asyncFetch () {
+      if (counter !== 0) {
+        const url = process.env.REACT_APP_NODE_ENV === 'development'
+          ? `https://localhost:4000/profile?type=${loginType}`
+          : `https://temp.artoring.com/profile?type=${loginType}`;
+        await axios.put(url, { profile, type: loginType }, {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        history.push('/');
+      }
     }
+    asyncFetch();
   };
 
   useEffect(uploader, [counter]);

@@ -1,8 +1,13 @@
+.MentorContainer, .InfoTopContainer{
+  width: 1080px;
+}
+
 .TeachContainer{
+  padding-top:80px;
   width: 1080px;
 }
 .CategoryBtnContainer{
-  padding-top: 70px;
+  padding-top: 75px;
   padding-bottom: 75px;
   padding-left: 12px;
 }
@@ -16,6 +21,6 @@
   color:#000000
 }
 .PageNationContainer{
-  padding-top:120px;
+
   padding-bottom:120px;
 }
